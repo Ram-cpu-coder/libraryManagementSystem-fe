@@ -1,38 +1,44 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
-import { userSignUpInputFields } from "../../assets/form-data/UserAuthInput.js";
 import useForm from "../../hooks/useForm.js";
+import { userSignInInputFields } from "../../assets/form-data/UserAuthInput.js";
 import { apiProcessor } from "../../helpers/axiosHelper.js";
 
-const UserSignUpForm = () => {
-  const registerEp = "http://localhost:9001/api/v1/auth/register";
+const UserSignInForm = () => {
+  const authEP = "http://localhost:9001/api/v1";
   const initialState = {
-    fName: "",
-    lName: "",
+    email: "",
+    password: "",
   };
   const { form, handleOnChange } = useForm(initialState);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-
+    // call the log in api
     const data = await apiProcessor({
       method: "post",
-      data: { ...form },
-      url: registerEp,
+      url: authEP + "/auth/login",
+      data: { email: form.email, password: form.password },
       isPrivate: false,
+      isRefreshToken: false,
     });
     console.log(data);
+    if (data.status == "success") {
+      // update the sesssion storage for access
+      sessionStorage.setItem("accessJWT", data.accessToken);
+      // updating the local storage for refresh
+      localStorage.setItem("refreshJWT", data.refreshToken);
+    }
   };
   return (
     <div className="d-flex align-items-center flex-column">
-      <h3>Join Our Community</h3>
+      <h3>Sign In</h3>
       <hr />
       <Form
         onSubmit={handleOnSubmit}
         className="d-flex align-items-center flex-column"
       >
-        {userSignUpInputFields.map((item) => {
+        {userSignInInputFields.map((item) => {
           return (
             <CustomInput
               key={item.name}
@@ -42,10 +48,10 @@ const UserSignUpForm = () => {
             />
           );
         })}
-        <Button type="submit">SignUp</Button>
+        <Button type="submit">SignIn</Button>
       </Form>
     </div>
   );
 };
 
-export default UserSignUpForm;
+export default UserSignInForm;
