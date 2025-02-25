@@ -15,10 +15,10 @@ const Header = () => {
               Home
             </Link>
             <Link className="nav-link" to="/signup">
-              SignUp
+              Sign Up
             </Link>
             <Link className="nav-link" to="/signin">
-              SignIn
+              Login
             </Link>
           </Nav>
         </Navbar.Collapse>
