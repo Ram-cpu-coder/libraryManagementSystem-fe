@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import UserSignInForm from "../components/forms/UserSignInForm";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [signinDisplay, setSigninDisplay] = useState(false);
+
+  /* sign in pop up */
+  if (signinDisplay == true) {
+    return (
+      <div className="border">
+        <UserSignInForm setSigninDisplay={setSigninDisplay} />
+      </div>
+    );
+  }
 
   return (
-    <div className="vh-100">
+    <div className="vh-100 relative">
       {/* Hero Section */}
       <div className="bg-primary text-white text-center py-5">
         <Container>
@@ -22,14 +33,14 @@ const HomePage = () => {
               variant="light"
               size="lg"
               className="me-3"
-              onClick={() => navigate("/login")}
+              onClick={() => setSigninDisplay(true)}
             >
               Login
             </Button>
             <Button
               variant="outline-light"
               size="lg"
-              onClick={() => navigate("/register")}
+              onClick={() => navigate("/signup")}
             >
               Register
             </Button>
@@ -86,12 +97,17 @@ const HomePage = () => {
           <Button
             variant="primary"
             size="lg"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/signup")}
           >
             Sign Up Now
           </Button>
         </Container>
       </div>
+
+      {/* sign in pop up */}
+      {/* {signinDisplay && (
+        <div className="border bg-dark text-white">Sign in</div>
+      )} */}
     </div>
   );
 };

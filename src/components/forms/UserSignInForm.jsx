@@ -4,8 +4,10 @@ import CustomInput from "../custom-input/CustomInput.jsx";
 import useForm from "../../hooks/useForm.js";
 import { userSignInInputFields } from "../../assets/form-data/UserAuthInput.js";
 import { apiProcessor } from "../../helpers/axiosHelper.js";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { Bounce, toast } from "react-toastify";
 
-const UserSignInForm = () => {
+const UserSignInForm = ({ setSigninDisplay }) => {
   const authEP = "http://localhost:9001/api/v1";
   const initialState = {
     email: "",
@@ -28,15 +30,35 @@ const UserSignInForm = () => {
       sessionStorage.setItem("accessJWT", data.accessToken);
       // updating the local storage for refresh
       localStorage.setItem("refreshJWT", data.refreshToken);
+      // toast message
+      toast.success("Logged in Successfully!!!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.error(data.message);
     }
   };
   return (
-    <div className="d-flex align-items-center flex-column vh-100">
-      <h3>Sign In</h3>
-      <hr />
+    <div className="d-flex align-items-center justify-content-center flex-column min-vh-100">
+      <h3 className="d-flex justify-content-between align-items-center w-25">
+        <IoArrowBackCircleOutline
+          className="cursor-pointer"
+          onClick={() => setSigninDisplay(false)}
+        />
+        <span>Sign In</span> <span> </span>
+      </h3>
+      <hr className="w-25" />
       <Form
         onSubmit={handleOnSubmit}
-        className="d-flex align-items-center flex-column"
+        className="d-flex align-items-center flex-column w-25"
       >
         {userSignInInputFields.map((item) => {
           return (
@@ -44,11 +66,13 @@ const UserSignInForm = () => {
               key={item.name}
               {...item}
               onChange={handleOnChange}
-              className="w-100"
+              className="mb-3"
             />
           );
         })}
-        <Button type="submit">SignIn</Button>
+        <Button type="submit" className="mt-4 w-100">
+          SignIn
+        </Button>
       </Form>
     </div>
   );
