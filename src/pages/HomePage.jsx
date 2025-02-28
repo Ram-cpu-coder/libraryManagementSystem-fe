@@ -5,16 +5,6 @@ import UserSignInForm from "../components/forms/UserSignInForm";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [signinDisplay, setSigninDisplay] = useState(false);
-
-  /* sign in pop up */
-  if (signinDisplay == true) {
-    return (
-      <div className="border">
-        <UserSignInForm setSigninDisplay={setSigninDisplay} />
-      </div>
-    );
-  }
 
   return (
     <div className="vh-100 relative">
@@ -33,7 +23,7 @@ const HomePage = () => {
               variant="light"
               size="lg"
               className="me-3"
-              onClick={() => setSigninDisplay(true)}
+              onClick={() => navigate("/signin")}
             >
               Login
             </Button>
@@ -103,11 +93,6 @@ const HomePage = () => {
           </Button>
         </Container>
       </div>
-
-      {/* sign in pop up */}
-      {/* {signinDisplay && (
-        <div className="border bg-dark text-white">Sign in</div>
-      )} */}
     </div>
   );
 };

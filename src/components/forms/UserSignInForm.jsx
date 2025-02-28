@@ -1,19 +1,21 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import useForm from "../../hooks/useForm.js";
 import { userSignInInputFields } from "../../assets/form-data/UserAuthInput.js";
 import { apiProcessor } from "../../helpers/axiosHelper.js";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
-const UserSignInForm = ({ setSigninDisplay }) => {
+const UserSignInForm = () => {
   const authEP = "http://localhost:9001/api/v1";
   const initialState = {
     email: "",
     password: "",
   };
   const { form, handleOnChange } = useForm(initialState);
+  const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     // call the log in api
@@ -47,18 +49,21 @@ const UserSignInForm = ({ setSigninDisplay }) => {
     }
   };
   return (
-    <div className="d-flex align-items-center justify-content-center flex-column min-vh-100">
-      <h3 className="d-flex justify-content-between align-items-center w-25">
-        <IoArrowBackCircleOutline
-          className="cursor-pointer"
-          onClick={() => setSigninDisplay(false)}
-        />
+    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
+      <h3 className="d-flex justify-content-between align-items-center w-50">
+        <Button
+          variant="light"
+          onClick={() => navigate("/")}
+          className="fs-2 d-flex align-items-center bg-white"
+        >
+          <IoArrowBackCircleOutline />
+        </Button>
         <span>Sign In</span> <span> </span>
       </h3>
-      <hr className="w-25" />
+      <hr className="w-50" />
       <Form
         onSubmit={handleOnSubmit}
-        className="d-flex align-items-center flex-column w-25"
+        className="d-flex align-items-center flex-column w-50"
       >
         {userSignInInputFields.map((item) => {
           return (
@@ -71,10 +76,13 @@ const UserSignInForm = ({ setSigninDisplay }) => {
           );
         })}
         <Button type="submit" className="mt-4 w-100">
-          SignIn
+          Sign In
         </Button>
+        <span className="mt-2">
+          Don't have an account ? <Link to="/signup">Sign up here</Link>
+        </span>
       </Form>
-    </div>
+    </Container>
   );
 };
 

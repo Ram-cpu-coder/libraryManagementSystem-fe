@@ -5,6 +5,7 @@ export const userSignUpInputFields = [
         required: true,
         placeholder: "John",
         type: "text",
+
     },
     {
         label: "Last Name",

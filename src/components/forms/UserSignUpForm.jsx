@@ -1,35 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Container, Card, Row, Col } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import { userSignUpInputFields } from "../../assets/form-data/UserAuthInput.js";
 import useForm from "../../hooks/useForm.js";
 import { apiProcessor } from "../../helpers/axiosHelper.js";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { SyncLoader } from "react-spinners";
 
 const UserSignUpForm = () => {
   const registerEp = "http://localhost:9001/api/v1/auth/register";
   const initialState = {
     fName: "",
     lName: "",
+    email: "",
+    phone: "",
+    password: "",
   };
-  const { form, handleOnChange } = useForm(initialState);
+  const { form, setForm, handleOnChange } = useForm(initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
-
+    setIsLoading(true);
     const data = await apiProcessor({
       method: "post",
       data: { ...form },
       url: registerEp,
       isPrivate: false,
     });
-    console.log(data);
-  };
+    if (data.status == "success") {
+      console.log("after", data);
+      setForm({ ...initialState });
+      setIsLoading(false);
+      toast.success(data.message);
+      navigate("/signin");
+    } else {
+      toast.error(data.message);
+    }
 
+    // why try catch did not work here while handling the error
+  };
+  if (isLoading) {
+    return (
+      <div className="d-flex align-items-center justify-content-center min-vh-100">
+        <SyncLoader color="blue" margin={5} size={10} speedMultiplier={1} />
+      </div>
+    );
+  }
   return (
     <Container
       fluid
-      className="d-flex align-items-center justify-content-center min-vh-100 bg-primary"
+      className="d-flex align-items-center justify-content-center min-vh-100"
     >
       <Card
         className="p-4 shadow-lg"
@@ -40,10 +65,20 @@ const UserSignUpForm = () => {
         }}
       >
         <Card.Body className="">
-          <h3 className="text-center mb-4" style={{ color: "#333" }}>
+          <h3
+            className="mb-4 d-flex align-items-center"
+            style={{ color: "#333" }}
+          >
+            <Button
+              variant="light"
+              onClick={() => navigate("/")}
+              className="fs-2 d-flex align-items-center bg-white"
+            >
+              <IoArrowBackCircleOutline />
+            </Button>
             Join Our Library Community
           </h3>
-          <hr className="mb-4" style={{ borderTop: "2px solid #6a11cb" }} />
+          <hr className="mb-4" />
           <Form onSubmit={handleOnSubmit}>
             <Row>
               {userSignUpInputFields.map((item) => (
@@ -53,7 +88,11 @@ const UserSignUpForm = () => {
                   md={item.half ? 6 : 12}
                   className="mb-3"
                 >
-                  <CustomInput {...item} onChange={handleOnChange} />
+                  <CustomInput
+                    {...item}
+                    key={item.name}
+                    onChange={handleOnChange}
+                  />
                 </Col>
               ))}
             </Row>
@@ -62,7 +101,7 @@ const UserSignUpForm = () => {
                 variant="primary"
                 type="submit"
                 size="lg"
-                style={{ background: "#6a11cb", border: "none" }}
+                style={{ border: "none" }}
               >
                 Sign Up
               </Button>
@@ -72,7 +111,7 @@ const UserSignUpForm = () => {
             <p className="mb-0" style={{ color: "#555" }}>
               Already have an account?{" "}
               <a
-                href="/login"
+                href="/signin"
                 className="text-decoration-none"
                 style={{ color: "#2575fc" }}
               >
