@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import UserLayout from "./components/layout/UserLayout";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
+import PublicBooks from "./pages/books/PublicBooks";
 import { Bounce, ToastContainer } from "react-toastify";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
+          <Route path="books" element={<PublicBooks />} />
         </Route>
         {/* private routes */}
 

@@ -12,7 +12,7 @@ const Dashboard = () => {
       isPrivate: true,
       isRefreshToken: false,
     });
-
+    console.log(data);
     if (data && data.status == "success") {
       setUser(data.user);
     }

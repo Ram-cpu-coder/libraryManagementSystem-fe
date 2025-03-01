@@ -22,7 +22,7 @@ const Header = () => {
             <Link className="nav-link text-black navLink" to="/signin">
               Login
             </Link>
-            <Link className="nav-link text-black navLink" to="/signin">
+            <Link className="nav-link text-black navLink" to="/books">
               Books
             </Link>
           </Nav>
