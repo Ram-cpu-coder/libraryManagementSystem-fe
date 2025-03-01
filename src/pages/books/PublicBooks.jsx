@@ -29,12 +29,12 @@ const PublicBooks = () => {
         <input type="search" className="rounded" />
       </div>
       <hr />
-      <div className="row row-cols-1 row-cols-md-4 g-4 m-1">
+      <div className="row row-cols-1 row-cols-md-4 g-4 m-1 d-flex justify-content-center">
         {book.map((item) => {
           return (
             <div
               className="border d-flex flex-column align-items-center justify-content-center m-1"
-              style={{ height: "300px", overflow: "hidden" }}
+              style={{ height: "300px", width: "auto", overflow: "hidden" }}
             >
               <img
                 src={item.thumbnail}
@@ -43,12 +43,9 @@ const PublicBooks = () => {
                 style={{ height: "150px", width: "240px" }}
               />
               <div className="">
-                <h5 className="">{item.title}</h5>
-                <p className="overflow-hidden">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+                <h5 className="text-center">{item.title}</h5>
+                <p className="text-end">{item.author}</p>
+                <p className="overflow-hidden">{item.description}</p>
               </div>
             </div>
           );

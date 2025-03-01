@@ -35,6 +35,14 @@ const HomePage = () => {
               Register
             </Button>
           </div>
+          <Button
+            className="mt-4 bg-primary text-white"
+            variant="light"
+            size="lg"
+            onClick={() => navigate("/books")}
+          >
+            Explore Books
+          </Button>
         </Container>
       </div>
 
