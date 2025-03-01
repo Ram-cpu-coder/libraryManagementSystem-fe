@@ -8,7 +8,7 @@ const UserLayout = () => {
     <div>
       <Header />
       <div>
-        <div className="left">sidebar menu</div>
+        <div className="left">SideBar</div>
         <main className="main">
           <Outlet />
         </main>

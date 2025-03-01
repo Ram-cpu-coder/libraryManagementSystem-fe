@@ -9,8 +9,8 @@ const HomePage = () => {
   return (
     <div className="vh-100 relative">
       {/* Hero Section */}
-      <div className="bg-primary text-white text-center py-5">
-        <Container>
+      <div className="bg-primary text-white text-center py-5  img-bg">
+        <Container className="glassmophormism">
           <h1 className="display-4">
             Welcome to the Library Management System
           </h1>
@@ -43,7 +43,7 @@ const HomePage = () => {
         <h2 className="text-center mb-4">Why Choose Us?</h2>
         <Row>
           <Col md={4} className="mb-4">
-            <Card className="h-100 text-center">
+            <Card className="h-100 text-center parallelogram">
               <Card.Body>
                 <Card.Title>Easy Book Management</Card.Title>
                 <Card.Text>

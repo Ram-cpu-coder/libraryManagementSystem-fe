@@ -44,12 +44,13 @@ const UserSignInForm = () => {
         theme: "light",
         transition: Bounce,
       });
+      navigate("/user");
     } else {
       toast.error(data.message);
     }
   };
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
+    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-90 ">
       <h3 className="d-flex justify-content-between align-items-center w-50">
         <Button
           variant="light"
@@ -60,28 +61,31 @@ const UserSignInForm = () => {
         </Button>
         <span>Sign In</span> <span> </span>
       </h3>
-      <hr className="w-50" />
-      <Form
-        onSubmit={handleOnSubmit}
-        className="d-flex align-items-center flex-column w-50"
-      >
-        {userSignInInputFields.map((item) => {
-          return (
-            <CustomInput
-              key={item.name}
-              {...item}
-              onChange={handleOnChange}
-              className="mb-3"
-            />
-          );
-        })}
-        <Button type="submit" className="mt-4 w-100">
-          Sign In
-        </Button>
-        <span className="mt-2">
-          Don't have an account ? <Link to="/signup">Sign up here</Link>
-        </span>
-      </Form>
+      <hr className="w-100" />
+      <div className="d-flex w-100 align-items-center justify-content-center gap-5 signinForm container">
+        <img src="./login.png" alt="Log in" srcset="" className="col-4" />
+        <Form
+          onSubmit={handleOnSubmit}
+          className="d-flex align-items-center flex-column col-6"
+        >
+          {userSignInInputFields.map((item) => {
+            return (
+              <CustomInput
+                key={item.name}
+                {...item}
+                onChange={handleOnChange}
+                className="mb-3"
+              />
+            );
+          })}
+          <Button type="submit" className="mt-4 w-100">
+            Sign In
+          </Button>
+          <span className="mt-2">
+            Don't have an account ? <Link to="/signup">Sign up here</Link>
+          </span>
+        </Form>
+      </div>
     </Container>
   );
 };
