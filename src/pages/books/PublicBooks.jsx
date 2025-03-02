@@ -6,7 +6,7 @@ const PublicBooks = () => {
   const [book, setBooks] = useState([]);
   const [searchedData, setSearchedData] = useState();
   const [displayBooks, setDisplayBooks] = useState([]);
-  const bookApi = process.env.VITE_API_BASE_URL;
+  const bookApi = import.meta.env.VITE_API_BASE_URL;
   const handleOnSearch = (e) => {
     const query = e.target.value.toLowerCase();
     console.log(query);

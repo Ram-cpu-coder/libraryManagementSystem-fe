@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { apiProcessor } from "../../helpers/axiosHelper";
 
 const Dashboard = () => {
-  const authEP = process.env.VITE_API_BASE_URL;
+  const authEP = import.meta.env.VITE_API_BASE_URL;
   const [user, setUser] = useState({});
 
   const fetchUserData = async () => {

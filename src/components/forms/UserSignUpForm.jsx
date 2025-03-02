@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { SyncLoader } from "react-spinners";
 
 const UserSignUpForm = () => {
-  const registerEp = process.env.VITE_API_BASE_URL;
+  const registerEp = import.meta.env.VITE_API_BASE_URL;
   const initialState = {
     fName: "",
     lName: "",
@@ -40,6 +40,7 @@ const UserSignUpForm = () => {
       navigate("/signin");
     } else {
       toast.error(data.message);
+      setIsLoading(false);
     }
 
     // why try catch did not work here while handling the error

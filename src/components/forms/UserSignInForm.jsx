@@ -7,10 +7,11 @@ import { apiProcessor } from "../../helpers/axiosHelper.js";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
 
 const UserSignInForm = () => {
-  const authEP = process.env.VITE_API_BASE_URL;
-  // const [isLoading, setIsLoading] = useState(false);
+  const loginEP = import.meta.env.VITE_API_BASE_URL;
+  const [isLoading, setIsLoading] = useState(false);
   const initialState = {
     email: "",
     password: "",
@@ -19,25 +20,17 @@ const UserSignInForm = () => {
   const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // setIsLoading(true);
-
+    setIsLoading(true);
     // call the log in api
-    const data = await toast.promise(
-      apiProcessor({
-        method: "post",
-        url: authEP + "/auth/login",
-        data: { email: form.email, password: form.password },
-        isPrivate: false,
-        isRefreshToken: false,
-      }),
-      {
-        pending: "Logging",
-        success: "Logged in Successfully!",
-        error: "data.message",
-      }
-    );
-    console.log(data);
-    if (data.status == "success") {
+    const data = await apiProcessor({
+      method: "post",
+      url: loginEP + "/auth/login",
+      data: { email: form.email, password: form.password },
+      isPrivate: false,
+      isRefreshToken: false,
+    });
+
+    if (data.status === "success") {
       // update the sesssion storage for access
       sessionStorage.setItem("accessJWT", data.accessToken);
       // updating the local storage for refresh
@@ -55,14 +48,20 @@ const UserSignInForm = () => {
         transition: Bounce,
       });
       navigate("/user");
+      setIsLoading(false);
     } else {
+      console.log("error", data);
+      setIsLoading(false);
       toast.error(data.message);
     }
-    // setIsLoading(false);
   };
-  // if (isLoading) {
-  //   return <div>Loading</div>;
-  // }
+  if (isLoading == true) {
+    return (
+      <div className="d-flex align-items-center justify-content-center min-vh-100">
+        <SyncLoader color="blue" margin={5} size={10} speedMultiplier={1} />
+      </div>
+    );
+  }
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
       <h3 className="d-flex justify-content-between align-items-center w-100">
