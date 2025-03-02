@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { apiProcessor } from "../../helpers/axiosHelper";
-import { Button, Card, Container } from "react-bootstrap";
+import { BsArrowRight } from "react-icons/bs";
 
 const PublicBooks = () => {
   const [book, setBooks] = useState([]);
+  const [searchedData, setSearchedData] = useState();
+  const [displayBooks, setDisplayBooks] = useState([]);
   const bookApi = "http://localhost:9001/api/v1/books/pub-books";
+  const handleOnSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    console.log(query);
+    const filtered = book.filter(
+      (item) =>
+        item.title.toLowerCase().includes(query) ||
+        item.author.toLowerCase().includes(query)
+    );
+
+    setSearchedData(e.target.value);
+    setDisplayBooks(filtered);
+  };
   const fetchPublicBooks = async () => {
     try {
       const data = await apiProcessor({
@@ -13,11 +27,13 @@ const PublicBooks = () => {
         isPrivate: false,
         isRefreshToken: false,
       });
-      console.log(data.books);
       setBooks(data.books);
-      //   if()
     } catch (error) {}
   };
+  useEffect(() => {
+    setDisplayBooks(book);
+  }, [book]);
+
   useEffect(() => {
     fetchPublicBooks();
   }, []);
@@ -25,31 +41,51 @@ const PublicBooks = () => {
     <div className="my-2">
       <h1 className="text-center">Books you may want to Read !</h1>
       <div className="d-flex align-items-center justify-content-between px-4">
-        <p>{book.length} books found!</p>
-        <input type="search" className="rounded" />
+        <p>{displayBooks.length} books found!</p>
+        <input
+          type="search"
+          value={searchedData}
+          className="rounded p-2 outline-0"
+          placeholder="Search Books ..."
+          onChange={handleOnSearch}
+        />
       </div>
       <hr />
       <div className="row row-cols-1 row-cols-md-4 g-4 m-1 d-flex justify-content-center">
-        {book.map((item) => {
-          return (
-            <div
-              className="border d-flex flex-column align-items-center justify-content-center m-1"
-              style={{ height: "300px", width: "auto", overflow: "hidden" }}
-            >
-              <img
-                src={item.thumbnail}
-                className="px-1"
-                alt=""
-                style={{ height: "150px", width: "240px" }}
-              />
-              <div className="">
-                <h5 className="text-center">{item.title}</h5>
-                <p className="text-end">{item.author}</p>
-                <p className="overflow-hidden">{item.description}</p>
+        {!displayBooks.length < 1 ? (
+          displayBooks.map((item) => {
+            return (
+              <div
+                className="border d-flex flex-column align-items-center justify-content-center m-1"
+                style={{ height: "300px", width: "auto", overflow: "hidden" }}
+              >
+                <img
+                  src={item.thumbnail}
+                  className="px-1"
+                  alt=""
+                  style={{ height: "150px", width: "240px" }}
+                />
+                <div className="w-100 mt-2">
+                  <h5 className="text-center">
+                    {item.title} <p className="fw-light">({item.author})</p>
+                  </h5>
+                  <p className="overflow-hidden">{item.description}</p>
+                </div>
+                <a
+                  className="icon-link icon-link-hover text-dark w-100 d-flex justify-content-end text-decoration-none"
+                  href="#"
+                >
+                  Read it
+                  <svg className="bi" aria-hidden="true">
+                    <BsArrowRight />
+                  </svg>
+                </a>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>No Books Found !</div>
+        )}
       </div>
     </div>
   );
