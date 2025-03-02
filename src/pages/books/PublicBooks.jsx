@@ -41,7 +41,7 @@ const PublicBooks = () => {
     <div className="my-2">
       <h1 className="text-center">Books you may want to Read !</h1>
       <div className="d-flex align-items-center justify-content-between px-4">
-        <p>{displayBooks.length} books found!</p>
+        <p>{displayBooks.length} book(s) found!</p>
         <input
           type="search"
           value={searchedData}

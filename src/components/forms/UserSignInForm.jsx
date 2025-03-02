@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import useForm from "../../hooks/useForm.js";
@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const UserSignInForm = () => {
   const authEP = "http://localhost:9001/api/v1";
+  // const [isLoading, setIsLoading] = useState(false);
   const initialState = {
     email: "",
     password: "",
@@ -18,14 +19,23 @@ const UserSignInForm = () => {
   const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    // setIsLoading(true);
+
     // call the log in api
-    const data = await apiProcessor({
-      method: "post",
-      url: authEP + "/auth/login",
-      data: { email: form.email, password: form.password },
-      isPrivate: false,
-      isRefreshToken: false,
-    });
+    const data = await toast.promise(
+      apiProcessor({
+        method: "post",
+        url: authEP + "/auth/login",
+        data: { email: form.email, password: form.password },
+        isPrivate: false,
+        isRefreshToken: false,
+      }),
+      {
+        pending: "Logging",
+        success: "Logged in Successfully!",
+        error: "data.message",
+      }
+    );
     console.log(data);
     if (data.status == "success") {
       // update the sesssion storage for access
@@ -48,10 +58,14 @@ const UserSignInForm = () => {
     } else {
       toast.error(data.message);
     }
+    // setIsLoading(false);
   };
+  // if (isLoading) {
+  //   return <div>Loading</div>;
+  // }
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-90 ">
-      <h3 className="d-flex justify-content-between align-items-center w-50">
+    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
+      <h3 className="d-flex justify-content-between align-items-center w-100">
         <Button
           variant="light"
           onClick={() => navigate("/")}
