@@ -1,6 +1,6 @@
 import axios from "axios"
 // const authEP = "import.meta.env.ROOT_URL"
-const authEP = "http://localhost:9001/api/v1/"
+const authEP = process.env.VITE_API_BASE_URL
 
 const getAccessJWT = () => {
     return sessionStorage.getItem("accessJWT");
