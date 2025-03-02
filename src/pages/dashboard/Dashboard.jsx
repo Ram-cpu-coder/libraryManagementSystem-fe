@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { apiProcessor } from "../../helpers/axiosHelper";
 
 const Dashboard = () => {
-  const authEP = "http://localhost:9001/api/v1/auth";
+  const authEP = process.env.VITE_API_BASE_URL;
   const [user, setUser] = useState({});
 
   const fetchUserData = async () => {
     const data = await apiProcessor({
       method: "get",
-      url: authEP,
+      url: authEP + "/auth",
       isPrivate: true,
       isRefreshToken: false,
     });

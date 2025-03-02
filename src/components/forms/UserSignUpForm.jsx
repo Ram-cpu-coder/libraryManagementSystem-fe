@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { SyncLoader } from "react-spinners";
 
 const UserSignUpForm = () => {
-  const registerEp = "http://localhost:9001/api/v1/auth/register";
+  const registerEp = process.env.VITE_API_BASE_URL;
   const initialState = {
     fName: "",
     lName: "",
@@ -29,7 +29,7 @@ const UserSignUpForm = () => {
     const data = await apiProcessor({
       method: "post",
       data: { ...form },
-      url: registerEp,
+      url: registerEp + "/auth/register",
       isPrivate: false,
     });
     if (data.status == "success") {

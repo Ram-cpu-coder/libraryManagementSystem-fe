@@ -6,7 +6,7 @@ const PublicBooks = () => {
   const [book, setBooks] = useState([]);
   const [searchedData, setSearchedData] = useState();
   const [displayBooks, setDisplayBooks] = useState([]);
-  const bookApi = "http://localhost:9001/api/v1/books/pub-books";
+  const bookApi = process.env.VITE_API_BASE_URL;
   const handleOnSearch = (e) => {
     const query = e.target.value.toLowerCase();
     console.log(query);
@@ -23,7 +23,7 @@ const PublicBooks = () => {
     try {
       const data = await apiProcessor({
         method: "get",
-        url: bookApi,
+        url: bookApi + "/books/pub-books",
         isPrivate: false,
         isRefreshToken: false,
       });
