@@ -72,7 +72,8 @@ const UserSignInForm = () => {
         >
           <IoArrowBackCircleOutline />
         </Button>
-        <span>Sign In</span> <span> </span>
+        <span>Sign In</span>
+        <span></span>
       </h3>
       <hr className="w-100" />
       <div className="d-flex w-100 align-items-center justify-content-center gap-5 signinForm container">

@@ -9,9 +9,11 @@ import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import PublicBooks from "./pages/books/PublicBooks";
 import { Bounce, ToastContainer } from "react-toastify";
+import PizzaPage from "./pages/PizzaPage";
 
 function App() {
   return (
+    // <PizzaPage />
     <>
       <ToastContainer
         position="top-center"

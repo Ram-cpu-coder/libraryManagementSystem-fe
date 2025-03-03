@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="vh-100 relative">
+    <div className="min-vh-100 relative">
       {/* Hero Section */}
       <div className="bg-primary text-white text-center py-5  img-bg">
         <Container className="glassmophormism">

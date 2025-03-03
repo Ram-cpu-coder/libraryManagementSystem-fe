@@ -65,3 +65,14 @@ export const apiProcessor = async ({ method, url, data, isPrivate, isRefreshToke
         }
     }
 }
+
+
+// export const autoLogInAxios = async () => {
+//     const refreshJWT = localStorage.getItem("refreshJWT")
+//     const data = await apiProcessor({
+//         method: "get",
+//         url: authEP + "/auth",
+//         isPrivate: false,
+//         isRefreshToken: false
+//     })
+// }

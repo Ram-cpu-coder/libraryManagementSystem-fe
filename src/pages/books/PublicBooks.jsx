@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { apiProcessor } from "../../helpers/axiosHelper";
 import { BsArrowRight } from "react-icons/bs";
+import { setBooks } from "../../slice/bookSlice";
+import { useDispatch } from "react-redux";
 
 const PublicBooks = () => {
+  const dispatch = useDispatch();
+  const bookApi = import.meta.env.VITE_API_BASE_URL;
+
   const [book, setBooks] = useState([]);
   const [searchedData, setSearchedData] = useState();
   const [displayBooks, setDisplayBooks] = useState([]);
-  const bookApi = import.meta.env.VITE_API_BASE_URL;
+
+  // search function
   const handleOnSearch = (e) => {
     const query = e.target.value.toLowerCase();
     console.log(query);
@@ -19,6 +25,8 @@ const PublicBooks = () => {
     setSearchedData(e.target.value);
     setDisplayBooks(filtered);
   };
+
+  // action to fetch the books
   const fetchPublicBooks = async () => {
     try {
       const data = await apiProcessor({
@@ -27,7 +35,8 @@ const PublicBooks = () => {
         isPrivate: false,
         isRefreshToken: false,
       });
-      setBooks(data.books);
+      dispatch(setBooks(data.books));
+      console.log(data.books, "books available");
     } catch (error) {}
   };
   useEffect(() => {
@@ -57,7 +66,7 @@ const PublicBooks = () => {
             return (
               <div
                 className="border d-flex flex-column align-items-center justify-content-center m-1"
-                style={{ height: "300px", width: "auto", overflow: "hidden" }}
+                style={{ height: "300px", width: "300px", overflow: "hidden" }}
               >
                 <img
                   src={item.thumbnail}
