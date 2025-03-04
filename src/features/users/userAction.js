@@ -1,10 +1,9 @@
-import { loginApi } from "./userAxios";
-import { useDispatch } from "react-redux";
-
+import { fetchUserData, loginApi } from "./userAxios";
+import { setUser } from "./userSlice";
 export const loginAction = (form) => async (dispatch) => {
     // call the log in api
     const data = await loginApi({ ...form });
-
+    console.log(data)
     // update the user store
 
     if (data.status === "success") {
@@ -13,6 +12,13 @@ export const loginAction = (form) => async (dispatch) => {
         sessionStorage.setItem("accessJWT", data.accessToken);
         // updating the local storage for refresh
         localStorage.setItem("refreshJWT", data.refreshToken);
-
     };
-} 
+}
+
+
+export const getUserDetail = () => async (dispatch) => {
+    // call api
+    const data = await fetchUserData()
+    console.log("fetchDAta", data)
+    dispatch(setUser(data.user))
+}

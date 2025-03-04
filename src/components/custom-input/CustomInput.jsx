@@ -10,7 +10,7 @@ const CustomInput = ({ label, type, ...rest }) => {
   };
   return (
     <div className="w-100 position-relative">
-      <Form.Group className="" controlId="formBasicEmail">
+      <Form.Group className="">
         <Form.Label className="">{label}</Form.Label>
         <Form.Control
           {...rest}

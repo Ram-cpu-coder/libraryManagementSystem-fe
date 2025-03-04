@@ -8,6 +8,7 @@ import { Bounce, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { loginAction } from "../../features/users/userAction.js";
+import { useDispatch } from "react-redux";
 
 const UserSignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,7 @@ const UserSignInForm = () => {
     email: "",
     password: "",
   };
+  const dispatch = useDispatch();
   const { form, handleOnChange } = useForm(initialState);
   const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
@@ -24,7 +26,8 @@ const UserSignInForm = () => {
     try {
       setIsLoading(true);
       // login action
-      loginAction(form);
+      dispatch(loginAction(form));
+      // await fetchUserData();
       navigate("/user");
       // toast message
       toast.success("Logged in Successfully!!!", {
@@ -71,10 +74,10 @@ const UserSignInForm = () => {
           onSubmit={handleOnSubmit}
           className="d-flex align-items-center flex-column col-6"
         >
-          {userSignInInputFields.map((item) => {
+          {userSignInInputFields.map((item, index) => {
             return (
               <CustomInput
-                key={item.name}
+                key={index}
                 {...item}
                 onChange={handleOnChange}
                 className="mb-3"
