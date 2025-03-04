@@ -9,7 +9,8 @@ import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import PublicBooks from "./pages/books/PublicBooks";
 import { Bounce, ToastContainer } from "react-toastify";
-import PizzaPage from "./pages/PizzaPage";
+// import PizzaPage from "./pages/PizzaPage";
+import BooksLandingPage from "./pages/books/BooksLandingPage";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="books" element={<PublicBooks />} />
+          <Route
+            path="books-landing-page/:_id"
+            element={<BooksLandingPage />}
+          />
         </Route>
         {/* private routes */}
 

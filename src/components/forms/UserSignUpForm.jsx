@@ -24,35 +24,46 @@ const UserSignUpForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    setIsLoading(true);
-    const data = await apiProcessor({
-      method: "post",
-      data: { ...form },
-      url: registerEp + "/auth/register",
-      isPrivate: false,
-    });
-    if (data.status == "success") {
-      console.log("after", data);
-      setForm({ ...initialState });
-      setIsLoading(false);
-      toast.success(data.message);
-      navigate("/signin");
-    } else {
-      toast.error(data.message);
+    console.log("entered data", form);
+    try {
+      setIsLoading(true);
+      const data = await toast.promise(
+        apiProcessor({
+          method: "post",
+          data: { ...form },
+          url: registerEp + "/auth/register",
+          isPrivate: false,
+        }),
+        {
+          pending: "is Loading",
+        }
+      );
+
+      toast[data.status](data.message);
+
+      console.log(11111, data);
+      if (data.status == "success") {
+        console.log("after", data);
+        setForm({ ...initialState });
+
+        // toast.success(data.message);
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.log(101, error);
+      toast.error("Internal Error");
+    } finally {
       setIsLoading(false);
     }
 
     // why try catch did not work here while handling the error
   };
-  if (isLoading) {
-    return (
-      <div className="d-flex align-items-center justify-content-center min-vh-100">
-        <SyncLoader color="blue" margin={5} size={10} speedMultiplier={1} />
-      </div>
-    );
-  }
-  return (
+
+  return isLoading ? (
+    <div className="d-flex align-items-center justify-content-center min-vh-100">
+      <SyncLoader color="blue" margin={5} size={10} speedMultiplier={1} />
+    </div>
+  ) : (
     <Container
       fluid
       className="d-flex align-items-center justify-content-center min-vh-100"

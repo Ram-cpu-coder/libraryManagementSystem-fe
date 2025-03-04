@@ -20,39 +20,43 @@ const UserSignInForm = () => {
   const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    // call the log in api
-    const data = await apiProcessor({
-      method: "post",
-      url: loginEP + "/auth/login",
-      data: { email: form.email, password: form.password },
-      isPrivate: false,
-      isRefreshToken: false,
-    });
-
-    if (data.status === "success") {
-      // update the sesssion storage for access
-      sessionStorage.setItem("accessJWT", data.accessToken);
-      // updating the local storage for refresh
-      localStorage.setItem("refreshJWT", data.refreshToken);
-      // toast message
-      toast.success("Logged in Successfully!!!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+    try {
+      setIsLoading(true);
+      // call the log in api
+      const data = await apiProcessor({
+        method: "post",
+        url: loginEP + "/auth/login",
+        data: { email: form.email, password: form.password },
+        isPrivate: false,
+        isRefreshToken: false,
       });
-      navigate("/user");
+
+      if (data.status === "success") {
+        // update the sesssion storage for access
+        sessionStorage.setItem("accessJWT", data.accessToken);
+        // updating the local storage for refresh
+        localStorage.setItem("refreshJWT", data.refreshToken);
+        // toast message
+        toast.success("Logged in Successfully!!!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        navigate("/user");
+      } else {
+        console.log("error", data);
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Internal Error");
+    } finally {
       setIsLoading(false);
-    } else {
-      console.log("error", data);
-      setIsLoading(false);
-      toast.error(data.message);
     }
   };
   if (isLoading == true) {
