@@ -3,14 +3,13 @@ import { Button, Container, Form } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import useForm from "../../hooks/useForm.js";
 import { userSignInInputFields } from "../../assets/form-data/UserAuthInput.js";
-import { apiProcessor } from "../../helpers/axiosHelper.js";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
+import { loginAction } from "../../features/users/userAction.js";
 
 const UserSignInForm = () => {
-  const loginEP = import.meta.env.VITE_API_BASE_URL;
   const [isLoading, setIsLoading] = useState(false);
   const initialState = {
     email: "",
@@ -20,39 +19,25 @@ const UserSignInForm = () => {
   const navigate = useNavigate();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
+    // call log in action
     try {
       setIsLoading(true);
-      // call the log in api
-      const data = await apiProcessor({
-        method: "post",
-        url: loginEP + "/auth/login",
-        data: { email: form.email, password: form.password },
-        isPrivate: false,
-        isRefreshToken: false,
+      // login action
+      loginAction(form);
+      navigate("/user");
+      // toast message
+      toast.success("Logged in Successfully!!!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
       });
-
-      if (data.status === "success") {
-        // update the sesssion storage for access
-        sessionStorage.setItem("accessJWT", data.accessToken);
-        // updating the local storage for refresh
-        localStorage.setItem("refreshJWT", data.refreshToken);
-        // toast message
-        toast.success("Logged in Successfully!!!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-        navigate("/user");
-      } else {
-        console.log("error", data);
-        toast.error(data.message);
-      }
     } catch (error) {
       toast.error("Internal Error");
     } finally {

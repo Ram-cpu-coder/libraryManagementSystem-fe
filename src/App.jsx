@@ -11,8 +11,16 @@ import PublicBooks from "./pages/books/PublicBooks";
 import { Bounce, ToastContainer } from "react-toastify";
 // import PizzaPage from "./pages/PizzaPage";
 import BooksLandingPage from "./pages/books/BooksLandingPage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllBookAction } from "./features/books/bookAction";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBookAction());
+  });
+
   return (
     // <PizzaPage />
     <>
