@@ -8,7 +8,7 @@ const UserLayout = () => {
     <div>
       <Header />
       <div className="min-vh-100">
-        <div className="left">SideBar</div>
+        <div className="left"></div>
         <main className="main">
           <Outlet />
         </main>

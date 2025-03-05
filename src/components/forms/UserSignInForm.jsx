@@ -23,12 +23,10 @@ const UserSignInForm = () => {
     e.preventDefault();
 
     // call log in action
+    setIsLoading(true);
+    // login action
+    await dispatch(loginAction(form, navigate));
     try {
-      setIsLoading(true);
-      // login action
-      dispatch(loginAction(form));
-      // await fetchUserData();
-      navigate("/user");
       // toast message
       toast.success("Logged in Successfully!!!", {
         position: "top-center",
