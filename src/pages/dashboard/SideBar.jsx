@@ -5,32 +5,39 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { MdReviews } from "react-icons/md";
 import { PiNotebookDuotone } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const menubar = [
     {
       icon: <LiaBookSolid />,
       name: "Books",
+      Link: "",
     },
     {
       icon: <IoIosPeople />,
       name: "Students",
+      Link: "",
     },
     {
       icon: <TfiMenuAlt />,
       name: "All burrows",
+      Link: "",
     },
     {
       icon: <MdReviews />,
       name: "All Reviews",
+      Link: "",
     },
     {
       icon: <PiNotebookDuotone />,
       name: "My Books",
+      Link: "",
     },
     {
       icon: <CgProfile />,
       name: "Profile",
+      Link: "",
     },
   ];
   return (
@@ -43,10 +50,13 @@ const SideBar = () => {
       <div className="d-flex flex-column my-2">
         {menubar.map((menus) => {
           return (
-            <div className="my-2 d-flex align-items-center gap-2">
+            <Link
+              to={"/" + menus.Link}
+              className="my-2 d-flex align-items-center gap-2 text-decoration-none text-white"
+            >
               {menus.icon}
               {menus.name}
-            </div>
+            </Link>
           );
         })}
       </div>
