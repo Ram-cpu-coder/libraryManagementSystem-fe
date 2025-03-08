@@ -7,6 +7,6 @@ export default configureStore({
     reducer: {
         pizza: pizzaReducer,
         books: bookReducer,
-        user: userReducer
+        users: userReducer
     }
 })

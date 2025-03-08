@@ -6,13 +6,15 @@ import { MdReviews } from "react-icons/md";
 import { PiNotebookDuotone } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { LiaPrayingHandsSolid } from "react-icons/lia";
 
 const SideBar = () => {
   const menubar = [
     {
       icon: <LiaBookSolid />,
       name: "Books",
-      Link: "",
+      Link: "user",
     },
     {
       icon: <IoIosPeople />,
@@ -40,11 +42,18 @@ const SideBar = () => {
       Link: "",
     },
   ];
+
+  const userStore = useSelector((state) => state.users);
+  const user = userStore.user;
   return (
     <div className="d-flex flex-column justify-content-start p-4 bg-dark text-white vh-100 w-25">
       <div>
-        <p>Welcome Back</p>
-        <h1>"USER"</h1>
+        <p className="d-flex align-items-center gap-2">
+          Welcome Back <LiaPrayingHandsSolid className="fs-5" />
+        </p>
+        <h1>
+          {user.fName} {user.lName}
+        </h1>
       </div>
       <hr className="my-3" />
       <div className="d-flex flex-column my-2">

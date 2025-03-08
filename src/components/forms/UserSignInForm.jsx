@@ -12,39 +12,19 @@ import { useDispatch } from "react-redux";
 
 const UserSignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const initialState = {
-    email: "",
-    password: "",
-  };
-  const dispatch = useDispatch();
-  const { form, handleOnChange } = useForm(initialState);
-  const navigate = useNavigate();
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
 
-    // call log in action
+  const dispatch = useDispatch();
+  const { form, handleOnChange } = useForm({});
+  const navigate = useNavigate();
+
+  const handleOnSubmit = async (e) => {
     setIsLoading(true);
+    e.preventDefault();
     // login action
-    await dispatch(loginAction(form, navigate));
-    try {
-      // toast message
-      toast.success("Logged in Successfully!!!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } catch (error) {
-      toast.error("Internal Error");
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(loginAction(form, navigate));
+    setIsLoading(false);
   };
+
   if (isLoading == true) {
     return (
       <div className="d-flex align-items-center justify-content-center min-vh-100">

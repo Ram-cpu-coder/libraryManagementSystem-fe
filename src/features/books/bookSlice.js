@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    books: []
+    books: [],
+    adminBooks: []
 }
 const bookSlice = createSlice({
     name: "books",
@@ -9,9 +10,12 @@ const bookSlice = createSlice({
     reducers: {
         setBooks: (state, action) => {
             state.books = action.payload;
+        },
+        setAdminBooks: (state, action) => {
+            state.adminBooks = action.payload;
         }
     }
 })
 
-export const { setBooks } = bookSlice.actions
+export const { setBooks, setAdminBooks } = bookSlice.actions
 export default bookSlice.reducer

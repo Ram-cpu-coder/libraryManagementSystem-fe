@@ -1,4 +1,4 @@
-import { fetchUserData, loginApi } from "./userAxios";
+import { fetchUserDataApi, loginApi } from "./userAxios";
 import { setUser } from "./userSlice";
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
@@ -12,19 +12,14 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         sessionStorage.setItem("accessJWT", data.accessToken);
         // updating the local storage for refresh
         localStorage.setItem("refreshJWT", data.refreshToken);
-        const response = await fetchUserData()
-        console.log("fetchDAta", response)
-        if (response.user) {
-            dispatch(setUser(response.user))
-        }
+
         navigate("/user")
     };
 }
 
+export const userDataAction = () => async (dispatch) => {
 
-// export const getUserDetail = () => async (dispatch) => {
-//     // call api
-//     const data = await fetchUserData()
-//     console.log("fetchDAta", data)
-//     dispatch(setUser(data.user))
-// }
+    const data = await fetchUserDataApi()
+    console.log("fetchUSerDAta", data)
+    dispatch(setUser(data.user))
+}

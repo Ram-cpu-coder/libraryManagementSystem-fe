@@ -11,3 +11,11 @@ export const fetchAllBookApi = () => {
     }
     return apiProcessor(apiObj)
 }
+export const fetchAdminLevelBooks = () => {
+    return apiProcessor({
+        method: "get",
+        url: bookApi + "/books",
+        isPrivate: true,
+        isRefreshToken: true
+    })
+}
