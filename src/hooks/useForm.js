@@ -11,9 +11,7 @@ const useForm = (initialState) => {
                 ...form,
                 [name]: value
             })
-
     }
-
     return {
         form,
         setForm,

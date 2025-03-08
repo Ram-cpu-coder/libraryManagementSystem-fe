@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     books: [],
-    adminBooks: []
+    adminBooks: [],
+    isUpdate: false
 }
 const bookSlice = createSlice({
     name: "books",
@@ -13,9 +14,15 @@ const bookSlice = createSlice({
         },
         setAdminBooks: (state, action) => {
             state.adminBooks = action.payload;
+        },
+        setIsUpdate: (state) => {
+            state.isUpdate = !state.isUpdate
+        },
+        setUpdateBook: (state) => {
+            state.books = action.payload;
         }
     }
 })
 
-export const { setBooks, setAdminBooks } = bookSlice.actions
+export const { setBooks, setAdminBooks, setIsUpdate } = bookSlice.actions
 export default bookSlice.reducer

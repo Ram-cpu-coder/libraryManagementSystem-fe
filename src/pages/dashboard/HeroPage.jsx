@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import AdminBooks from "./AdminBooks";
+import AdminBooks from "../books/AdminBooks";
 
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
