@@ -1,13 +1,14 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import AdminBooks from "./AdminBooks";
 
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
   const books = bookStore.adminBooks;
   console.log(111, books);
   return (
-    <div className="w-75 d-flex flex-column p-2">
+    <div className="w-100 d-flex flex-column py-2 px-5">
       <h1>Book List</h1>
       <hr />
       <div className=" d-flex justify-content-end my-3">
@@ -15,7 +16,7 @@ const HeroPage = () => {
           Add New Book
         </Button>
       </div>
-      <hr />
+
       <div className="d-flex justify-content-between align-items-center">
         <p>{books.length} Books Found!</p>
         <input
@@ -26,6 +27,7 @@ const HeroPage = () => {
         />
       </div>
       <hr />
+      <AdminBooks books={books} />
     </div>
   );
 };

@@ -46,7 +46,10 @@ const SideBar = () => {
   const userStore = useSelector((state) => state.users);
   const user = userStore.user;
   return (
-    <div className="d-flex flex-column justify-content-start p-4 bg-dark text-white vh-100 w-25">
+    <div
+      className="d-flex flex-column justify-content-start p-4 bg-dark text-white min-vh-100"
+      style={{ width: "300px" }}
+    >
       <div>
         <p className="d-flex align-items-center gap-2">
           Welcome Back <LiaPrayingHandsSolid className="fs-5" />
