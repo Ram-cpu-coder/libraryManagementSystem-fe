@@ -20,7 +20,7 @@ const UpdateBooksAdmin = () => {
   };
   return (
     <div className="w-100 d-flex flex-column my-5 min-vh-100 align-items-center justify-content-center">
-      <h1 className="d-flex justify-content-evenly w-75">
+      <h1 className="d-flex justify-content-evenly align-items-center w-50">
         <Button
           variant="light"
           onClick={() => dispatch(setIsUpdate())}
@@ -28,9 +28,10 @@ const UpdateBooksAdmin = () => {
         >
           <IoArrowBackCircleOutline />
         </Button>
-        Update Book!
+        <span>Update Book!</span>
         <span></span>
       </h1>
+      <hr className="w-50" />
       <Form
         onSubmit={handleOnSubmit}
         className="d-flex align-items-center flex-column w-50"

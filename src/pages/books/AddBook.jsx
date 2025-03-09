@@ -10,7 +10,7 @@ const AddBook = () => {
     <div className="w-100 d-flex flex-column justify-content-center align-items-center min-vh-100">
       <h1 className="my-2">Add Book !</h1>
       <hr className="w-50" />
-      <div className="w-50 d-flex flex-column align-items-center border p-4 rounded my-2 shadow-lg">
+      <div className="w-50 d-flex flex-column align-items-center p-4 rounded my-2 shadow-lg">
         <Form className="w-100 px-2">
           {bookAddInputFields.map((item, index) => {
             return (

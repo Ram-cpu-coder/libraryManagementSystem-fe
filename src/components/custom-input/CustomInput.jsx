@@ -9,7 +9,7 @@ const CustomInput = ({ label, type, ...rest }) => {
     setShowPassword((prev) => !prev);
   };
   return (
-    <div className="w-100 position-relative">
+    <div className="w-100 position-relative my-2">
       <Form.Group className="">
         <Form.Label className="">{label}</Form.Label>
         <Form.Control

@@ -69,7 +69,7 @@ const UserSignUpForm = () => {
       className="d-flex align-items-center justify-content-center min-vh-100"
     >
       <Card
-        className="p-4 shadow-lg"
+        className="m-4 p-2 rounded shadow-lg"
         style={{
           width: "100%",
           maxWidth: "500px",
@@ -94,12 +94,7 @@ const UserSignUpForm = () => {
           <Form onSubmit={handleOnSubmit}>
             <Row>
               {userSignUpInputFields.map((item, index) => (
-                <Col
-                  key={index}
-                  xs={12}
-                  md={item.half ? 6 : 12}
-                  className="mb-3"
-                >
+                <Col key={index} xs={12} md={item.half ? 6 : 12}>
                   <CustomInput
                     {...item}
                     key={index}
