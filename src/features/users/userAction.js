@@ -1,5 +1,5 @@
 import { fetchUserDataApi, loginApi } from "./userAxios";
-import { setUser } from "./userSlice";
+import { setIsLogged, setUser } from "./userSlice";
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
     const data = await loginApi({ ...form });
@@ -12,7 +12,7 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         sessionStorage.setItem("accessJWT", data.accessToken);
         // updating the local storage for refresh
         localStorage.setItem("refreshJWT", data.refreshToken);
-
+        dispatch(setIsLogged())
         navigate("/user")
     };
 }

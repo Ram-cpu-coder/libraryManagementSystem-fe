@@ -13,8 +13,8 @@ const SideBar = () => {
   const menubar = [
     {
       icon: <LiaBookSolid />,
-      name: "Books",
-      Link: "user",
+      name: "Dashboard",
+      Link: "/user",
     },
     {
       icon: <IoIosPeople />,
@@ -60,10 +60,11 @@ const SideBar = () => {
       </div>
       <hr className="my-3" />
       <div className="d-flex flex-column my-2">
-        {menubar.map((menus) => {
+        {menubar.map((menus, index) => {
           return (
             <Link
-              to={"/" + menus.Link}
+              key={index}
+              to={menus.Link}
               className="my-2 d-flex align-items-center gap-2 text-decoration-none text-white"
             >
               {menus.icon}

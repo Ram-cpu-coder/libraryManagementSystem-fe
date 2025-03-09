@@ -15,8 +15,19 @@ const BooksTable = ({ books }) => {
     <tbody>
       {books.map((books, index) => {
         return (
-          <tr>
+          <tr key={index}>
             <td>{index + 1}</td>
+            <td>
+              <p
+                style={
+                  books.status == "active"
+                    ? { color: "green" }
+                    : { color: "red" }
+                }
+              >
+                {books.status}
+              </p>
+            </td>
             <td>
               <img
                 src={books.thumbnail}
@@ -27,15 +38,6 @@ const BooksTable = ({ books }) => {
             <td>
               <h2>{books.title}</h2>
               <p>{books.author}</p>
-              <p
-                style={
-                  books.status == "active"
-                    ? { color: "green" }
-                    : { color: "red" }
-                }
-              >
-                Status : {books.status}
-              </p>
             </td>
             <td>
               <Button
