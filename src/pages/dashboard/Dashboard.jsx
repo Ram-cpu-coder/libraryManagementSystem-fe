@@ -5,6 +5,7 @@ import HeroPage from "./HeroPage";
 import { userDataAction } from "../../features/users/userAction";
 import { fetchAdminLevelBooksAction } from "../../features/books/bookAction";
 import UpdateBooksAdmin from "../books/UpdateBooksAdmin";
+import { setIsLogged } from "../../features/users/userSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(userDataAction());
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(fetchAdminLevelBooksAction());
+    dispatch(setIsLogged());
   }, [dispatch]);
   return (
     <div className="d-flex">

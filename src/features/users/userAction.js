@@ -1,5 +1,5 @@
 import { fetchUserDataApi, loginApi } from "./userAxios";
-import { setIsLogged, setUser } from "./userSlice";
+import { resetUser, setIsLogged, setIsLoggedOut, setUser } from "./userSlice";
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
     const data = await loginApi({ ...form });
@@ -22,4 +22,11 @@ export const userDataAction = () => async (dispatch) => {
     const data = await fetchUserDataApi()
     console.log("fetchUSerDAta", data)
     dispatch(setUser(data.user))
+}
+
+export const logOutAction = () => async (dispatch) => {
+    await dispatch(resetUser())
+    sessionStorage.removeItem("accessJWT")
+    localStorage.clear()
+    await dispatch(setIsLoggedOut())
 }

@@ -47,7 +47,6 @@ const PublicBooks = () => {
   useEffect(() => {
     fetchPublicBooks();
   }, []);
-  console.log(bookStore.books);
 
   return (
     <div className="my-2">
@@ -76,7 +75,7 @@ const PublicBooks = () => {
             </div>
           ) : !displayBooks.length < 1 ? (
             displayBooks.map((item, index) => {
-              return <BooksCard item={{ ...item }} />;
+              return <BooksCard item={{ ...item }} key={index} />;
             })
           ) : (
             <div className="w-100">No Books Found !</div>

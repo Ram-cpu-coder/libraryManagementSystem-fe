@@ -33,7 +33,7 @@ const BooksCard = ({ item }) => {
           className="icon-link icon-link-hover text-white bg-primary text-decoration-none border p-2 rounded"
           to={"/books-landing-page/" + item._id}
         >
-          Read it
+          Read
           <svg className="bi" aria-hidden="true">
             <BsArrowRight />
           </svg>

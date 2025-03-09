@@ -19,12 +19,15 @@ const userSlice = createSlice({
             state.user = {};
         }),
         setIsLogged: (state => {
-            state.isLoggedIn = !state.isLoggedIn
+            state.isLoggedIn = true
+        }),
+        setIsLoggedOut: (state => {
+            state.isLoggedIn = false
         })
 
     }
 })
 
-export const { setUser, resetUser, setIsLogged } = userSlice.actions
+export const { setUser, resetUser, setIsLogged, setIsLoggedOut } = userSlice.actions
 
 export default userSlice.reducer

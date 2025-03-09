@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { logOutAction } from "../../features/users/userAction";
 
 const LoggedInHeader = () => {
   return (
     <Navbar expand="lg" className="shadow text-dark">
       <Container>
-        <Navbar.Brand href="/" className="text-dark">
+        <Navbar.Brand href="/user" className="text-dark">
           LMS
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,7 +21,11 @@ const LoggedInHeader = () => {
             <Link className="nav-link navLink text-black px-4" to="/user">
               DashBoard
             </Link>
-            <Link className="nav-link text-black navLink px-4" to="/">
+            <Link
+              className="nav-link text-black navLink px-4"
+              to="/"
+              onClick={() => logOutAction()}
+            >
               Log Out
             </Link>
           </Nav>

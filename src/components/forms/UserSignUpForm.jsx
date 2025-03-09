@@ -93,16 +93,16 @@ const UserSignUpForm = () => {
           <hr className="mb-4" />
           <Form onSubmit={handleOnSubmit}>
             <Row>
-              {userSignUpInputFields.map((item) => (
+              {userSignUpInputFields.map((item, index) => (
                 <Col
-                  key={item.name}
+                  key={index}
                   xs={12}
                   md={item.half ? 6 : 12}
                   className="mb-3"
                 >
                   <CustomInput
                     {...item}
-                    key={item.name}
+                    key={index}
                     onChange={handleOnChange}
                   />
                 </Col>

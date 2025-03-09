@@ -6,7 +6,6 @@ import AdminBooks from "../books/AdminBooks";
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
   const books = bookStore.adminBooks;
-  console.log(111, books);
   return (
     <div className="w-100 d-flex flex-column py-2 px-5">
       <h1>Book List</h1>
