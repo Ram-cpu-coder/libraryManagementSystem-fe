@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllBookAction } from "./features/books/bookAction";
 import UpdateBooksAdmin from "./pages/books/UpdateBooksAdmin";
+import AddBook from "./pages/books/AddBook";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ function App() {
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="updateBook" element={<UpdateBooksAdmin />} />
+          <Route path="addBook" element={<AddBook />} />
         </Route>
       </Routes>
     </>

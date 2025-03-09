@@ -1,11 +1,11 @@
 import React from "react";
-import { bookUpdateInputFields } from "../../assets/form-data/UserAuthInput";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { Button, Form } from "react-bootstrap";
 import useForm from "../../hooks/useForm";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { setIsUpdate } from "../../features/books/bookSlice";
+import { bookUpdateInputFields } from "../../assets/form-data/BooksInput.js";
 
 const UpdateBooksAdmin = () => {
   const { form, handleOnChange } = useForm({});

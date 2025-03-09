@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import AdminBooks from "../books/AdminBooks";
+import { Link } from "react-router-dom";
 
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
@@ -11,9 +12,11 @@ const HeroPage = () => {
       <h1>Book List</h1>
       <hr />
       <div className=" d-flex justify-content-end my-3">
-        <Button variant="primary" className="w-10">
-          Add New Book
-        </Button>
+        <Link to="/user/addBook">
+          <Button variant="primary" className="w-10">
+            Add New Book
+          </Button>
+        </Link>
       </div>
 
       <div className="d-flex justify-content-between align-items-center">
