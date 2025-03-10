@@ -9,6 +9,7 @@ import {
 
 const BooksTable = ({ books, isPrivate }) => {
   const dispatch = useDispatch();
+  const userStore = useSelector((state) => state.users);
 
   const handleOnEditToggle = () => {
     dispatch(isUpdateToggle());
@@ -23,15 +24,17 @@ const BooksTable = ({ books, isPrivate }) => {
     <tbody>
       {books.map((books, index) => {
         return (
-          <tr key={index}>
+          <tr key={books.isbn}>
             <td>{index + 1}</td>
-            <td>
+            <td
+              style={{
+                display: userStore.user.role == "admin" ? "block" : "none",
+              }}
+            >
               <p
-                style={
-                  books.status == "active"
-                    ? { color: "green" }
-                    : { color: "red" }
-                }
+                style={{
+                  color: books.status == "active" ? "green" : "red",
+                }}
               >
                 {books.status}
               </p>
