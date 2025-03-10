@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import AdminBooks from "../books/AdminBooks";
 import { Link } from "react-router-dom";
 
-const HeroPage = () => {
+const HeroPage = ({ isPrivate }) => {
   const bookStore = useSelector((state) => state.books);
-  const books = bookStore.adminBooks;
+  const userStore = useSelector((state) => state.users);
+  const books = bookStore.books;
   return (
     <div className="w-100 d-flex flex-column py-2 px-5">
       <h1>Book List</h1>
@@ -28,8 +29,7 @@ const HeroPage = () => {
           placeholder="Search books ..."
         />
       </div>
-      <hr />
-      <AdminBooks books={books} />
+      <AdminBooks books={books} isPrivate={isPrivate} />
     </div>
   );
 };

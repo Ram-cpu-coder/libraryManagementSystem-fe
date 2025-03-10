@@ -2,19 +2,19 @@
 import { fetchAdminLevelBooks, fetchAllBookApi, updateBookApi } from "./bookAxios";
 import { setAdminBooks, setBooks, setIsUpdate } from "./bookSlice";
 
-export const getAllBookAction = () => async (dispatch) => {
+export const getAllBookAction = (isPrivate) => async (dispatch) => {
     // call api
-    const data = await fetchAllBookApi()
+    const data = await fetchAllBookApi(isPrivate)
     // console.log("Public books", data.books)
     // update the book store
     dispatch(setBooks(data.books));
 }
 
-export const fetchAdminLevelBooksAction = () => async (dispatch) => {
-    const data = await fetchAdminLevelBooks()
-    // console.log(data, "books from action")
-    dispatch(setAdminBooks(data.books))
-}
+// export const fetchAdminLevelBooksAction = () => async (dispatch) => {
+//     const data = await fetchAdminLevelBooks()
+//     // console.log(data, "books from action")
+//     dispatch(setAdminBooks(data?.books || []))
+// }
 export const isUpdateToggle = () => (dispatch) => {
     dispatch(setIsUpdate())
 }

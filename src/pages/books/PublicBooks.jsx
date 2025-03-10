@@ -33,7 +33,7 @@ const PublicBooks = () => {
     try {
       setIsLoading(true);
       // action to
-      dispatch(getAllBookAction());
+      dispatch(getAllBookAction(false));
     } catch (error) {
       console.log(error);
     } finally {

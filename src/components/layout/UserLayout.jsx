@@ -11,6 +11,8 @@ const UserLayout = () => {
         <div className="left"></div>
         <main className="main">
           <Outlet />
+
+          {/* there is another way of layouting, take reference from drive's code of 10-03 date  */}
         </main>
       </div>
       <Footer />

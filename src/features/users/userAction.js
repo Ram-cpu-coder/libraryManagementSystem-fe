@@ -20,13 +20,11 @@ export const loginAction = (form, navigate) => async (dispatch) => {
 export const userDataAction = () => async (dispatch) => {
 
     const data = await fetchUserDataApi()
-    console.log("fetchUSerDAta", data)
     dispatch(setUser(data.user))
 }
 
 export const logOutAction = () => async (dispatch) => {
-    await dispatch(resetUser())
-    sessionStorage.removeItem("accessJWT")
-    localStorage.clear()
-    await dispatch(setIsLoggedOut())
+    await dispatch(resetUser());
+    sessionStorage.removeItem("accessJWT");
+    localStorage.clear();
 }

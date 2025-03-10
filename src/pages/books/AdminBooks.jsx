@@ -3,9 +3,9 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import BooksTable from "./BooksTable";
 
-const AdminBooks = ({ books }) => {
+const AdminBooks = ({ books, isPrivate }) => {
   return (
-    <Table bordered hover size="sm">
+    <Table hover size="sm">
       <thead>
         <tr>
           <th>#</th>
@@ -15,7 +15,7 @@ const AdminBooks = ({ books }) => {
           <th>Action</th>
         </tr>
       </thead>
-      <BooksTable books={books} />
+      <BooksTable books={books} isPrivate={isPrivate} />
     </Table>
   );
 };

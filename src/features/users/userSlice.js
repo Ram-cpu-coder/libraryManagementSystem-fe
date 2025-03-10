@@ -17,6 +17,7 @@ const userSlice = createSlice({
         },
         resetUser: (state => {
             state.user = {};
+            state.isLoggedIn = false;
         }),
         setIsLogged: (state => {
             state.isLoggedIn = true

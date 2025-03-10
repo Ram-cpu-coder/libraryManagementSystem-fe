@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { MdModeEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { isUpdateToggle } from "../../features/books/bookAction";
+import {
+  getAllBookAction,
+  isUpdateToggle,
+} from "../../features/books/bookAction";
 
-const BooksTable = ({ books }) => {
+const BooksTable = ({ books, isPrivate }) => {
   const dispatch = useDispatch();
-  const bookStore = useSelector((state) => state.books);
+
   const handleOnEditToggle = () => {
     dispatch(isUpdateToggle());
   };
+
+  // use effect to fetch all books
+  useEffect(() => {
+    dispatch(getAllBookAction(isPrivate));
+  }, []);
 
   return (
     <tbody>
@@ -36,7 +44,11 @@ const BooksTable = ({ books }) => {
               />
             </td>
             <td>
-              <h2>{books.title}</h2>
+              <h2>
+                {books.title.length > 30
+                  ? books.title.slice(0, 30) + "..."
+                  : books.title}
+              </h2>
               <p>{books.author}</p>
             </td>
             <td>

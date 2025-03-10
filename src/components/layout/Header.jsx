@@ -6,7 +6,7 @@ const Header = () => {
   // const dispatch = useDispatch();
   const userStore = useSelector((state) => state.users);
 
-  return userStore.isLoggedIn == true ? <LoggedInHeader /> : <DefaultHeader />;
+  return userStore.isLoggedIn ? <LoggedInHeader /> : <DefaultHeader />;
 };
 
 export default Header;

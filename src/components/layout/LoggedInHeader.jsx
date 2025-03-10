@@ -4,8 +4,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { logOutAction } from "../../features/users/userAction";
+import { useDispatch } from "react-redux";
 
 const LoggedInHeader = () => {
+  const dispatch = useDispatch();
   return (
     <Navbar expand="lg" className="shadow text-dark">
       <Container>
@@ -24,7 +26,7 @@ const LoggedInHeader = () => {
             <Link
               className="nav-link text-black navLink px-4"
               to="/"
-              onClick={() => logOutAction()}
+              onClick={() => dispatch(logOutAction())}
             >
               Log Out
             </Link>

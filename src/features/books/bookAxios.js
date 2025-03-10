@@ -2,11 +2,11 @@ import { apiProcessor } from "../../helpers/axiosHelper"
 
 const bookApi = import.meta.env.VITE_API_BASE_URL;
 // api 
-export const fetchAllBookApi = () => {
+export const fetchAllBookApi = (isPrivate) => {
     const apiObj = {
         method: "get",
-        url: bookApi + "/books/pub-books",
-        isPrivate: false,
+        url: `${bookApi}/${isPrivate ? "books" : "books/pub-books"}`,
+        isPrivate,
         isRefreshToken: false,
     }
     return apiProcessor(apiObj)

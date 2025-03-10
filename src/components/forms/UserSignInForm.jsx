@@ -7,7 +7,10 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
-import { loginAction } from "../../features/users/userAction.js";
+import {
+  loginAction,
+  userDataAction,
+} from "../../features/users/userAction.js";
 import { useDispatch } from "react-redux";
 
 const UserSignInForm = () => {
@@ -22,6 +25,7 @@ const UserSignInForm = () => {
     e.preventDefault();
     // login action
     dispatch(loginAction(form, navigate));
+    dispatch(userDataAction());
     setIsLoading(false);
   };
 
@@ -49,7 +53,7 @@ const UserSignInForm = () => {
       <div className="d-flex w-50 align-items-center justify-content-center gap-5 signinForm container shadow p-3 rounded">
         <Form
           onSubmit={handleOnSubmit}
-          className="d-flex align-items-center flex-column w-100"
+          className="d-flex align-items-center flex-column w-50"
         >
           {userSignInInputFields.map((item, index) => {
             return (
