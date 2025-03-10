@@ -13,7 +13,7 @@ const AdminBooks = ({ books, isPrivate }) => {
           <th>#</th>
           <th
             style={{
-              display: userStore.user.role === "admin" ? "block" : "none",
+              display: userStore.user.role === "admin" ? "" : "none",
             }}
           >
             Status

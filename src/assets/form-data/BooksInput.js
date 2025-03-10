@@ -63,13 +63,7 @@ export const bookUpdateInputFields = [
 
 
 export const bookAddInputFields = [
-    {
-        label: "Status",
-        name: "status",
-        placeholder: "Status",
-        required: true,
-        type: "String",
-    },
+
     {
         label: "Title",
         name: "title",
@@ -118,18 +112,5 @@ export const bookAddInputFields = [
         required: true,
         type: "String",
     },
-    {
-        label: "Availability",
-        name: "isAvailable",
-        placeholder: "Available?",
-        required: true,
-        type: "String",
-    },
-    {
-        label: "Expected To be Available",
-        name: "expectedAvailabiliity",
-        placeholder: "Expected Availability",
-        required: true,
-        type: "date",
-    }
+
 ]

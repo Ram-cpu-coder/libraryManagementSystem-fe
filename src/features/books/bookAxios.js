@@ -27,3 +27,12 @@ export const updateBookApi = () => {
         isRefreshToken: true
     })
 }
+export const addBookApi = (form) => {
+    return apiProcessor({
+        method: 'post',
+        url: bookApi + "/books/add",
+        isPrivate: true,
+        isRefreshToken: true,
+        data: form
+    })
+}

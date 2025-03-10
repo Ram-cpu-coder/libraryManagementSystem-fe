@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { MdModeEdit } from "react-icons/md";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBookAction,
@@ -28,7 +28,7 @@ const BooksTable = ({ books, isPrivate }) => {
             <td>{index + 1}</td>
             <td
               style={{
-                display: userStore.user.role == "admin" ? "block" : "none",
+                display: userStore.user.role == "admin" ? "" : "none",
               }}
             >
               <p
@@ -43,7 +43,7 @@ const BooksTable = ({ books, isPrivate }) => {
               <img
                 src={books.thumbnail}
                 alt="books"
-                style={{ height: "100px" }}
+                style={{ width: "100px", height: "100px", overflow: "hidden" }}
               />
             </td>
             <td>
@@ -55,12 +55,21 @@ const BooksTable = ({ books, isPrivate }) => {
               <p>{books.author}</p>
             </td>
             <td>
-              <Button
-                className="d-flex gap-1 align-items-center justify-content-center"
-                onClick={handleOnEditToggle}
-              >
-                <MdModeEdit /> Edit
-              </Button>
+              <div className="d-flex gap-2 justify-content-center">
+                <Button
+                  className="d-flex gap-1 align-items-center justify-content-center"
+                  onClick={handleOnEditToggle}
+                >
+                  <MdModeEdit /> Edit
+                </Button>
+                <Button
+                  variant="danger"
+                  className="d-flex gap-1 align-items-center justify-content-center"
+                  onClick={handleOnEditToggle}
+                >
+                  <MdDelete />
+                </Button>
+              </div>
             </td>
           </tr>
         );

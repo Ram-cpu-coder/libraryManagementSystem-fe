@@ -20,9 +20,12 @@ const bookSlice = createSlice({
         },
         setUpdateBook: (state) => {
             state.books = action.payload;
+        },
+        setAddBook: (state, action) => {
+            return { ...state, books: action.payload }
         }
     }
 })
 
-export const { setBooks, setAdminBooks, setIsUpdate } = bookSlice.actions
+export const { setBooks, setAdminBooks, setIsUpdate, setAddBook, setUpdateBook } = bookSlice.actions
 export default bookSlice.reducer
