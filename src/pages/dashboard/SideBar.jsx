@@ -57,6 +57,7 @@ const SideBar = () => {
     user.role === "admin"
       ? menubar
       : menubar.filter((item) => !item.isAdminOnly);
+
   useEffect(() => {
     dispatch(userDataAction());
   }, []);

@@ -26,6 +26,7 @@ const UserSignInForm = () => {
     // login action
     dispatch(loginAction(form, navigate));
     dispatch(userDataAction());
+    navigate("/");
     setIsLoading(false);
   };
 

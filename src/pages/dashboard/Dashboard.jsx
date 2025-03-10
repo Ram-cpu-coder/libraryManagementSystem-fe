@@ -11,19 +11,24 @@ const Dashboard = () => {
   const bookStore = useSelector((state) => state.books);
   const userStore = useSelector((state) => state.users);
 
-  const isPrivate = userStore.user.role == "admin" ? true : false;
-  useEffect(() => {
-    dispatch(getAllBookAction(isPrivate));
-    dispatch(setIsLogged());
-  }, [dispatch]);
+  // const isPrivate = userStore.user.role == "admin" ? true : false;
 
+  const privateBoolean = userStore.user.role === "admin" ? true : false;
+
+  console.log(privateBoolean);
+  useEffect(() => {
+    dispatch(getAllBookAction(privateBoolean));
+    dispatch(setIsLogged());
+  }, [dispatch, privateBoolean]);
+
+  console.log(bookStore.books);
   return (
     <div className="d-flex">
       <SideBar />
       {bookStore.isUpdate == true ? (
         <UpdateBooksAdmin />
       ) : (
-        <HeroPage isPrivate={isPrivate} />
+        <HeroPage isPrivate={userStore.isPrivate} books={bookStore.books} />
       )}
     </div>
   );

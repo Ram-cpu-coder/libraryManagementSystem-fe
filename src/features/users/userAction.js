@@ -21,6 +21,7 @@ export const userDataAction = () => async (dispatch) => {
 
     const data = await fetchUserDataApi()
     dispatch(setUser(data.user))
+    // console.log(data.isPrivate)
 }
 
 export const logOutAction = () => async (dispatch) => {
