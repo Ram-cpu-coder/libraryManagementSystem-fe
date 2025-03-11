@@ -96,7 +96,7 @@ export const bookAddInputFields = [
         name: "publishedYear",
         placeholder: "Published Year",
         required: true,
-        type: "date",
+        type: "number",
     },
     {
         label: "Thumbnail",

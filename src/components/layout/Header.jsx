@@ -3,10 +3,9 @@ import LoggedInHeader from "./LoggedInHeader";
 import DefaultHeader from "./DefaultHeader";
 
 const Header = () => {
-  // const dispatch = useDispatch();
-  const userStore = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.users);
 
-  return userStore.isLoggedIn ? <LoggedInHeader /> : <DefaultHeader />;
+  return user?._id ? <LoggedInHeader /> : <DefaultHeader />;
 };
 
 export default Header;

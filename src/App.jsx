@@ -4,24 +4,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
 import DefaultLayout from "./components/layout/DefaultLayout";
 import Dashboard from "./pages/dashboard/Dashboard";
-import UserLayout from "./components/layout/UserLayout";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import PublicBooks from "./pages/books/PublicBooks";
 import { Bounce, ToastContainer } from "react-toastify";
-// import PizzaPage from "./pages/PizzaPage";
 import BooksLandingPage from "./pages/books/BooksLandingPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllBookAction } from "./features/books/bookAction";
 import UpdateBooksAdmin from "./pages/books/UpdateBooksAdmin";
 import AddBook from "./pages/books/AddBook";
+import HeroPage from "./pages/dashboard/HeroPage";
+import { autoLogin } from "./features/users/userAction";
+import DeleteBook from "./pages/books/DeleteBook";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllBookAction());
-  });
+    dispatch(autoLogin());
+  }, []);
 
   return (
     // <PizzaPage />
@@ -54,11 +56,13 @@ function App() {
         </Route>
         {/* private routes */}
 
-        <Route path="/user" element={<UserLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="updateBook" element={<UpdateBooksAdmin />} />
-          <Route path="addBook" element={<AddBook />} />
-        </Route>
+        {/* admin CRUD pages */}
+        <Route path="/admin/updateBook" element={<UpdateBooksAdmin />} />
+        <Route path="/admin/addBook" element={<AddBook />} />
+        <Route path="/admin/delete/:_id" element={<DeleteBook />} />
+        <Route path="/admin" element={<HeroPage />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );

@@ -36,3 +36,11 @@ export const addBookApi = (form) => {
         data: form
     })
 }
+export const deleteBookApi = (_id) => {
+    return apiProcessor({
+        method: "delete",
+        url: bookApi + "/books/" + _id,
+        isPrivate: true,
+        isRefreshToken: true
+    })
+}

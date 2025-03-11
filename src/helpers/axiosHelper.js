@@ -1,6 +1,6 @@
 import axios from "axios"
 // const authEP = "import.meta.env.ROOT_URL"
-const authEP = import.meta.env.VITE_API_BASE_URL
+const authEP = import.meta.env.VITE_API_BASE_URL + "/auth"
 
 const getAccessJWT = () => {
     return sessionStorage.getItem("accessJWT");
@@ -66,13 +66,14 @@ export const apiProcessor = async ({ method, url, data, isPrivate, isRefreshToke
     }
 }
 
+export const renewAccessJWT = async () => {
+    const { accessJWT } = await apiProcessor({
+        method: "get",
+        url: authEP + "/renew-jwt",
+        isPrivate: true,
+        isRefreshToken: true
+    })
 
-// export const autoLogInAxios = async () => {
-//     const refreshJWT = localStorage.getItem("refreshJWT")
-//     const data = await apiProcessor({
-//         method: "get",
-//         url: authEP + "/auth",
-//         isPrivate: false,
-//         isRefreshToken: false
-//     })
-// }
+    sessionStorage.setItem("accessJWT", accessJWT)
+    return accessJWT
+}

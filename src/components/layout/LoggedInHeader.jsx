@@ -11,16 +11,16 @@ const LoggedInHeader = () => {
   return (
     <Navbar expand="lg" className="shadow text-dark">
       <Container>
-        <Navbar.Brand href="/user" className="text-dark">
+        <Navbar.Brand href="/dashboard" className="text-dark">
           LMS
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Link className="nav-link navLink text-black px-4" to="/user">
+            <Link className="nav-link navLink text-black px-4" to="/">
               Home
             </Link>
-            <Link className="nav-link navLink text-black px-4" to="/user">
+            <Link className="nav-link navLink text-black px-4" to="/dashboard">
               DashBoard
             </Link>
             <Link

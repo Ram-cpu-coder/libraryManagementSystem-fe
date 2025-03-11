@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import useForm from "../../hooks/useForm.js";
 import { userSignInInputFields } from "../../assets/form-data/UserAuthInput.js";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import {
   loginAction,
   userDataAction,
 } from "../../features/users/userAction.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserSignInForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,10 @@ const UserSignInForm = () => {
   const dispatch = useDispatch();
   const { form, handleOnChange } = useForm({});
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const sentTo = location?.state?.from?.location?.pathname || "/dashboard";
+  const { user } = useSelector((state) => state.users);
 
   const handleOnSubmit = async (e) => {
     setIsLoading(true);
@@ -26,9 +30,13 @@ const UserSignInForm = () => {
     // login action
     dispatch(loginAction(form, navigate));
     dispatch(userDataAction());
-    navigate("/");
+    // navigate("/dashboard");
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    user?._id && navigate(sentTo);
+  }, [user?._id]);
 
   if (isLoading == true) {
     return (
@@ -42,7 +50,7 @@ const UserSignInForm = () => {
       <h3 className="d-flex justify-content-between align-items-center w-50">
         <Button
           variant="light"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashboard")}
           className="fs-2 d-flex align-items-center bg-white"
         >
           <IoArrowBackCircleOutline />

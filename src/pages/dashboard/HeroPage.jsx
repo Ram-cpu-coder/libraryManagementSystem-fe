@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AdminBooks from "../books/AdminBooks";
 import { Link } from "react-router-dom";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import UserLayout from "../../components/layout/UserLayout";
+import { getAllBookAction } from "../../features/books/bookAction";
 
-const HeroPage = ({ isPrivate, books }) => {
+const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
   const userStore = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+  const books = bookStore.books;
 
   const [searchedData, setSearchedData] = useState();
   const [displayData, setDisplayData] = useState([]);
 
   useEffect(() => {
-    setDisplayData(bookStore.books);
-  }, [bookStore.books]);
+    setDisplayData(books);
+  }, [books]);
+
+  useEffect(() => {
+    dispatch(getAllBookAction(true));
+  }, []);
 
   const handleOnSearch = (e) => {
     const query = e.target.value.toLowerCase();
-    const filteredData = bookStore.books.filter(
+    const filteredData = books.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
         item.author.toLowerCase().includes(query)
@@ -26,17 +35,17 @@ const HeroPage = ({ isPrivate, books }) => {
     setSearchedData(e.target.value);
     setDisplayData(filteredData);
   };
+
+  console.log("HeroPage", books);
   return (
-    <div className="w-100 d-flex flex-column py-2 px-5">
-      <h1>Book List</h1>
-      <hr />
+    <UserLayout pageTitle="Admin Books">
       <div
         className="justify-content-end my-3"
         style={{
           display: userStore.user.role == "admin" ? "flex" : "none",
         }}
       >
-        <Link to="/user/addBook">
+        <Link to="/admin/addBook">
           <Button
             variant="primary"
             className="w-10 d-flex align-items-center gap-2"
@@ -48,7 +57,7 @@ const HeroPage = ({ isPrivate, books }) => {
       </div>
 
       <div className="d-flex justify-content-between align-items-center">
-        <p>{books.length} Books Found!</p>
+        <p>{books?.length || 0} Books Found!</p>
         <input
           type="search"
           name="search"
@@ -58,8 +67,8 @@ const HeroPage = ({ isPrivate, books }) => {
           value={searchedData}
         />
       </div>
-      <AdminBooks books={displayData} isPrivate={isPrivate} />
-    </div>
+      <AdminBooks books={displayData} />
+    </UserLayout>
   );
 };
 

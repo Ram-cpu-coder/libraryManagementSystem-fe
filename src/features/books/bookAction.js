@@ -1,6 +1,6 @@
 
-import { addBookApi, fetchAllBookApi, updateBookApi } from "./bookAxios";
-import { setAddBook, setBooks, setIsUpdate } from "./bookSlice";
+import { addBookApi, deleteBookApi, fetchAllBookApi } from "./bookAxios";
+import { setBooks } from "./bookSlice";
 
 export const getAllBookAction = (isPrivate) => async (dispatch) => {
     // call api
@@ -9,16 +9,13 @@ export const getAllBookAction = (isPrivate) => async (dispatch) => {
     dispatch(setBooks(data.books));
 }
 
-export const isUpdateToggle = () => (dispatch) => {
-    dispatch(setIsUpdate())
-}
-export const updateBookAction = () => async (dispatch) => {
-    const data = await updateBookApi();
-    console.log(data, "updatedbook")
-    dispatch(setUpdateBook(data.books))
-}
 export const addBookAction = (form) => async (dispatch) => {
-    const data = await addBookApi({ ...form });
-    console.log(data.status)
-    dispatch(setAddBook(data.user))
+    await addBookApi({ ...form });
+
+    dispatch(getAllBookAction(true));
 }
+
+export const deleteBookAction = (_id) => async (dispatch) => {
+    await deleteBookApi(_id)
+    dispatch(getAllBookAction(true))
+} 

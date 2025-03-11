@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 import BooksTable from "./BooksTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBookAction } from "../../features/books/bookAction";
 
-const AdminBooks = ({ books, isPrivate }) => {
-  const userStore = useSelector((state) => state.users);
+const AdminBooks = ({ books }) => {
+  // const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.users);
+  // const { books } = useSelector((state) => state.books);
+
+  // useEffect(() => {
+  //   dispatch(getAllBookAction(true));
+  // }, []);
   return (
     <Table hover size="sm">
       <thead>
@@ -13,17 +20,17 @@ const AdminBooks = ({ books, isPrivate }) => {
           <th>#</th>
           <th
             style={{
-              display: userStore.user.role === "admin" ? "" : "none",
+              display: user.role === "admin" ? "" : "none",
             }}
           >
             Status
           </th>
           <th>Thumbnail</th>
           <th>Title</th>
-          <th>Action</th>
+          <th className="text-center">Action</th>
         </tr>
       </thead>
-      <BooksTable books={books} isPrivate={isPrivate} />
+      <BooksTable isPrivate={true} books={books} />
     </Table>
   );
 };
