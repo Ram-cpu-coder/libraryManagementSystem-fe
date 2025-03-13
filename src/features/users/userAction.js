@@ -1,6 +1,6 @@
 import { renewAccessJWT } from "../../helpers/axiosHelper";
-import { fetchUserDataApi, loginApi } from "./userAxios";
-import { resetUser, setUser } from "./userSlice";
+import { fetchUserDataApi, getStudentsApi, loginApi } from "./userAxios";
+import { resetUser, setStudents, setUser } from "./userSlice";
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
     const data = await loginApi({ ...form });
@@ -16,7 +16,7 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         navigate("/dashboard")
     };
 }
-
+// individual user detail
 export const userDataAction = () => async (dispatch) => {
 
     const data = await fetchUserDataApi()
@@ -45,4 +45,9 @@ export const autoLogin = () => async (dispatch) => {
         token && dispatch(userDataAction())
         console.log("refreshToken")
     }
+}
+export const getStudentsAction = () => async (dispatch) => {
+    const data = await getStudentsApi()
+    dispatch(setStudents(data.users))
+    // console.log(data.users)
 }

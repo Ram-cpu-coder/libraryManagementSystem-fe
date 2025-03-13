@@ -19,12 +19,13 @@ export const fetchAdminLevelBooks = () => {
         isRefreshToken: true
     })
 }
-export const updateBookApi = () => {
+export const updateBookApi = (form) => {
     return apiProcessor({
         method: "put",
         url: bookApi + "/books",
         isPrivate: true,
-        isRefreshToken: true
+        isRefreshToken: true,
+        data: form
     })
 }
 export const addBookApi = (form) => {

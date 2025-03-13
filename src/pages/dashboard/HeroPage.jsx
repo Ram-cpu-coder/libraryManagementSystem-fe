@@ -36,38 +36,39 @@ const HeroPage = () => {
     setDisplayData(filteredData);
   };
 
-  console.log("HeroPage", books);
   return (
     <UserLayout pageTitle="Admin Books">
-      <div
-        className="justify-content-end my-3"
-        style={{
-          display: userStore.user.role == "admin" ? "flex" : "none",
-        }}
-      >
-        <Link to="/admin/addBook">
-          <Button
-            variant="primary"
-            className="w-10 d-flex align-items-center gap-2"
-          >
-            <IoIosAddCircleOutline />
-            Add New Book
-          </Button>
-        </Link>
-      </div>
+      <div className="w-100">
+        <div
+          className="justify-content-end my-3"
+          style={{
+            display: userStore.user.role == "admin" ? "flex" : "none",
+          }}
+        >
+          <Link to="/admin/addBook">
+            <Button
+              variant="primary"
+              className="w-10 d-flex align-items-center gap-2"
+            >
+              <IoIosAddCircleOutline />
+              Add New Book
+            </Button>
+          </Link>
+        </div>
 
-      <div className="d-flex justify-content-between align-items-center">
-        <p>{books?.length || 0} Books Found!</p>
-        <input
-          type="search"
-          name="search"
-          className="rounded p-1"
-          placeholder="Search books ..."
-          onChange={handleOnSearch}
-          value={searchedData}
-        />
+        <div className="d-flex justify-content-between align-items-center">
+          <p>{books?.length || 0} Books Found!</p>
+          <input
+            type="search"
+            name="search"
+            className="rounded p-1"
+            placeholder="Search books ..."
+            onChange={handleOnSearch}
+            value={searchedData}
+          />
+        </div>
+        <AdminBooks books={displayData} />
       </div>
-      <AdminBooks books={displayData} />
     </UserLayout>
   );
 };

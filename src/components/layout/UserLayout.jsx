@@ -24,31 +24,31 @@ const UserLayout = ({ children, pageTitle }) => {
     {
       icon: <IoIosPeople />,
       name: "Students",
-      Link: "",
+      Link: "/students",
       isAdminOnly: true,
     },
     {
       icon: <TfiMenuAlt />,
       name: "All burrows",
-      Link: "",
+      Link: "/burrows",
       isAdminOnly: true,
     },
     {
       icon: <MdReviews />,
       name: "All Reviews",
-      Link: "",
+      Link: "/reviews",
       isAdminOnly: false,
     },
     {
       icon: <PiNotebookDuotone />,
       name: "My Books",
-      Link: "",
+      Link: "/my-books",
       isAdminOnly: false,
     },
     {
       icon: <CgProfile />,
       name: "Profile",
-      Link: "",
+      Link: "/profile",
       isAdminOnly: false,
     },
   ];
@@ -64,10 +64,12 @@ const UserLayout = ({ children, pageTitle }) => {
         <div className="min-vh-100 d-flex w-100">
           <SideBar menubar={menubar} />
 
-          <div className="d-flex flex-column w-100">
-            <h1>{pageTitle}</h1>
+          <div className="d-flex flex-column w-100 px-4">
+            <h1 className="mt-3 text-center">{pageTitle}</h1>
             <hr className="w-100" />
-            <main>{children}</main>
+            <main className="d-flex justify-content-center align-items-center w-100">
+              {children}
+            </main>
           </div>
         </div>
         <Footer />

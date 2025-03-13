@@ -33,7 +33,7 @@ export const bookUpdateInputFields = [
         label: "Published Year",
         name: "publishedYear",
         placeholder: "Published Year",
-        type: "date",
+        type: "number",
     },
     {
         label: "Thumbnail",
@@ -57,7 +57,7 @@ export const bookUpdateInputFields = [
         label: "Expected To be Available",
         name: "expectedAvailabiliity",
         placeholder: "Expected Availability",
-        type: "date",
+        type: "number",
     }
 ]
 

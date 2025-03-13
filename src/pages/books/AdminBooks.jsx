@@ -14,24 +14,26 @@ const AdminBooks = ({ books }) => {
   //   dispatch(getAllBookAction(true));
   // }, []);
   return (
-    <Table hover size="sm">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th
-            style={{
-              display: user.role === "admin" ? "" : "none",
-            }}
-          >
-            Status
-          </th>
-          <th>Thumbnail</th>
-          <th>Title</th>
-          <th className="text-center">Action</th>
-        </tr>
-      </thead>
-      <BooksTable isPrivate={true} books={books} />
-    </Table>
+    <div>
+      <Table hover size="sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th
+              style={{
+                display: user.role === "admin" ? "" : "none",
+              }}
+            >
+              Status
+            </th>
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th className="text-center">Action</th>
+          </tr>
+        </thead>
+        <BooksTable isPrivate={true} books={books} />
+      </Table>
+    </div>
   );
 };
 

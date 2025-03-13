@@ -21,7 +21,7 @@ const AddBook = () => {
     navigate("/admin");
   };
   return (
-    <UserLayout pageTitle="Add Book">
+    <UserLayout pageTitle="">
       <div className="w-100 d-flex flex-column justify-content-center align-items-center min-vh-100">
         <div className="w-75 d-flex flex-column justify-content-center align-items-center mb-4">
           <h1 className="mt-4 d-flex justify-content-evenly align-items-center w-75">

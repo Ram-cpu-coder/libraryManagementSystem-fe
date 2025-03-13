@@ -42,17 +42,14 @@ const BooksTable = ({ books }) => {
               <p>{book.author}</p>
             </td>
             <td>
-              <div className="d-flex gap-2 justify-content-center">
-                <Link to="/admin/updateBook">
+              <div className="d-flex gap-2 justify-content-center align-items-center">
+                <Link to="/admin/updateBook" onClick={() => console.log(book)}>
                   <Button className="d-flex gap-1 align-items-center justify-content-center">
                     <MdModeEdit /> Edit
                   </Button>
                 </Link>
                 <Link to={"/admin/delete/" + book._id}>
-                  <Button
-                    variant="danger"
-                    className="d-flex gap-1 align-items-center justify-content-center"
-                  >
+                  <Button variant="danger" className="">
                     <MdDelete />
                   </Button>
                 </Link>

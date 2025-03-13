@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     user: {},
+    students: [],
     isLoggedIn: false,
 }
 
@@ -14,6 +15,9 @@ const userSlice = createSlice({
         // you can reference another way of creating the reducer in bookSlice
         setUser: (state, { payload }) => {
             state.user = payload
+        },
+        setStudents: (state, action) => {
+            state.students = action.payload
         },
         resetUser: (state => {
             state.user = {};
@@ -29,6 +33,6 @@ const userSlice = createSlice({
     }
 })
 
-export const { setUser, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic } = userSlice.actions
+export const { setUser, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic, setStudents } = userSlice.actions
 
 export default userSlice.reducer

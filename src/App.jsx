@@ -15,13 +15,20 @@ import { getAllBookAction } from "./features/books/bookAction";
 import UpdateBooksAdmin from "./pages/books/UpdateBooksAdmin";
 import AddBook from "./pages/books/AddBook";
 import HeroPage from "./pages/dashboard/HeroPage";
-import { autoLogin } from "./features/users/userAction";
+import { autoLogin, getStudentsAction } from "./features/users/userAction";
 import DeleteBook from "./pages/books/DeleteBook";
+import Students from "./pages/students/Students";
+import Burrows from "./pages/burrows/Burrows";
+import Reviews from "./pages/reviews/Reviews";
+import MyBooks from "./pages/my-books/MyBooks";
+import Profile from "./pages/profile/Profile";
+import UserProfileDetails from "./pages/profile/UserProfileDetails";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllBookAction());
+    dispatch(getStudentsAction());
     dispatch(autoLogin());
   }, []);
 
@@ -61,6 +68,13 @@ function App() {
         <Route path="/admin/addBook" element={<AddBook />} />
         <Route path="/admin/delete/:_id" element={<DeleteBook />} />
         <Route path="/admin" element={<HeroPage />} />
+        <Route path="/students" element={<Students />} />
+        <Route path="/burrows" element={<Burrows />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/my-books" element={<MyBooks />} />
+        <Route path="/profile" element={<Profile />} />
+
+        <Route path="/userProfileDetails" element={<UserProfileDetails />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

@@ -29,3 +29,11 @@ export const createNewUserApi = (newUserObj) => {
         data: newUserObj
     })
 }
+export const getStudentsApi = () => {
+    return apiProcessor({
+        method: "get",
+        url: authEP + "/students",
+        isPrivate: true,
+        isRefreshToken: true
+    })
+}
