@@ -22,7 +22,7 @@ const Profile = () => {
           </p>
         </div>
         <hr className="w-100" />
-        <Link to="/userProfileDetails">Profile Details</Link>
+        <Link to="/editProfile">Edit Profile</Link>
       </div>
     </UserLayout>
   );

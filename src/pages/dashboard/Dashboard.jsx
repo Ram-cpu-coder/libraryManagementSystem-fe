@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllBookAction } from "../../features/books/bookAction";
 import UserLayout from "../../components/layout/UserLayout";
 
 const Dashboard = () => {

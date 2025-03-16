@@ -21,22 +21,10 @@ const AddBook = () => {
     navigate("/admin");
   };
   return (
-    <UserLayout pageTitle="">
-      <div className="w-100 d-flex flex-column justify-content-center align-items-center min-vh-100">
-        <div className="w-75 d-flex flex-column justify-content-center align-items-center mb-4">
-          <h1 className="mt-4 d-flex justify-content-evenly align-items-center w-75">
-            <Link to="/admin">
-              <Button
-                variant="light"
-                className="fs-2 d-flex align-items-center bg-white"
-              >
-                <IoArrowBackCircleOutline />
-              </Button>
-            </Link>
-            <span>Add Book!</span> <span></span>
-          </h1>
-          <hr className="w-50" />
-          <div className="w-50 d-flex flex-column align-items-center p-4 rounded my-2 shadow-lg">
+    <UserLayout pageTitle="Create Book">
+      <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+        <div className="w-75 d-flex flex-column justify-content-center align-items-center">
+          <div className="w-75 d-flex flex-column align-items-center p-4 rounded shadow-lg">
             <Form className="w-100 px-2" onSubmit={handleOnAdd}>
               {bookAddInputFields.map((item, index) => {
                 return (

@@ -1,12 +1,12 @@
 import React from "react";
 import UserLayout from "../../components/layout/UserLayout";
 
-const Burrows = () => {
+const EditProfile = () => {
   return (
-    <UserLayout pageTitle="Burrow List">
-      <div>Burrows</div>
+    <UserLayout pageTitle="Edit Profile">
+      <div>EditProfile</div>
     </UserLayout>
   );
 };
 
-export default Burrows;
+export default EditProfile;

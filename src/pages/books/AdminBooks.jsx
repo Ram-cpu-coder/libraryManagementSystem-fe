@@ -2,17 +2,10 @@ import React, { useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 import BooksTable from "./BooksTable";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllBookAction } from "../../features/books/bookAction";
+import { useSelector } from "react-redux";
 
 const AdminBooks = ({ books }) => {
-  // const dispatch = useDispatch();
   const { user } = useSelector((state) => state.users);
-  // const { books } = useSelector((state) => state.books);
-
-  // useEffect(() => {
-  //   dispatch(getAllBookAction(true));
-  // }, []);
   return (
     <div>
       <Table hover size="sm">

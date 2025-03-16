@@ -1,43 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../../components/custom-input/CustomInput";
 import { Button, Form } from "react-bootstrap";
 import useForm from "../../hooks/useForm";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bookUpdateInputFields } from "../../assets/form-data/BooksInput.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UserLayout from "../../components/layout/UserLayout.jsx";
-import { updateBookAction } from "../../features/books/bookAction.js";
+import {
+  getAllBookAction,
+  updateBookAction,
+} from "../../features/books/bookAction.js";
 
 const UpdateBooksAdmin = () => {
-  const { form, handleOnChange } = useForm({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { _id } = useParams();
+
+  const { books } = useSelector((state) => state.books);
+
+  const selectedBook = books.filter((item) => {
+    return item._id === _id;
+  });
+  const { form, handleOnChange } = useForm(selectedBook || {});
 
   const handleOnSubmit = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
-    dispatch(updateBookAction(form, navigate));
-    setIsLoading(false);
+    const formObj = { _id, ...form };
+    dispatch(updateBookAction(formObj, navigate));
+    console.log(_id, form);
   };
+
+  useEffect(() => {
+    dispatch(getAllBookAction());
+  }, [_id]);
   return (
-    <UserLayout pageTitle="">
-      <div className="w-100 d-flex flex-column my-5 min-vh-100 align-items-center justify-content-center">
+    <UserLayout pageTitle="Update Books">
+      <div className="w-100 d-flex flex-column min-vh-100 align-items-center justify-content-center">
         <div className="d-flex justify-content-center align-items-center flex-column shadow py-3 rounded w-50">
-          <h1 className="d-flex justify-content-evenly align-items-center w-100">
-            <Link to="/admin">
-              <Button
-                variant="light"
-                onClick={() => navigate("/admin")}
-                className="fs-2 d-flex align-items-center bg-white"
-              >
-                <IoArrowBackCircleOutline />
-              </Button>
-            </Link>
-            <span>Update Book!</span>
-            <span></span>
-          </h1>
-          <hr className="w-75" />
           <Form
             onSubmit={handleOnSubmit}
             className="d-flex align-items-center flex-column w-75"

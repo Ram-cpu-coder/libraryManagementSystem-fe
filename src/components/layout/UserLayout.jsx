@@ -30,7 +30,7 @@ const UserLayout = ({ children, pageTitle }) => {
     {
       icon: <TfiMenuAlt />,
       name: "All burrows",
-      Link: "/burrows",
+      Link: "/borrows",
       isAdminOnly: true,
     },
     {

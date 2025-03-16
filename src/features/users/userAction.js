@@ -49,5 +49,5 @@ export const autoLogin = () => async (dispatch) => {
 export const getStudentsAction = () => async (dispatch) => {
     const data = await getStudentsApi()
     dispatch(setStudents(data.users))
-    // console.log(data.users)
+    console.log(data)
 }
