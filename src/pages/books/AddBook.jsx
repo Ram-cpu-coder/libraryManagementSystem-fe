@@ -17,7 +17,6 @@ const AddBook = () => {
   const handleOnAdd = (e) => {
     e.preventDefault();
     dispatch(addBookAction(form));
-    console.log("clicked", form);
     navigate("/admin");
   };
   return (

@@ -17,7 +17,7 @@ const LoggedInHeader = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Link className="nav-link navLink text-black px-4" to="/">
+            <Link className="nav-link navLink text-black px-4" to="/dashboard">
               Home
             </Link>
             <Link className="nav-link navLink text-black px-4" to="/dashboard">

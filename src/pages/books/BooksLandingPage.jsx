@@ -5,17 +5,13 @@ import { CiStar } from "react-icons/ci";
 import { getAllBookAction } from "../../features/books/bookAction";
 
 const BooksLandingPage = () => {
-  // const location = useLocation();
   const dispatch = useDispatch();
   const bookStore = useSelector((state) => state.books);
   const { _id } = useParams();
 
   const [displayBooks, setDisplayBooks] = useState([]);
 
-  // console.log("CURRENT LOCATION", location);
-
   const selectedBook = displayBooks.find((item) => item._id == _id);
-  console.log(bookStore.books);
 
   const stars = Array(5).fill(0);
   const colors = {
@@ -23,7 +19,6 @@ const BooksLandingPage = () => {
     grey: "a9a9a9",
   };
 
-  console.log(selectedBook);
   const fetchAllBooks = async () => {
     await dispatch(getAllBookAction());
   };

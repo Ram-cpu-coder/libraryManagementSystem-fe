@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.users);
-  console.log(user);
   return (
     <UserLayout pageTitle="Profile">
       <div className="w-50 border shadow rounded p-2">

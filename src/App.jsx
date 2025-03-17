@@ -15,22 +15,19 @@ import { getAllBookAction } from "./features/books/bookAction";
 import UpdateBooksAdmin from "./pages/books/UpdateBooksAdmin";
 import AddBook from "./pages/books/AddBook";
 import HeroPage from "./pages/dashboard/HeroPage";
-import { autoLogin, getStudentsAction } from "./features/users/userAction";
+import { autoLogin } from "./features/users/userAction";
 import DeleteBook from "./pages/books/DeleteBook";
 import Students from "./pages/students/Students";
 import Reviews from "./pages/reviews/Reviews";
 import MyBooks from "./pages/my-books/MyBooks";
 import Profile from "./pages/profile/Profile";
 import EditProfile from "./pages/profile/EditProfile";
-import { getBorrowAction } from "./features/borrows/borrowAction.js";
 import Borrows from "./pages/borrows/Borrows";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllBookAction());
-    dispatch(getStudentsAction());
-    dispatch(getBorrowAction());
     dispatch(autoLogin());
   }, []);
 
@@ -76,6 +73,7 @@ function App() {
         <Route path="/my-books" element={<MyBooks />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/my-books" element={<MyBooks />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

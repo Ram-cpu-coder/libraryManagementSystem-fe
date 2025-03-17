@@ -18,16 +18,14 @@ const UpdateBooksAdmin = () => {
 
   const { books } = useSelector((state) => state.books);
 
-  const selectedBook = books.filter((item) => {
+  const selectedBook = books.find((item) => {
     return item._id === _id;
   });
   const { form, handleOnChange } = useForm(selectedBook || {});
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const formObj = { _id, ...form };
-    dispatch(updateBookAction(formObj, navigate));
-    console.log(_id, form);
+    (await dispatch(updateBookAction(formObj))) && navigate("/admin");
   };
 
   useEffect(() => {
@@ -48,6 +46,7 @@ const UpdateBooksAdmin = () => {
                   {...item}
                   onChange={handleOnChange}
                   className=""
+                  value={form[item.name]}
                 />
               );
             })}

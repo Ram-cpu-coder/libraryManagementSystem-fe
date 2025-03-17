@@ -17,7 +17,6 @@ const PublicBooks = () => {
   // search function
   const handleOnSearch = (e) => {
     const query = e.target.value.toLowerCase();
-    console.log(query);
     const filtered = bookStore.books.filter(
       (item) =>
         item.title.toLowerCase().includes(query) ||
