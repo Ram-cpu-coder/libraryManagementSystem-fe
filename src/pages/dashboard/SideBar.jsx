@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { LiaPrayingHandsSolid } from "react-icons/lia";
+import { Stack } from "react-bootstrap";
 
 const SideBar = ({ menubar }) => {
-  const userStore = useSelector((state) => state.users);
-  const user = userStore.user;
+  const { user, menu } = useSelector((state) => state.users);
   const list =
     user.role === "admin"
       ? menubar
       : menubar.filter((item) => !item.isAdminOnly);
-
   return (
     <div
       className="d-flex flex-column justify-content-start p-4 bg-dark text-white min-vh-100"
@@ -25,19 +24,23 @@ const SideBar = ({ menubar }) => {
         </h1>
       </div>
       <hr className="my-3" />
-      <div className="d-flex flex-column my-2">
-        {list.map((menus, index) => {
-          return (
-            <Link
-              key={index}
-              to={menus.Link}
-              className="my-2 d-flex align-items-center gap-2 text-decoration-none text-white"
-            >
-              {menus.icon}
-              {menus.name}
-            </Link>
-          );
-        })}
+      <div className="d-flex flex-column my-2 min-w-25">
+        <Stack gap={1}>
+          {list.map((item, index) => {
+            return (
+              <Link
+                key={item.name}
+                to={item.Link}
+                className={`nav-link p-1 d-flex align-items-center gap-1 ${
+                  item.name === menu ? "bg-white text-dark rounded" : ""
+                }`}
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            );
+          })}
+        </Stack>
       </div>
     </div>
   );

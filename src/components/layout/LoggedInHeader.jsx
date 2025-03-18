@@ -20,7 +20,7 @@ const LoggedInHeader = () => {
             <Link className="nav-link navLink text-black px-4" to="/dashboard">
               Home
             </Link>
-            <Link className="nav-link navLink text-black px-4" to="/dashboard">
+            <Link className="nav-link navLink text-black px-4" to="/books">
               DashBoard
             </Link>
             <Link

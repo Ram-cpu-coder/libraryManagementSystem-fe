@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import UserLayout from "../../components/layout/UserLayout";
 import { getAllBookAction } from "../../features/books/bookAction";
+import { setMenu } from "../../features/users/userSlice";
 
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);
@@ -37,7 +38,7 @@ const HeroPage = () => {
   };
 
   return (
-    <UserLayout pageTitle="Admin Books">
+    <UserLayout pageTitle="Books">
       <div className="w-100">
         <div
           className="justify-content-end my-3"

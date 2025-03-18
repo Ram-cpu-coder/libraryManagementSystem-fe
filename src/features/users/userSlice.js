@@ -4,6 +4,7 @@ const initialState = {
     user: {},
     students: [],
     isLoggedIn: false,
+    menu: ''
 }
 
 const userSlice = createSlice({
@@ -19,6 +20,10 @@ const userSlice = createSlice({
         setStudents: (state, action) => {
             state.students = action.payload
         },
+        setMenu: (state, action) => {
+            state.menu = action.payload
+        }
+        ,
         resetUser: (state => {
             state.user = {};
             state.isLoggedIn = false;
@@ -33,6 +38,6 @@ const userSlice = createSlice({
     }
 })
 
-export const { setUser, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic, setStudents } = userSlice.actions
+export const { setUser, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic, setStudents, setMenu } = userSlice.actions
 
 export default userSlice.reducer

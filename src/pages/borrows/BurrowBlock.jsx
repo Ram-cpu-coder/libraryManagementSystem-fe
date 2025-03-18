@@ -1,15 +1,22 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { returnBorrowAction } from "../../features/borrows/borrowAction";
 
 const BurrowBlock = ({ borrows }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const { borrows } = useSelector((state) => state.borrows);
 
   // return function
   const handleOnReturn = (id) => {
     dispatch(returnBorrowAction(id));
   };
+  console.log(borrows);
+  // review funciton
+  const handleOnReview = (id) => navigate("/reviews/" + id);
   return (
     <Table bordered hover>
       <thead>
@@ -39,7 +46,13 @@ const BurrowBlock = ({ borrows }) => {
             <td>
               {item.status === "returned" ? (
                 <div>
-                  <Button variant="warning">Give Reviews</Button> Book Returned
+                  <Button
+                    variant="warning"
+                    onClick={() => handleOnReview(item.bookId)}
+                  >
+                    Give Reviews
+                  </Button>
+                  Book Returned
                 </div>
               ) : (
                 <Button

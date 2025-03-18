@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
 import { getAllBookAction } from "../../features/books/bookAction";
+import { Button } from "react-bootstrap";
+import { createBorrowAction } from "../../features/borrows/borrowAction";
 
 const BooksLandingPage = () => {
   const dispatch = useDispatch();
   const bookStore = useSelector((state) => state.books);
+  const { borrows } = useSelector((state) => state.borrows);
+  // console.log(borrows);
+
   const { _id } = useParams();
 
   const [displayBooks, setDisplayBooks] = useState([]);
 
   const selectedBook = displayBooks.find((item) => item._id == _id);
-
+  console.log(selectedBook);
   const stars = Array(5).fill(0);
   const colors = {
     orange: " #F2C265",
@@ -21,6 +26,16 @@ const BooksLandingPage = () => {
 
   const fetchAllBooks = async () => {
     await dispatch(getAllBookAction());
+  };
+
+  // creating the borrow
+  const handleOnBorrow = () => {
+    const borrowObj = {
+      bookId: selectedBook._id,
+      title: selectedBook.title,
+      thumbnail: selectedBook.thumbnail,
+    };
+    dispatch(createBorrowAction(borrowObj));
   };
 
   useEffect(() => {
@@ -62,6 +77,15 @@ const BooksLandingPage = () => {
                 );
               })}
             </div>
+            {borrows.status === "borrowed" ? (
+              <Button variant="primary mt-1" disabled>
+                Borrowed
+              </Button>
+            ) : (
+              <Button variant="primary mt-1" onClick={handleOnBorrow}>
+                Borrow
+              </Button>
+            )}
           </div>
         </div>
       </div>

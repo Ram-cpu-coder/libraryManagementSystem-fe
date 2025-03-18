@@ -73,9 +73,15 @@ const PublicBooks = () => {
               />
             </div>
           ) : !displayBooks.length < 1 ? (
-            displayBooks.map((item, index) => {
-              return <BooksCard item={{ ...item }} key={index} />;
-            })
+            <div className="border w-100 container">
+              {displayBooks.map((item, index) => {
+                return (
+                  <div className="row">
+                    <BooksCard item={{ ...item }} key={index} />
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             <div className="w-100">No Books Found !</div>
           )}

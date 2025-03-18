@@ -2,9 +2,18 @@ import { toast } from "react-toastify";
 import { createBorrowApi, getBorrowApi, getUserBorrowApi, returnBorrowApi } from "./borrowAxios.js";
 import { setBorrows, setUserBorrows } from "./borrowSlice.js";
 
-export const createBorrowAction = () => async (dispatch) => {
-    const { data } = await createBorrowApi();
-    // dispatch(setBorrows({ data }))
+export const createBorrowAction = (borrowObj) => async (dispatch) => {
+    const pending = createBorrowApi(borrowObj);
+    toast.promise(pending, {
+        pending: "Please Wait!",
+
+    })
+
+    const { data, status, message } = await pending;
+    toast[status](message)
+    console.log(data)
+    dispatch(getBorrowAction())
+    dispatch(getUserBorrows())
 }
 // get all the borrows
 export const getBorrowAction = () => async (dispatch) => {

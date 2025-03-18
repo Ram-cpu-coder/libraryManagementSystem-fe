@@ -2,12 +2,13 @@ import { apiProcessor } from "../../helpers/axiosHelper";
 
 const borrowEp = import.meta.env.VITE_API_BASE_URL + "/borrow"
 
-export const createBorrowApi = () => {
+export const createBorrowApi = (borrowObj) => {
     return apiProcessor({
         method: "post",
         url: borrowEp,
         isPrivate: true,
         isRefreshToken: true,
+        data: borrowObj
     })
 
 }

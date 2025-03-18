@@ -22,8 +22,8 @@ const Students = () => {
   };
 
   useEffect(() => {
-    dispatch(getStudentsAction());
     setdisplayStudents(students);
+    dispatch(getStudentsAction());
   }, []);
   console.log(1111, students);
   return (

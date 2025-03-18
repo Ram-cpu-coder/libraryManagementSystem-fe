@@ -29,6 +29,4 @@ export const updateBookAction = (formObj, navigate) => async (dispatch) => {
     toast[data.status](data.message)
 
     return data.status === "success";
-
-    navigate("/admin")
 }

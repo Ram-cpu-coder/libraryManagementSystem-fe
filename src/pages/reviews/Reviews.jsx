@@ -3,7 +3,7 @@ import UserLayout from "../../components/layout/UserLayout";
 
 const Reviews = () => {
   return (
-    <UserLayout pageTitle="Reviews">
+    <UserLayout pageTitle="All Reviews">
       <div>Reviews</div>
     </UserLayout>
   );

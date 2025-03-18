@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import UserLayout from "../../components/layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
 import BurrowBlock from "./BurrowBlock.jsx";
-import { getBorrowAction } from "../../features/borrows/borrowAction.js";
+import {
+  getBorrowAction,
+  getUserBorrows,
+} from "../../features/borrows/borrowAction.js";
 
 const Borrows = () => {
   const dispatch = useDispatch();
@@ -26,10 +29,14 @@ const Borrows = () => {
 
   useEffect(() => {
     dispatch(getBorrowAction());
-    setDisplayBorrows(borrows);
+    // dispatch(getUserBorrows());
   }, []);
+
+  useEffect(() => {
+    setDisplayBorrows(borrows || []);
+  }, [borrows]);
   return (
-    <UserLayout pageTitle="Burrow List">
+    <UserLayout pageTitle="All burrows">
       <div className="w-100">
         <div className="d-flex justify-content-end">
           <input
