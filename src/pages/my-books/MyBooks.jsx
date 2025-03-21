@@ -24,11 +24,12 @@ const MyBooks = () => {
   };
   console.log(displayBooks);
   useEffect(() => {
-    setDisplayBooks(userBorrows);
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(getUserBorrows());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setDisplayBooks(userBorrows);
+  }, [userBorrows]);
   return (
     <UserLayout pageTitle="My Books">
       <div className="w-100">

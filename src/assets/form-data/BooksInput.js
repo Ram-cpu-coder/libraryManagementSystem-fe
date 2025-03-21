@@ -1,11 +1,6 @@
 
 export const bookUpdateInputFields = [
-    {
-        label: "Status",
-        name: "status",
-        placeholder: "Status",
-        type: "String",
-    },
+
     {
         label: "Title",
         name: "title",
@@ -97,13 +92,6 @@ export const bookAddInputFields = [
         placeholder: "Published Year",
         required: true,
         type: "number",
-    },
-    {
-        label: "Thumbnail",
-        name: "thumbnail",
-        placeholder: "Thumbnail src Link",
-        required: true,
-        type: "String",
     },
     {
         label: "Description",

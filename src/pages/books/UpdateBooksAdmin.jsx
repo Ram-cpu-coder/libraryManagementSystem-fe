@@ -39,6 +39,19 @@ const UpdateBooksAdmin = () => {
             onSubmit={handleOnSubmit}
             className="d-flex align-items-center flex-column w-75"
           >
+            <Form.Check
+              name="status"
+              onChange={handleOnChange}
+              checked={form?.status === "active"}
+              type="switch"
+              id="custom-switch"
+              label={form?.status?.toUpperCase()}
+              className={`${
+                form?.status === "active"
+                  ? "mb-3 text-success"
+                  : "mb-3 text-danger"
+              } w-100 position-relative my-2`}
+            />
             {bookUpdateInputFields.map((item, index) => {
               return (
                 <CustomInput

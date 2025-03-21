@@ -11,7 +11,7 @@ export const getAllBookAction = (isPrivate) => async (dispatch) => {
 }
 
 export const addBookAction = (form) => async (dispatch) => {
-    const data = await addBookApi({ ...form });
+    const data = await addBookApi(form);
     dispatch(getAllBookAction(true));
     toast[data.status](data.message)
 }

@@ -1,10 +1,17 @@
+import { toast } from "react-toastify";
 import { renewAccessJWT } from "../../helpers/axiosHelper";
-import { fetchUserDataApi, getStudentsApi, loginApi } from "./userAxios";
+import { createNewUserApi, fetchUserDataApi, getStudentsApi, loginApi } from "./userAxios";
 import { resetUser, setStudents, setUser } from "./userSlice";
+
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
-    const data = await loginApi({ ...form });
-    console.log(data)
+    const pending = loginApi({ ...form });
+    const data = await pending;
+
+    toast.promise(pending, {
+        pending: "Logging ... "
+    })
+
     // update the user store
 
     if (data.status === "success") {
@@ -15,7 +22,25 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         localStorage.setItem("refreshJWT", data.refreshToken);
         navigate("/dashboard")
     };
+
+    toast[data.status](data.message)
 }
+
+
+// creating the user 
+export const createNewUser = (form, navigate) => async (dispatch) => {
+    const pending = createNewUserApi(form)
+    const data = await pending;
+    toast.promise(pending, {
+        pending: "Registering ... "
+    })
+    data.status === "success" ? navigate("/signin") : ""
+    console.log(data)
+    toast[data.status](data.message)
+}
+
+
+
 // individual user detail
 export const userDataAction = () => async (dispatch) => {
 

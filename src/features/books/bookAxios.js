@@ -34,7 +34,8 @@ export const addBookApi = (form) => {
         url: bookApi + "/books/add",
         isPrivate: true,
         isRefreshToken: true,
-        data: form
+        data: form,
+        contentType: 'multipart/form-data'
     })
 }
 export const deleteBookApi = (_id) => {

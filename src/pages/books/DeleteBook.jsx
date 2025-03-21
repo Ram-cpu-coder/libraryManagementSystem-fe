@@ -22,7 +22,11 @@ const DeleteBook = () => {
           <Button variant="danger" onClick={handleOnDelete} className="col">
             Yes
           </Button>
-          <Button variant="light" onClick={handleOnDelete} className="col">
+          <Button
+            variant="light"
+            onClick={() => navigate("/admin")}
+            className="col"
+          >
             No
           </Button>
         </div>

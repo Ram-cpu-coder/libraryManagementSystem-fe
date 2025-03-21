@@ -25,7 +25,6 @@ const UserReview = () => {
           />
           <div className="d-flex flex-column align-items-start">
             <span>{selectedBook.title}</span>
-            <span>{selectedBook.averageRating}</span>
           </div>
         </div>
       </div>

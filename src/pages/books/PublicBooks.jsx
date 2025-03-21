@@ -73,10 +73,10 @@ const PublicBooks = () => {
               />
             </div>
           ) : !displayBooks.length < 1 ? (
-            <div className="border w-100 container">
+            <div className="w-100 row">
               {displayBooks.map((item, index) => {
                 return (
-                  <div className="row">
+                  <div className="col-4">
                     <BooksCard item={{ ...item }} key={index} />
                   </div>
                 );

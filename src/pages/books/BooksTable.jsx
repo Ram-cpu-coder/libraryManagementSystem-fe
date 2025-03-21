@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const BooksTable = ({ books }) => {
+const BooksTable = ({ books, setShowDisplay }) => {
   const { user } = useSelector((state) => state.users);
+
+  // const handleOnDelete = (id) => {
+  //   setShowDisplay(true);
+  // };
 
   return (
     <tbody>

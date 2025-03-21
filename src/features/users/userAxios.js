@@ -1,5 +1,4 @@
 import { apiProcessor } from "../../helpers/axiosHelper.js";
-const userEP = import.meta.env.VITE_APP_ROOT_URL + "/users";
 const authEP = import.meta.env.VITE_API_BASE_URL + "/auth"
 
 export const loginApi = (loginObj) => {
@@ -21,12 +20,12 @@ export const fetchUserDataApi = () => {
     })
 }
 
-export const createNewUserApi = (newUserObj) => {
+export const createNewUserApi = ({ ...form }) => {
     return apiProcessor({
         method: "post",
-        url: userEP,
-        isPrivate: true,
-        data: newUserObj
+        url: authEP + "/register",
+        isPrivate: false,
+        data: form
     })
 }
 export const getStudentsApi = () => {

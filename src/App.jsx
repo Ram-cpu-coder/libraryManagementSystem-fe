@@ -30,7 +30,6 @@ function App() {
   useEffect(() => {
     dispatch(getAllBookAction());
     dispatch(getStudentsAction());
-
     dispatch(autoLogin());
   }, []);
 
@@ -79,7 +78,7 @@ function App() {
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/reviews/:id" element={<UserReview />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/admin" element={<HeroPage />} />
       </Routes>
     </>

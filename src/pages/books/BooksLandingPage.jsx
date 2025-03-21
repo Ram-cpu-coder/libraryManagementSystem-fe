@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
 import { getAllBookAction } from "../../features/books/bookAction";
 import { Button } from "react-bootstrap";
 import { createBorrowAction } from "../../features/borrows/borrowAction";
+import UserLayout from "../../components/layout/UserLayout";
+import { userDataAction } from "../../features/users/userAction";
 
 const BooksLandingPage = () => {
   const dispatch = useDispatch();
   const bookStore = useSelector((state) => state.books);
-  const { borrows } = useSelector((state) => state.borrows);
-  // console.log(borrows);
-
+  const { user } = useSelector((state) => state.users);
+  console.log(user, 11);
   const { _id } = useParams();
 
   const [displayBooks, setDisplayBooks] = useState([]);
@@ -38,18 +39,25 @@ const BooksLandingPage = () => {
     dispatch(createBorrowAction(borrowObj));
   };
 
+  // console.log(selectedBook.isAvailable);
+
   useEffect(() => {
     fetchAllBooks();
+    dispatch(userDataAction());
   }, []);
+
   useEffect(() => {
     setDisplayBooks(bookStore.books);
   }, [bookStore.books]);
+
   return !selectedBook ? (
-    <div>NotFound</div>
+    <div className="d-flex justify-content-center">
+      <p>NotFound</p>
+    </div>
   ) : (
     <div className="d-flex justify-content-center">
       <div className="d-flex flex-column w-75 my-3 align-items-center">
-        <div className="d-flex gap-3 ">
+        <div className="d-flex gap-3">
           <img
             src={selectedBook.thumbnail}
             alt=""
@@ -77,14 +85,19 @@ const BooksLandingPage = () => {
                 );
               })}
             </div>
-            {borrows.status === "borrowed" ? (
-              <Button variant="primary mt-1" disabled>
-                Borrowed
+
+            {user._id ? (
+              <Button
+                disabled={!selectedBook.isAvailable}
+                variant="primary mt-1"
+                onClick={handleOnBorrow}
+              >
+                {selectedBook.isAvailable ? "Borrow" : "Expected Date"}
               </Button>
             ) : (
-              <Button variant="primary mt-1" onClick={handleOnBorrow}>
-                Borrow
-              </Button>
+              <Link>
+                <Button>Sign in to burrow</Button>
+              </Link>
             )}
           </div>
         </div>

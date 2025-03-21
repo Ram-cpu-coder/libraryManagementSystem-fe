@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import UserLayout from "../../components/layout/UserLayout";
 import { getAllBookAction } from "../../features/books/bookAction";
-import { setMenu } from "../../features/users/userSlice";
 
 const HeroPage = () => {
   const bookStore = useSelector((state) => state.books);

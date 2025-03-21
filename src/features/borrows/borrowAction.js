@@ -11,7 +11,6 @@ export const createBorrowAction = (borrowObj) => async (dispatch) => {
 
     const { data, status, message } = await pending;
     toast[status](message)
-    console.log(data)
     dispatch(getBorrowAction())
     dispatch(getUserBorrows())
 }

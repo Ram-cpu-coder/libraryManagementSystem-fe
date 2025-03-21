@@ -3,14 +3,13 @@ import { Button, Form, Container, Card, Row, Col } from "react-bootstrap";
 import CustomInput from "../custom-input/CustomInput.jsx";
 import { userSignUpInputFields } from "../../assets/form-data/UserAuthInput.js";
 import useForm from "../../hooks/useForm.js";
-import { apiProcessor } from "../../helpers/axiosHelper.js";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { SyncLoader } from "react-spinners";
+import { useDispatch } from "react-redux";
+import { createNewUser } from "../../features/users/userAction.js";
 
 const UserSignUpForm = () => {
-  const registerEp = import.meta.env.VITE_API_BASE_URL;
+  const dispatch = useDispatch();
   const initialState = {
     fName: "",
     lName: "",
@@ -19,51 +18,18 @@ const UserSignUpForm = () => {
     password: "",
   };
   const { form, setForm, handleOnChange } = useForm(initialState);
-  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log("entered data", form);
-    try {
-      setIsLoading(true);
-      const data = await toast.promise(
-        apiProcessor({
-          method: "post",
-          data: { ...form },
-          url: registerEp + "/auth/register",
-          isPrivate: false,
-        }),
-        {
-          pending: "is Loading",
-        }
-      );
 
-      toast[data.status](data.message);
-
-      console.log(11111, data);
-      if (data.status == "success") {
-        console.log("after", data);
-        setForm({ ...initialState });
-
-        // toast.success(data.message);
-        navigate("/signin");
-      }
-    } catch (error) {
-      console.log(101, error);
-      toast.error("Internal Error");
-    } finally {
-      setIsLoading(false);
-    }
-
-    // why try catch did not work here while handling the error
+    dispatch(createNewUser(form, navigate));
+    console.log("registered");
+    // setForm({ ...initialState });
   };
 
-  return isLoading ? (
-    <div className="d-flex align-items-center justify-content-center min-vh-100">
-      <SyncLoader color="blue" margin={5} size={10} speedMultiplier={1} />
-    </div>
-  ) : (
+  return (
     <Container
       fluid
       className="d-flex align-items-center justify-content-center min-vh-100"

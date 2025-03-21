@@ -8,8 +8,6 @@ const BurrowBlock = ({ borrows }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const { borrows } = useSelector((state) => state.borrows);
-
   // return function
   const handleOnReturn = (id) => {
     dispatch(returnBorrowAction(id));
@@ -44,24 +42,7 @@ const BurrowBlock = ({ borrows }) => {
             <td>{item.dueDate.slice(0, 10)}</td>
             <td>{}</td>
             <td>
-              {item.status === "returned" ? (
-                <div>
-                  <Button
-                    variant="warning"
-                    onClick={() => handleOnReview(item.bookId)}
-                  >
-                    Give Reviews
-                  </Button>
-                  Book Returned
-                </div>
-              ) : (
-                <Button
-                  variant="success"
-                  onClick={() => handleOnReturn(item._id)}
-                >
-                  Return Book
-                </Button>
-              )}
+              <Button>Any Action</Button>
             </td>
           </tr>
         ))}
@@ -69,5 +50,4 @@ const BurrowBlock = ({ borrows }) => {
     </Table>
   );
 };
-
 export default BurrowBlock;
