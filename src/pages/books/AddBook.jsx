@@ -18,17 +18,17 @@ const AddBook = () => {
 
     // these is the cheatsheet for converting the normal form to the formData
     const formData = new FormData();
-    console.log(101, form);
+    // console.log(101, form);
     Object.keys(form).forEach((key) => {
       formData.append(key, form[key]);
     });
 
-    console.log(formData, 111);
+    // console.log(formData, 111);
 
     dispatch(addBookAction(formData));
     navigate("/admin");
   };
-  console.log(form);
+  // console.log(form);
   return (
     <UserLayout pageTitle="Create Book">
       <div className="w-100 d-flex flex-column justify-content-center align-items-center">

@@ -20,7 +20,7 @@ const UserSignInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const sentTo = location?.state?.from?.location?.pathname || "/dashboard";
+  const sentTo = location?.state?.from?.location?.pathname || "/books";
   const { user } = useSelector((state) => state.users);
 
   const handleOnSubmit = async (e) => {

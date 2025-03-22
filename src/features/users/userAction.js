@@ -20,7 +20,7 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         sessionStorage.setItem("accessJWT", data.accessToken);
         // updating the local storage for refresh
         localStorage.setItem("refreshJWT", data.refreshToken);
-        navigate("/dashboard")
+        navigate("/admin")
     };
 
     toast[data.status](data.message)
@@ -57,22 +57,22 @@ export const logOutAction = () => async (dispatch) => {
 export const autoLogin = () => async (dispatch) => {
     const refreshToken = localStorage.getItem("refreshJWT")
     const accessToken = sessionStorage.getItem("accessJWT")
-    console.log("AUTO LOGIN")
+    // console.log("AUTO LOGIN")
 
     if (accessToken) {
         dispatch(userDataAction())
-        console.log("accessToken")
+        // console.log("accessToken")
         return;
     }
     // in case of no accesstoken 
     if (refreshToken) {
         const token = await renewAccessJWT()
         token && dispatch(userDataAction())
-        console.log("refreshToken")
+        // console.log("refreshToken")
     }
 }
 export const getStudentsAction = () => async (dispatch) => {
     const data = await getStudentsApi();
-    console.log(2000, data.users)
+    // console.log(2000, data.users)
     dispatch(setStudents(data.users))
 }

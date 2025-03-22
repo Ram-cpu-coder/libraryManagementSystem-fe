@@ -49,7 +49,7 @@ const BooksTable = ({ books, setShowDisplay }) => {
               <div className="d-flex gap-2 justify-content-center align-items-center">
                 <Link
                   to={`/admin/updateBook/${book._id}`}
-                  onClick={() => console.log(book)}
+                  // onClick={() => console.log(book)}
                 >
                   <Button className="d-flex gap-1 align-items-center justify-content-center">
                     <MdModeEdit /> Edit

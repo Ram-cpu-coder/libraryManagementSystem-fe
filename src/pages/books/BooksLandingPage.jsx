@@ -5,14 +5,12 @@ import { CiStar } from "react-icons/ci";
 import { getAllBookAction } from "../../features/books/bookAction";
 import { Button } from "react-bootstrap";
 import { createBorrowAction } from "../../features/borrows/borrowAction";
-import UserLayout from "../../components/layout/UserLayout";
 import { userDataAction } from "../../features/users/userAction";
 
 const BooksLandingPage = () => {
   const dispatch = useDispatch();
   const bookStore = useSelector((state) => state.books);
   const { user } = useSelector((state) => state.users);
-  console.log(user, 11);
   const { _id } = useParams();
 
   const [displayBooks, setDisplayBooks] = useState([]);
@@ -25,10 +23,6 @@ const BooksLandingPage = () => {
     grey: "a9a9a9",
   };
 
-  const fetchAllBooks = async () => {
-    await dispatch(getAllBookAction());
-  };
-
   // creating the borrow
   const handleOnBorrow = () => {
     const borrowObj = {
@@ -39,12 +33,13 @@ const BooksLandingPage = () => {
     dispatch(createBorrowAction(borrowObj));
   };
 
-  // console.log(selectedBook.isAvailable);
-
   useEffect(() => {
-    fetchAllBooks();
-    dispatch(userDataAction());
-  }, []);
+    const fetchData = async () => {
+      await dispatch(getAllBookAction());
+      await dispatch(userDataAction());
+    };
+    fetchData();
+  }, [dispatch]);
 
   useEffect(() => {
     setDisplayBooks(bookStore.books);
@@ -86,7 +81,7 @@ const BooksLandingPage = () => {
               })}
             </div>
 
-            {user._id ? (
+            {user?._id ? (
               <Button
                 disabled={!selectedBook.isAvailable}
                 variant="primary mt-1"
@@ -95,7 +90,7 @@ const BooksLandingPage = () => {
                 {selectedBook.isAvailable ? "Borrow" : "Expected Date"}
               </Button>
             ) : (
-              <Link>
+              <Link to="/signin">
                 <Button>Sign in to burrow</Button>
               </Link>
             )}

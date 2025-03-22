@@ -22,6 +22,7 @@ const BurrowBlock = ({ borrows }) => {
           <th>#</th>
           <th>Thumbnail</th>
           <th>Name</th>
+          <th>Taken By</th>
           <th>Due Date</th>
           <th>Returned Date</th>
           <th>Action</th>
@@ -39,6 +40,7 @@ const BurrowBlock = ({ borrows }) => {
               />
             </td>
             <td>{item.title}</td>
+            <td>Someone</td>
             <td>{item.dueDate.slice(0, 10)}</td>
             <td>{}</td>
             <td>

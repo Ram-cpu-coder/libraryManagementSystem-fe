@@ -15,7 +15,11 @@ import { getAllBookAction } from "./features/books/bookAction";
 import UpdateBooksAdmin from "./pages/books/UpdateBooksAdmin";
 import AddBook from "./pages/books/AddBook";
 import HeroPage from "./pages/dashboard/HeroPage";
-import { autoLogin, getStudentsAction } from "./features/users/userAction";
+import {
+  autoLogin,
+  getStudentsAction,
+  userDataAction,
+} from "./features/users/userAction";
 import DeleteBook from "./pages/books/DeleteBook";
 import Students from "./pages/students/Students";
 import Reviews from "./pages/reviews/Reviews";
@@ -28,6 +32,7 @@ import UserReview from "./pages/reviews/UserReview";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(userDataAction());
     dispatch(getAllBookAction());
     dispatch(getStudentsAction());
     dispatch(autoLogin());
@@ -78,7 +83,7 @@ function App() {
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/reviews/:id" element={<UserReview />} />
 
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<HeroPage />} />
       </Routes>
     </>

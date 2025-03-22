@@ -7,6 +7,7 @@ import StudentsTable from "./StudentsTable";
 const Students = () => {
   const dispatch = useDispatch();
   const { students } = useSelector((state) => state.users);
+  console.log(students);
   const [searchedData, setSearchedData] = useState([]);
   const [displayStudents, setdisplayStudents] = useState([]);
 
@@ -22,10 +23,16 @@ const Students = () => {
   };
 
   useEffect(() => {
-    setdisplayStudents(students);
-    dispatch(getStudentsAction());
+    const fetchStudents = async () => {
+      await dispatch(getStudentsAction());
+    };
+    fetchStudents();
   }, []);
-  console.log(1111, students);
+
+  useEffect(() => {
+    setdisplayStudents(students);
+  }, [students]);
+  // console.log(1111, students);
   return (
     <UserLayout pageTitle="Students">
       <div className="w-100">
@@ -40,7 +47,7 @@ const Students = () => {
             onChange={handleOnSearch}
           />
         </div>
-        <p>{displayStudents.length} student(s) Found !</p>
+        <p>{displayStudents?.length} student(s) Found !</p>
         <StudentsTable students={displayStudents} />
       </div>
     </UserLayout>
