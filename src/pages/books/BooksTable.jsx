@@ -4,6 +4,8 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
+
 const BooksTable = ({ books, setShowDisplay }) => {
   const { user } = useSelector((state) => state.users);
 
@@ -32,7 +34,7 @@ const BooksTable = ({ books, setShowDisplay }) => {
             </td>
             <td>
               <img
-                src={book.thumbnail}
+                src={`${rootUrl}${book.thumbnail}`}
                 alt="books"
                 style={{ width: "100px", height: "100px", overflow: "hidden" }}
               />

@@ -76,7 +76,7 @@ const PublicBooks = () => {
             <div className="w-100 row">
               {displayBooks.map((item, index) => {
                 return (
-                  <div className="col-4" key={index}>
+                  <div className="col-3" key={index}>
                     <BooksCard item={{ ...item }} key={index} />
                   </div>
                 );

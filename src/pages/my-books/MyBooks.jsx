@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserBorrows } from "../../features/borrows/borrowAction";
 import UserLayout from "../../components/layout/UserLayout";
-import BurrowBlock from "../borrows/BurrowBlock";
+import MyBooksBlock from "./MyBooksBlock";
 
 const MyBooks = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const MyBooks = () => {
     });
     setDisplayBooks(filteredData);
   };
-  console.log(displayBooks);
+  // console.log(displayBooks);
   useEffect(() => {
     dispatch(getUserBorrows());
   }, [dispatch]);
@@ -46,7 +46,7 @@ const MyBooks = () => {
         </div>
         {displayBooks.length} book(s) history found!
         <hr />
-        <BurrowBlock borrows={displayBooks} />
+        <MyBooksBlock borrows={displayBooks} />
       </div>
     </UserLayout>
   );

@@ -52,6 +52,13 @@ const UserLayout = ({ children, pageTitle }) => {
       value: 5,
     },
     {
+      icon: <MdReviews />,
+      name: "My Reviews",
+      Link: "/reviews/:id",
+      isAdminOnly: false,
+      value: 7,
+    },
+    {
       icon: <CgProfile />,
       name: "Profile",
       Link: "/profile",

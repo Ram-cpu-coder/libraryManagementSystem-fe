@@ -7,7 +7,7 @@ import StudentsTable from "./StudentsTable";
 const Students = () => {
   const dispatch = useDispatch();
   const { students } = useSelector((state) => state.users);
-  console.log(students);
+  // console.log(students);
   const [searchedData, setSearchedData] = useState([]);
   const [displayStudents, setdisplayStudents] = useState([]);
 

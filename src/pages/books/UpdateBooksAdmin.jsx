@@ -21,11 +21,28 @@ const UpdateBooksAdmin = () => {
   const selectedBook = books.find((item) => {
     return item._id === _id;
   });
+
   const { form, handleOnChange } = useForm(selectedBook || {});
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const formObj = { _id, ...form };
-    (await dispatch(updateBookAction(formObj))) && navigate("/admin");
+
+    const formData = new FormData();
+
+    Object.keys(form).forEach((key) => {
+      // skip isbn
+      // skip thumbnail
+      if (
+        bookUpdateInputFields.find((item) => item.name == key) ||
+        key == "_id" ||
+        key == "status" ||
+        key == "bookFile"
+      ) {
+        formData.append(key, form[key]);
+      }
+    });
+
+    (await dispatch(updateBookAction(formData))) && navigate("/admin");
   };
 
   useEffect(() => {
@@ -63,6 +80,19 @@ const UpdateBooksAdmin = () => {
                 />
               );
             })}
+
+            {/* thumbnail  */}
+
+            <Form.Group className="mb-3 w-100" controlId="bookFile">
+              <Form.Label>Upload your book cover image</Form.Label>
+              <Form.Control
+                type="file"
+                accept="image"
+                name="bookFile"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
+
             <Button type="submit" className="mt-4 w-100">
               Update
             </Button>

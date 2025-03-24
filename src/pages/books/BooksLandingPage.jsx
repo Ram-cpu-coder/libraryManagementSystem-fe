@@ -8,6 +8,8 @@ import { createBorrowAction } from "../../features/borrows/borrowAction";
 import { userDataAction } from "../../features/users/userAction";
 
 const BooksLandingPage = () => {
+  const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
+
   const dispatch = useDispatch();
   const bookStore = useSelector((state) => state.books);
   const { user } = useSelector((state) => state.users);
@@ -16,7 +18,8 @@ const BooksLandingPage = () => {
   const [displayBooks, setDisplayBooks] = useState([]);
 
   const selectedBook = displayBooks.find((item) => item._id == _id);
-  console.log(selectedBook);
+  // console.log(111, selectedBook);
+  console.log(user, "user");
   const stars = Array(5).fill(0);
   const colors = {
     orange: " #F2C265",
@@ -54,7 +57,7 @@ const BooksLandingPage = () => {
       <div className="d-flex flex-column w-75 my-3 align-items-center">
         <div className="d-flex gap-3">
           <img
-            src={selectedBook.thumbnail}
+            src={`${rootUrl}${selectedBook.thumbnail}`}
             alt=""
             style={{ height: "300px" }}
           />

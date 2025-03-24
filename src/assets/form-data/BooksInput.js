@@ -12,12 +12,6 @@ export const bookUpdateInputFields = [
         name: "author",
         placeholder: "Author",
         type: "String",
-    },
-    {
-        label: "ISBN",
-        name: "isbn",
-        placeholder: "ISBN",
-        type: "String",
     }, {
         label: "Genre",
         name: "genre",
@@ -30,12 +24,7 @@ export const bookUpdateInputFields = [
         placeholder: "Published Year",
         type: "number",
     },
-    {
-        label: "Thumbnail",
-        name: "thumbnail",
-        placeholder: "Thumbnail src Link",
-        type: "String",
-    },
+
     {
         label: "Description",
         name: "description",
@@ -50,7 +39,7 @@ export const bookUpdateInputFields = [
     },
     {
         label: "Expected To be Available",
-        name: "expectedAvailabiliity",
+        name: "expectedAvailable",
         placeholder: "Expected Availability",
         type: "number",
     }

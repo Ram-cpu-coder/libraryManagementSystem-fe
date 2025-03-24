@@ -1,23 +1,23 @@
 import React from "react";
-import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const BooksCard = ({ item }) => {
+  const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
   return (
     <Link className="nav-link" to={"/books-landing-page/" + item._id}>
       <div
         className="border d-flex flex-column align-items-center m-1 py-2"
         style={{
-          height: "300px",
+          maxHeight: "400px",
           width: "300px",
         }}
         key={item.isbn}
       >
         <img
-          src={item.thumbnail}
+          src={`${rootUrl}${item.thumbnail}`}
           className="px-1"
           alt=""
-          style={{ height: "150px", width: "240px" }}
+          style={{ maxHeight: "300px", width: "240px" }}
         />
         <div className="w-100 mt-2">
           <h5 className="text-center">
