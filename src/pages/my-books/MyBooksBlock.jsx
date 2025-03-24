@@ -20,7 +20,9 @@ const MyBooksBlock = ({ borrows }) => {
   console.log(borrows);
 
   // review funciton
-  const handleOnReview = (id) => navigate("/reviews/" + id);
+  const handleOnReview = () => {
+    console.log("reviewClicked");
+  };
 
   return (
     <Table bordered hover>
@@ -52,7 +54,9 @@ const MyBooksBlock = ({ borrows }) => {
               {item.status === "borrowed" ? (
                 <Button onClick={() => handleOnReturn(item._id)}>Return</Button>
               ) : (
-                <Button variant="warning">Leave Review</Button>
+                <Button variant="warning" onClick={handleOnReview}>
+                  Leave Review
+                </Button>
               )}
             </td>
           </tr>

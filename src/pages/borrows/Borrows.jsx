@@ -28,11 +28,13 @@ const Borrows = () => {
   // console.log(borrows, "Borrows");
 
   useEffect(() => {
-    dispatch(getBorrowAction());
     const fetchStudents = async () => {
-      await dispatch(getStudentsAction());
+      (await dispatch(getStudentsAction())) || [];
     };
     fetchStudents();
+  }, [displayBorrows]);
+  useEffect(() => {
+    dispatch(getBorrowAction());
   }, []);
 
   useEffect(() => {
