@@ -15,11 +15,11 @@ const BooksLandingPage = () => {
   const { user } = useSelector((state) => state.users);
   const { _id } = useParams();
 
-  const [displayBooks, setDisplayBooks] = useState([]);
+  const selectedBook = bookStore.books.find((item) => item._id == _id);
+  console.log(selectedBook);
 
-  const selectedBook = displayBooks.find((item) => item._id == _id);
-  // console.log(111, selectedBook);
-  console.log(user, "user");
+  // const dateExpected = expectedAvailable.slice(0, expectedAvailable.indexOf(T));
+
   const stars = Array(5).fill(0);
   const colors = {
     orange: " #F2C265",
@@ -35,7 +35,6 @@ const BooksLandingPage = () => {
     };
     dispatch(createBorrowAction(borrowObj));
   };
-
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getAllBookAction());
@@ -43,10 +42,6 @@ const BooksLandingPage = () => {
     };
     fetchData();
   }, [dispatch]);
-
-  useEffect(() => {
-    setDisplayBooks(bookStore.books);
-  }, [bookStore.books]);
 
   return !selectedBook ? (
     <div className="d-flex justify-content-center">
@@ -86,15 +81,21 @@ const BooksLandingPage = () => {
 
             {user?._id ? (
               <Button
-                disabled={!selectedBook.isAvailable}
-                variant="primary mt-1"
+                disabled={!selectedBook?.isAvailable}
+                variant="primary"
                 onClick={handleOnBorrow}
               >
-                {selectedBook.isAvailable ? "Borrow" : "Expected Date"}
+                {selectedBook?.isAvailable
+                  ? "Borrow"
+                  : "Expected Date: " +
+                    selectedBook.expectedAvailable.slice(
+                      0,
+                      selectedBook.expectedAvailable.indexOf("T")
+                    )}
               </Button>
             ) : (
               <Link to="/signin">
-                <Button>Sign in to burrow</Button>
+                <Button>Sign in to borrow</Button>
               </Link>
             )}
           </div>

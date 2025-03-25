@@ -26,7 +26,7 @@ const BooksCard = ({ item }) => {
               ({item.author}-{item.publishedYear})
             </p>
           </h5>
-          <p className="overflow-hidden text-center">{item.description}</p>
+          {/* <p className="overflow-hidden text-center">{item.description}</p> */}
         </div>
       </div>
     </Link>

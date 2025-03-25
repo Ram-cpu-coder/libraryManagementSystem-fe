@@ -58,7 +58,11 @@ const Borrows = () => {
         </div>
         {displayBorrows.length} burrowed history found!
         <hr />
-        <BurrowBlock borrows={displayBorrows} students={students} />
+        {displayBorrows.length ? (
+          <BurrowBlock borrows={displayBorrows} students={students} />
+        ) : (
+          <div className="text-center">No Borrows Found!</div>
+        )}
       </div>
     </UserLayout>
   );

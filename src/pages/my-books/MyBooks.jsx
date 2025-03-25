@@ -48,7 +48,11 @@ const MyBooks = () => {
         </div>
         {displayBooks.length} book(s) history found!
         <hr />
-        <MyBooksBlock borrows={displayBooks} user={user} />
+        {displayBooks.length ? (
+          <MyBooksBlock borrows={displayBooks} user={user} />
+        ) : (
+          <div className="text-center">No Books Found!</div>
+        )}
       </div>
     </UserLayout>
   );

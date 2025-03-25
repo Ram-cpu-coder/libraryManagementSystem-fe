@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddReview from "../reviews/AddReview";
 import { returnBorrowAction } from "../../features/borrows/borrowAction";
 
 const MyBooksBlock = ({ borrows, user }) => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
-
   const [borrow, setBorrow] = useState({});
 
   // return function
@@ -18,7 +17,6 @@ const MyBooksBlock = ({ borrows, user }) => {
   const handleOnReview = (borrowObj) => {
     setBorrow({ ...borrowObj, userName: user.fName });
   };
-  console.log(borrow);
 
   return borrow._id ? (
     <div>

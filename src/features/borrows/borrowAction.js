@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { createBorrowApi, getBorrowApi, getUserBorrowApi, returnBorrowApi } from "./borrowAxios.js";
 import { setBorrows, setUserBorrows } from "./borrowSlice.js";
+import { getAllBookAction } from "../books/bookAction.js";
 
 export const createBorrowAction = (borrowObj) => async (dispatch) => {
     const pending = createBorrowApi(borrowObj);
@@ -12,7 +13,7 @@ export const createBorrowAction = (borrowObj) => async (dispatch) => {
     const { data, status, message } = await pending;
     toast[status](message)
     dispatch(getBorrowAction())
-    dispatch(getUserBorrows())
+    dispatch(getAllBookAction())
 }
 // get all the borrows
 export const getBorrowAction = () => async (dispatch) => {

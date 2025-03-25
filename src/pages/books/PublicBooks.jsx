@@ -64,7 +64,7 @@ const PublicBooks = () => {
       <div className="d-flex justify-content-center w-100">
         <div className="row row-cols-1 row-cols-md-4 g-4 m-1 d-flex justify-content-center">
           {isLoading ? (
-            <div className="d-flex align-items-center justify-content-center min-vh-100">
+            <div className="d-flex align-items-center justify-content-center min-vh-100 w-100">
               <SyncLoader
                 color="blue"
                 margin={5}
@@ -76,7 +76,10 @@ const PublicBooks = () => {
             <div className="w-100 row">
               {displayBooks.map((item, index) => {
                 return (
-                  <div className="col-3" key={index}>
+                  <div
+                    className="col-md-6 col-sm-12 col-lg-4 my-2 d-flex justify-content-center"
+                    key={index}
+                  >
                     <BooksCard item={{ ...item }} key={index} />
                   </div>
                 );
