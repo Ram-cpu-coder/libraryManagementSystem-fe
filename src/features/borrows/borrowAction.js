@@ -26,8 +26,8 @@ export const getUserBorrows = () => async (dispatch) => {
     dispatch(setUserBorrows(response.borrowedBooks))
 }
 // return borrow action 
-export const returnBorrowAction = (id) => async (dispatch) => {
-    const response = await returnBorrowApi(id)
+export const returnBorrowAction = (id, status) => async (dispatch) => {
+    const response = await returnBorrowApi(id, status)
     dispatch(setBorrows(response.data))
     dispatch(getUserBorrows())
     response && toast[response.status](response.message)

@@ -4,13 +4,38 @@ import CustomInput from "../../components/custom-input/CustomInput";
 import useForm from "../../hooks/useForm";
 import { Form } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { postReviewAction } from "../../features/reviews/reviewsAction";
 
-const AddReview = () => {
+const AddReview = ({ borrow, setBorrow }) => {
+  const dispatch = useDispatch();
   const { form, handleOnChange } = useForm({});
-  const [rating, setRating] = useState(1);
+  const [ratings, setRatings] = useState(1);
+
+  const handlePostReview = async (e) => {
+    e.preventDefault();
+    const { userName, status, _id, title, thumbnail, bookId, userId } = borrow;
+    const reviewObj = {
+      ...form,
+      userName,
+      status,
+      borrowId: _id,
+      title,
+      thumbnail,
+      bookId,
+      userId,
+      ratings,
+    };
+
+    if (window.confirm("Are you sure to post review?")) {
+      const action = await dispatch(postReviewAction(reviewObj));
+      action && setBorrow({});
+    }
+  };
+
   return (
     <div className="w-100 d-flex align-items-center flex-column">
-      <Form className="w-100">
+      <Form className="w-100" onSubmit={handlePostReview}>
         <CustomInput
           label="Title"
           name="title"
@@ -25,15 +50,15 @@ const AddReview = () => {
           {new Array(5).fill("").map((item, i) => (
             <FaStar
               key={i}
-              onClick={() => setRating(i + 1)}
-              className={i < rating ? "text-warning" : ""}
+              onClick={() => setRatings(i + 1)}
+              className={i < ratings ? "text-warning" : ""}
             />
           ))}
         </div>
 
         <CustomInput
           label="Comment"
-          name="comment"
+          name="message"
           type="text"
           as="textarea"
           required
@@ -46,7 +71,7 @@ const AddReview = () => {
             <Button variant="danger" className="col-5">
               Cancel
             </Button>
-            <Button variant="success" className="col-5">
+            <Button variant="success" type="submit" className="col-5">
               Submit
             </Button>
           </div>

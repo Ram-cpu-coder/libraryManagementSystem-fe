@@ -1,5 +1,7 @@
+import { toast } from "react-toastify"
 import { fetchAdminReviewsApi, postReviewApi } from "./reviewsAxios"
 import { setReviews } from "./reviewsSlice"
+import { getUserBorrows } from "../borrows/borrowAction"
 
 export const fetchAdminReviewsAction = () => async (dispatch) => {
     const { data } = await fetchAdminReviewsApi()
@@ -7,8 +9,8 @@ export const fetchAdminReviewsAction = () => async (dispatch) => {
     dispatch(setReviews(data))
 }
 
-export const postReviewAction = () => async (dispatch) => {
-    const pending = postReviewApi()
+export const postReviewAction = (form) => async (dispatch) => {
+    const pending = postReviewApi(form)
 
     toast.promise(pending,
         { pending: "Posting Review!" }
@@ -18,4 +20,9 @@ export const postReviewAction = () => async (dispatch) => {
     toast[status](message);
 
     dispatch(setReviews(data));
+    dispatch(getUserBorrows())
+    if (status == "success") {
+        return true;
+    }
+
 }

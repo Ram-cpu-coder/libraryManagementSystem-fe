@@ -14,6 +14,6 @@ export const postReviewApi = (form) => {
         method: "post",
         url: reviewEP + "/add-review",
         isPrivate: true,
-        form
+        data: form
     })
 }
