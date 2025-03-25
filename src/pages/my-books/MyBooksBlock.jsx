@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import {
   returnBorrowAction,
 } from "../../features/borrows/borrowAction";
 
-const MyBooksBlock = ({ borrows }) => {
+const MyBooksBlock = ({ borrows, setDisplayPostReview }) => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,11 +18,6 @@ const MyBooksBlock = ({ borrows }) => {
     console.log(id);
   };
   console.log(borrows);
-
-  // review funciton
-  const handleOnReview = () => {
-    console.log("reviewClicked");
-  };
 
   return (
     <Table bordered hover>
@@ -54,7 +49,10 @@ const MyBooksBlock = ({ borrows }) => {
               {item.status === "borrowed" ? (
                 <Button onClick={() => handleOnReturn(item._id)}>Return</Button>
               ) : (
-                <Button variant="warning" onClick={handleOnReview}>
+                <Button
+                  variant="warning"
+                  onClick={() => setDisplayPostReview(true)}
+                >
                   Leave Review
                 </Button>
               )}

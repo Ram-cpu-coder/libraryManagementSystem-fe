@@ -33,6 +33,7 @@ const Borrows = () => {
     };
     fetchStudents();
   }, [displayBorrows]);
+
   useEffect(() => {
     dispatch(getBorrowAction());
   }, []);

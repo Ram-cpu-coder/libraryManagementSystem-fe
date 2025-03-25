@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserBorrows } from "../../features/borrows/borrowAction";
 import UserLayout from "../../components/layout/UserLayout";
 import MyBooksBlock from "./MyBooksBlock";
+import AddReview from "../reviews/AddReview";
 
 const MyBooks = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const MyBooks = () => {
 
   const [searchedData, setSearchedData] = useState([]);
   const [displayBooks, setDisplayBooks] = useState([]);
+  const [displayPostReview, setDisplayPostReview] = useState(false);
 
   const handleOnSearch = (e) => {
     setSearchedData(e.target.value);
@@ -30,6 +32,14 @@ const MyBooks = () => {
   useEffect(() => {
     setDisplayBooks(userBorrows);
   }, [userBorrows]);
+
+  if (displayPostReview) {
+    return (
+      <UserLayout pageTitle="Add Review">
+        <AddReview />
+      </UserLayout>
+    );
+  }
   return (
     <UserLayout pageTitle="My Books">
       <div className="w-100">
@@ -46,7 +56,10 @@ const MyBooks = () => {
         </div>
         {displayBooks.length} book(s) history found!
         <hr />
-        <MyBooksBlock borrows={displayBooks} />
+        <MyBooksBlock
+          borrows={displayBooks}
+          setDisplayPostReview={setDisplayPostReview}
+        />
       </div>
     </UserLayout>
   );
