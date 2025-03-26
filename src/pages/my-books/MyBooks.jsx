@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserBorrows } from "../../features/borrows/borrowAction";
 import UserLayout from "../../components/layout/UserLayout";
 import MyBooksBlock from "./MyBooksBlock";
+import AddReview from "../reviews/AddReview";
 
 const MyBooks = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const MyBooks = () => {
 
   const [searchedData, setSearchedData] = useState([]);
   const [displayBooks, setDisplayBooks] = useState([]);
+
+  const [borrow, setBorrow] = useState({});
 
   const handleOnSearch = (e) => {
     setSearchedData(e.target.value);
@@ -32,7 +35,11 @@ const MyBooks = () => {
     setDisplayBooks(userBorrows);
   }, [userBorrows]);
 
-  return (
+  return borrow._id ? (
+    <UserLayout pageTitle="Add Review">
+      <AddReview borrow={borrow} setBorrow={setBorrow} />
+    </UserLayout>
+  ) : (
     <UserLayout pageTitle="My Books">
       <div className="w-100">
         <div className="d-flex justify-content-end">
@@ -49,7 +56,11 @@ const MyBooks = () => {
         {displayBooks.length} book(s) history found!
         <hr />
         {displayBooks.length ? (
-          <MyBooksBlock borrows={displayBooks} user={user} />
+          <MyBooksBlock
+            borrows={displayBooks}
+            user={user}
+            setBorrow={setBorrow}
+          />
         ) : (
           <div className="text-center">No Books Found!</div>
         )}

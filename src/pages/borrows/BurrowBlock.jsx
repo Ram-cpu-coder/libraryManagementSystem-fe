@@ -43,7 +43,7 @@ const BurrowBlock = ({ borrows, students }) => {
               <img
                 src={`${rootUrl}${item.thumbnail}`}
                 alt="thumbnail"
-                style={{ height: "70px" }}
+                style={{ height: "70px", width: "50px" }}
               />
             </td>
             <td>{item.title}</td>

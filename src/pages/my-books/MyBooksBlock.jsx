@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import AddReview from "../reviews/AddReview";
 import { returnBorrowAction } from "../../features/borrows/borrowAction";
 
-const MyBooksBlock = ({ borrows, user }) => {
+const MyBooksBlock = ({ borrows, user, setBorrow }) => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
-  const [borrow, setBorrow] = useState({});
 
   // return function
   const handleOnReturn = (id, status) => {
@@ -18,11 +17,7 @@ const MyBooksBlock = ({ borrows, user }) => {
     setBorrow({ ...borrowObj, userName: user.fName });
   };
 
-  return borrow._id ? (
-    <div>
-      <AddReview borrow={borrow} setBorrow={setBorrow} />
-    </div>
-  ) : (
+  return (
     <Table bordered hover>
       <thead>
         <tr>
@@ -42,7 +37,7 @@ const MyBooksBlock = ({ borrows, user }) => {
               <img
                 src={`${rootUrl}${item.thumbnail}`}
                 alt="thumbnail"
-                style={{ height: "70px" }}
+                style={{ height: "70px", width: "50px" }}
               />
             </td>
             <td>{item.title}</td>

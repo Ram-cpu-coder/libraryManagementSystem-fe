@@ -16,7 +16,7 @@ const Reviews = () => {
 
   return (
     <UserLayout pageTitle="All Reviews">
-      <ReviewTable />
+      <ReviewTable reviews={reviews} />
     </UserLayout>
   );
 };

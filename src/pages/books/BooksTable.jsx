@@ -9,10 +9,6 @@ const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
 const BooksTable = ({ books, setShowDisplay }) => {
   const { user } = useSelector((state) => state.users);
 
-  // const handleOnDelete = (id) => {
-  //   setShowDisplay(true);
-  // };
-
   return (
     <tbody>
       {books.map((book, index) => {

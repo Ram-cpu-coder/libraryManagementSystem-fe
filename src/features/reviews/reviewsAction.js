@@ -5,7 +5,7 @@ import { getUserBorrows } from "../borrows/borrowAction"
 
 export const fetchAdminReviewsAction = () => async (dispatch) => {
     const { data } = await fetchAdminReviewsApi()
-    // console.log(response)
+    // console.log()
     dispatch(setReviews(data))
 }
 
@@ -20,9 +20,15 @@ export const postReviewAction = (form) => async (dispatch) => {
     toast[status](message);
 
     dispatch(setReviews(data));
+    dispatch(fetchAdminReviewsAction())
     dispatch(getUserBorrows())
+
     if (status == "success") {
         return true;
     }
 
 }
+
+// export const updateReviewAction = () => async (dispatch) => {
+//     const data = await
+// }

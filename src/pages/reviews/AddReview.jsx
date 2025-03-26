@@ -14,11 +14,10 @@ const AddReview = ({ borrow, setBorrow }) => {
 
   const handlePostReview = async (e) => {
     e.preventDefault();
-    const { userName, status, _id, title, thumbnail, bookId, userId } = borrow;
+    const { userName, _id, title, thumbnail, bookId, userId } = borrow;
     const reviewObj = {
       ...form,
       userName,
-      status,
       borrowId: _id,
       title,
       thumbnail,
@@ -38,7 +37,7 @@ const AddReview = ({ borrow, setBorrow }) => {
       <Form className="w-100" onSubmit={handlePostReview}>
         <CustomInput
           label="Title"
-          name="title"
+          name="heading"
           type="text"
           required
           placeholder="Awesome Book"
