@@ -2,10 +2,18 @@ import React, { useEffect } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import useForm from "../../hooks/useForm";
 import Stars from "../../components/stars/Stars";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAdminReviewsAction,
+  updateReviewAction,
+} from "../../features/reviews/reviewsAction";
 
-const ReviewTable = ({ reviews }) => {
+const ReviewTable = () => {
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
-  const { form, handleOnChange } = useForm();
+  const dispatch = useDispatch();
+  const { reviews } = useSelector((state) => state.reviews);
+
+  // total number of reviews, this is needed in the bookLanding page
 
   // const numberOfReview = (selectedReviewBookId) => {
   //   const reviewsOfThatBook = reviews.filter(
@@ -15,9 +23,24 @@ const ReviewTable = ({ reviews }) => {
   //   return reviewsOfThatBook.length;
   // };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSwitchChange = (e) => {
     e.preventDefault();
+    const { value, checked } = e.target;
+    dispatch(
+      updateReviewAction({
+        _id: value,
+        status: checked ? "active" : "inactive",
+      })
+    );
   };
+
+  useEffect(() => {
+    dispatch(fetchAdminReviewsAction());
+  }, []);
+  console.log(reviews);
+
+  const safeReviews = Array.isArray(reviews) ? reviews : [];
+  // const safeReviews = reviews ? reviews : [];
   return (
     <Table bordered hover>
       <thead>
@@ -31,26 +54,17 @@ const ReviewTable = ({ reviews }) => {
         </tr>
       </thead>
       <tbody>
-        {reviews?.map((item, index) => (
+        {safeReviews?.map((item, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
             <td>
-              {/* {/* {/here all of them are being checked */}
-              <Form onSubmit={handleOnSubmit}>
-                <Form.Check
-                  name="status"
-                  onChange={handleOnChange}
-                  checked={form?.status === "active"}
-                  type="switch"
-                  id={`custom-switch-${index}`}
-                  label={item?.status?.toUpperCase()}
-                  className={`${
-                    item?.status === "active"
-                      ? "mb-3 text-success"
-                      : "mb-3 text-danger"
-                  } w-100 position-relative my-2`}
-                />
-              </Form>
+              <Form.Check
+                onChange={handleOnSwitchChange}
+                checked={item?.status === "active"}
+                type="switch"
+                value={item._id}
+                className={`w-100 position-relative my-2`}
+              />
             </td>
             <td>
               <img

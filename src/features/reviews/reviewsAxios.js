@@ -17,3 +17,12 @@ export const postReviewApi = (form) => {
         data: form
     })
 }
+
+export const updateReviewApi = ({ _id, status }) => {
+    return apiProcessor({
+        method: "put",
+        url: reviewEP + "/admin-edit-review",
+        isPrivate: true,
+        data: { _id, status }
+    })
+}

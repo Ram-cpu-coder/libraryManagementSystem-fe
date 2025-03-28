@@ -12,8 +12,6 @@ const useForm = (initialState) => {
             value = checked ? "active" : "inactive"
         }
 
-
-
         if (name === "bookFile") {
             setForm({
                 ...form,

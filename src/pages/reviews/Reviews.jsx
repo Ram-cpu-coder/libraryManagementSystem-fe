@@ -5,18 +5,9 @@ import { fetchAdminReviewsAction } from "../../features/reviews/reviewsAction";
 import ReviewTable from "./ReviewTable";
 
 const Reviews = () => {
-  const dispatch = useDispatch();
-
-  const { reviews } = useSelector((state) => state.reviews);
-  console.log("Review", reviews);
-
-  useEffect(() => {
-    dispatch(fetchAdminReviewsAction());
-  }, []);
-
   return (
     <UserLayout pageTitle="All Reviews">
-      <ReviewTable reviews={reviews} />
+      <ReviewTable />
     </UserLayout>
   );
 };
