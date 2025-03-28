@@ -1,5 +1,5 @@
 import { toast } from "react-toastify"
-import { fetchAdminReviewsApi, postReviewApi, updateReviewApi } from "./reviewsAxios"
+import { deleteReviewByIdApi, fetchAdminReviewsApi, postReviewApi, updateReviewApi } from "./reviewsAxios"
 import { setReviews } from "./reviewsSlice"
 import { getUserBorrows } from "../borrows/borrowAction"
 
@@ -36,4 +36,16 @@ export const updateReviewAction = ({ _id, status }) => async (dispatch) => {
     if (response.status === "success") {
         dispatch(fetchAdminReviewsAction())
     }
+}
+
+export const deleteReviewByIdAction = (_id) => async (dispatch) => {
+    const pending = deleteReviewByIdApi(_id);
+    toast.promise(pending, {
+        pending: "Deleting Review!"
+    })
+
+    const { status, message, data } = await pending;
+    // console.log(data, "data")
+    toast[status](message)
+    dispatch(fetchAdminReviewsAction())
 }

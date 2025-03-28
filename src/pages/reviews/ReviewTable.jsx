@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
-import useForm from "../../hooks/useForm";
 import Stars from "../../components/stars/Stars";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteReviewByIdAction,
   fetchAdminReviewsAction,
   updateReviewAction,
 } from "../../features/reviews/reviewsAction";
+import { useNavigate } from "react-router-dom";
 
 const ReviewTable = () => {
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { reviews } = useSelector((state) => state.reviews);
+  const [deleteBox, setDeleteBox] = useState([false, null]);
 
   // total number of reviews, this is needed in the bookLanding page
 
@@ -34,15 +37,33 @@ const ReviewTable = () => {
     );
   };
 
+  const handleOnDelete = (_id) => {
+    dispatch(deleteReviewByIdAction(_id));
+    setDeleteBox([false, null]);
+  };
+
   useEffect(() => {
     dispatch(fetchAdminReviewsAction());
   }, []);
-  console.log(reviews);
 
+  // this helps to make the page render avoiding the error called that reviews.map is not a function
+  // actually this line 44 is checking the variable reviews if it is array or not, if not it will provide empty array
   const safeReviews = Array.isArray(reviews) ? reviews : [];
-  // const safeReviews = reviews ? reviews : [];
+  if (deleteBox[0]) {
+    return (
+      <div>
+        <p>Are you sure you want to delete?</p>
+        <div>
+          <Button variant="secondary">Cancel</Button>
+          <Button variant="danger" onClick={() => handleOnDelete(deleteBox[1])}>
+            Delete
+          </Button>
+        </div>
+      </div>
+    );
+  }
   return (
-    <Table bordered hover>
+    <Table bordered hover relative>
       <thead>
         <tr>
           <th>#</th>
@@ -82,7 +103,14 @@ const ReviewTable = () => {
               <p>{item.message}</p>
             </td>
             <td>
-              <Button variant="danger">Delete</Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  setDeleteBox([true, item._id]);
+                }}
+              >
+                Delete
+              </Button>
             </td>
           </tr>
         ))}

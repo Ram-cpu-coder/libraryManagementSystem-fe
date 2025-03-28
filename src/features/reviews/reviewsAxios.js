@@ -26,3 +26,12 @@ export const updateReviewApi = ({ _id, status }) => {
         data: { _id, status }
     })
 }
+
+export const deleteReviewByIdApi = (_id) => {
+    return apiProcessor({
+        method: "delete",
+        url: reviewEP + "/delete-review",
+        isPrivate: true,
+        data: { _id }
+    })
+}
