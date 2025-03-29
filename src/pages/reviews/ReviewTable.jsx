@@ -14,16 +14,6 @@ const ReviewTable = () => {
   const { reviews } = useSelector((state) => state.reviews);
   const [deleteBox, setDeleteBox] = useState([false, null]);
 
-  // total number of reviews, this is needed in the bookLanding page
-
-  // const numberOfReview = (selectedReviewBookId) => {
-  //   const reviewsOfThatBook = reviews.filter(
-  //     (item) => item.bookId === selectedReviewBookId
-  //   );
-  //   console.log(reviewsOfThatBook.length);
-  //   return reviewsOfThatBook.length;
-  // };
-
   const handleOnSwitchChange = (e) => {
     e.preventDefault();
     const { value, checked } = e.target;
