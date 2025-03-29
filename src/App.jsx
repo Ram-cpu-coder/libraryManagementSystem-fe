@@ -81,7 +81,7 @@ function App() {
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
-        <Route path="/reviews/:id" element={<UserReview />} />
+        <Route path="/userReviews" element={<UserReview />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<HeroPage />} />

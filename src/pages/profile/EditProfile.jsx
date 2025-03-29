@@ -1,10 +1,11 @@
 import React from "react";
 import UserLayout from "../../components/layout/UserLayout";
+import { Form } from "react-bootstrap";
 
 const EditProfile = () => {
   return (
     <UserLayout pageTitle="Edit Profile">
-      <div>EditProfile</div>
+      {/* <Form onSubmit={handleOnSubmit}></Form> */}
     </UserLayout>
   );
 };

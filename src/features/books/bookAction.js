@@ -25,7 +25,7 @@ export const deleteBookAction = (_id) => async (dispatch) => {
 export const updateBookAction = (formObj, navigate) => async (dispatch) => {
     const data = await updateBookApi(formObj)
     dispatch(getAllBookAction(true))
-    console.log("Updated:", data)
+    // console.log("Updated:", data)
     toast[data.status](data.message)
 
     return data.status === "success";

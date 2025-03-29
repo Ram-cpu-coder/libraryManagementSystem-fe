@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { renewAccessJWT } from "../../helpers/axiosHelper";
-import { createNewUserApi, fetchUserDataApi, getStudentsApi, loginApi } from "./userAxios";
+import { createNewUserApi, deleteUserApi, fetchUserDataApi, getStudentsApi, loginApi, updateUserProfileApi } from "./userAxios";
 import { resetUser, setStudents, setUser } from "./userSlice";
 
 export const loginAction = (form, navigate) => async (dispatch) => {
@@ -20,13 +20,11 @@ export const loginAction = (form, navigate) => async (dispatch) => {
         sessionStorage.setItem("accessJWT", data.accessToken);
         // updating the local storage for refresh
         localStorage.setItem("refreshJWT", data.refreshToken);
-        navigate("/admin")
+        navigate("/books")
     };
 
     toast[data.status](data.message)
 }
-
-
 // creating the user 
 export const createNewUser = (form, navigate) => async (dispatch) => {
     const pending = createNewUserApi(form)
@@ -35,25 +33,20 @@ export const createNewUser = (form, navigate) => async (dispatch) => {
         pending: "Registering ... "
     })
     data.status === "success" ? navigate("/signin") : ""
-    console.log(data)
+    // console.log(data)
     toast[data.status](data.message)
 }
-
-
-
 // individual user detail
 export const userDataAction = () => async (dispatch) => {
 
     const data = await fetchUserDataApi()
     dispatch(setUser(data.user))
 }
-
 export const logOutAction = () => async (dispatch) => {
     await dispatch(resetUser());
     sessionStorage.removeItem("accessJWT");
     localStorage.removeItem("refreshJWT")
 }
-
 export const autoLogin = () => async (dispatch) => {
     const refreshToken = localStorage.getItem("refreshJWT")
     const accessToken = sessionStorage.getItem("accessJWT")
@@ -75,4 +68,23 @@ export const getStudentsAction = () => async (dispatch) => {
     const data = await getStudentsApi();
     // console.log(2000, data.users)
     dispatch(setStudents(data.users))
+}
+export const updateUserProfileAction = (form) => async (dispatch) => {
+    const pending = updateUserProfileApi(form);
+    toast.promise(pending, {
+        pending: "Uploading !"
+    })
+    const data = await pending;
+
+}
+// delete the user action
+export const deleteUserAction = (_id) => async (dispatch) => {
+    const pending = deleteUserApi(_id)
+    toast.promise(pending, {
+        pending: "Deleting..."
+    })
+    const { status, message, data } = await pending;
+    dispatch(getStudentsAction())
+    console.log(data)
+    toast[status](message)
 }

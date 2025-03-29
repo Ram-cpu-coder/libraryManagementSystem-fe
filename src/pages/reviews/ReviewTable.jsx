@@ -7,12 +7,10 @@ import {
   fetchAdminReviewsAction,
   updateReviewAction,
 } from "../../features/reviews/reviewsAction";
-import { useNavigate } from "react-router-dom";
 
 const ReviewTable = () => {
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { reviews } = useSelector((state) => state.reviews);
   const [deleteBox, setDeleteBox] = useState([false, null]);
 
@@ -51,11 +49,21 @@ const ReviewTable = () => {
   const safeReviews = Array.isArray(reviews) ? reviews : [];
   if (deleteBox[0]) {
     return (
-      <div>
+      <div className="d-flex flex-column justify-content-center align-items-center w-100">
         <p>Are you sure you want to delete?</p>
-        <div>
-          <Button variant="secondary">Cancel</Button>
-          <Button variant="danger" onClick={() => handleOnDelete(deleteBox[1])}>
+        <div className="row-custom gap-1 text-center">
+          <Button
+            variant="secondary"
+            className="col-5 custom-btn"
+            onClick={() => setDeleteBox([false, null])}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            className="col-5 custom-btn"
+            onClick={() => handleOnDelete(deleteBox[1])}
+          >
             Delete
           </Button>
         </div>
@@ -63,59 +71,67 @@ const ReviewTable = () => {
     );
   }
   return (
-    <Table bordered hover relative>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Status</th>
-          <th>Book</th>
-          <th>UserName</th>
-          <th>Review</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {safeReviews?.map((item, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>
-              <Form.Check
-                onChange={handleOnSwitchChange}
-                checked={item?.status === "active"}
-                type="switch"
-                value={item._id}
-                className={`w-100 position-relative my-2`}
-              />
-            </td>
-            <td>
-              <img
-                src={`${thumbnailEP}${item.thumbnail}`}
-                alt="Images"
-                style={{ height: "70px", width: "50px" }}
-              />
-            </td>
-            <td>{item.userName}</td>
-            <td className="d-flex flex-column justify-content-center">
-              <h2>{item.heading}</h2>{" "}
-              <div>
-                <Stars stars={item.ratings} />
-              </div>
-              <p>{item.message}</p>
-            </td>
-            <td>
-              <Button
-                variant="danger"
-                onClick={() => {
-                  setDeleteBox([true, item._id]);
-                }}
-              >
-                Delete
-              </Button>
-            </td>
+    <div>
+      <p>{reviews.length} review(s) found !</p>
+      <Table bordered hover relative>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Status</th>
+            <th>Book</th>
+            <th>UserName</th>
+            <th>Review</th>
+            <th>Action</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {safeReviews?.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td
+                className={
+                  item.status === "active" ? "text-primary" : "text-danger"
+                }
+              >
+                <Form.Check
+                  onChange={handleOnSwitchChange}
+                  checked={item?.status === "active"}
+                  type="switch"
+                  value={item._id}
+                  className={`w-100 position-relative my-2`}
+                />
+                {item.status.toUpperCase()}
+              </td>
+              <td>
+                <img
+                  src={`${thumbnailEP}${item.thumbnail}`}
+                  alt="Images"
+                  style={{ height: "70px", width: "50px" }}
+                />
+              </td>
+              <td>{item.userName}</td>
+              <td className="d-flex flex-column justify-content-center">
+                <h2>{item.heading}</h2>{" "}
+                <div>
+                  <Stars stars={item.ratings} />
+                </div>
+                <p>{item.message}</p>
+              </td>
+              <td>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    setDeleteBox([true, item._id]);
+                  }}
+                >
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

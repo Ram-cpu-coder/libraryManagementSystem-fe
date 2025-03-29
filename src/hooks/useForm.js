@@ -12,7 +12,7 @@ const useForm = (initialState) => {
             value = checked ? "active" : "inactive"
         }
 
-        if (name === "bookFile") {
+        if (name === "bookFile" || name === "profilePic") {
             setForm({
                 ...form,
                 [name]: files[0]
@@ -24,6 +24,7 @@ const useForm = (initialState) => {
                     [name]: value
                 })
         }
+
     }
     return {
         form,

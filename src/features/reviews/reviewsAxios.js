@@ -1,6 +1,13 @@
 import { apiProcessor } from "../../helpers/axiosHelper";
 const reviewEP = import.meta.env.VITE_APP_REVIEW_URL;
 
+export const fetchUsersReviewsApi = () => {
+    return apiProcessor({
+        method: "get",
+        url: reviewEP + "/user-review",
+        isPrivate: true,
+    })
+}
 export const fetchAdminReviewsApi = () => {
     return apiProcessor({
         method: "get",

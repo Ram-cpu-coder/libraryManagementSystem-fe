@@ -54,7 +54,7 @@ const UserLayout = ({ children, pageTitle }) => {
     {
       icon: <MdReviews />,
       name: "My Reviews",
-      Link: "/reviews/:id",
+      Link: "/userReviews",
       isAdminOnly: false,
       value: 7,
     },

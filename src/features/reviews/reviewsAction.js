@@ -1,8 +1,15 @@
 import { toast } from "react-toastify"
-import { deleteReviewByIdApi, fetchAdminReviewsApi, postReviewApi, updateReviewApi } from "./reviewsAxios"
-import { setReviews } from "./reviewsSlice"
+import { deleteReviewByIdApi, fetchAdminReviewsApi, fetchUsersReviewsApi, postReviewApi, updateReviewApi } from "./reviewsAxios"
+import { setReviews, setUserReview } from "./reviewsSlice"
 import { getUserBorrows } from "../borrows/borrowAction"
 
+export const fetchUsersReviewsAction = () => async (dispatch) => {
+    const { reviews, status } = await fetchUsersReviewsApi()
+    // console.log(reviews, "userReview")
+    if (status === "success") {
+        dispatch(setUserReview(reviews))
+    }
+}
 export const fetchAdminReviewsAction = () => async (dispatch) => {
     const { data } = await fetchAdminReviewsApi()
     // console.log()
@@ -31,7 +38,7 @@ export const postReviewAction = (form) => async (dispatch) => {
 
 export const updateReviewAction = ({ _id, status }) => async (dispatch) => {
     const response = await updateReviewApi({ _id, status });
-    console.log(response, "updateReview")
+    // console.log(response, "updateReview")
     dispatch(setReviews(response.response))
     if (response.status === "success") {
         dispatch(fetchAdminReviewsAction())

@@ -36,3 +36,20 @@ export const getStudentsApi = () => {
         isRefreshToken: true
     })
 }
+export const updateUserProfileApi = (form) => {
+    return apiProcessor({
+        method: "put",
+        url: authEP + "/edit-profile",
+        isPrivate: true,
+        data: form
+    })
+}
+
+export const deleteUserApi = (_id) => {
+    return apiProcessor({
+        method: "delete",
+        url: authEP + "/delete-user",
+        isPrivate: true,
+        data: { _id }
+    })
+}

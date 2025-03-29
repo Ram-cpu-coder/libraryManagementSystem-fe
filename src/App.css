@@ -67,3 +67,26 @@ background-attachment: fixed;
     background-color: white;
     color: black;
 }
+
+/* bos for the review delete */
+.custom-btn {
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Bold text for emphasis */
+    border-radius: 8px; /* Rounded corners for buttons */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .custom-btn:hover {
+    transform: scale(1.02); /* Slightly enlarge the button on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+  }
+  
+  .mb-3 {
+    margin-bottom: 20px; /* Adjust the spacing for the message text */
+  }
+  
+  .row-custom {
+    width: 100%; /* Ensure row takes full width */
+    max-width: 400px; /* Limit row size for small screens */
+  }
+  

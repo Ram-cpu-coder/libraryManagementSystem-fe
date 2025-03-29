@@ -16,7 +16,7 @@ const BooksLandingPage = () => {
   const { _id } = useParams();
 
   const selectedBook = bookStore.books.find((item) => item._id == _id);
-  console.log(selectedBook);
+  // console.log(selectedBook);
 
   // const dateExpected = expectedAvailable.slice(0, expectedAvailable.indexOf(T));
 

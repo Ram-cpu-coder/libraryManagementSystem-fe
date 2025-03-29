@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllBookAction } from "../../features/books/bookAction";
 import { SyncLoader } from "react-spinners";
 import BooksCard from "./BooksCard";
+import { Container } from "react-bootstrap";
 
 const PublicBooks = () => {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ const PublicBooks = () => {
               />
             </div>
           ) : !displayBooks.length < 1 ? (
-            <div className="w-100 row">
+            <Container className="w-100 row">
               {displayBooks.map((item, index) => {
                 return (
                   <div
@@ -84,7 +85,7 @@ const PublicBooks = () => {
                   </div>
                 );
               })}
-            </div>
+            </Container>
           ) : (
             <div className="w-100">No Books Found !</div>
           )}

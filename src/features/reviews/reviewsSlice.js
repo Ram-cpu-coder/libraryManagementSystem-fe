@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    reviews: []
+    reviews: [],
+    userReviews: []
 }
 
 const reviewSlice = createSlice({
@@ -10,9 +11,12 @@ const reviewSlice = createSlice({
     reducers: {
         setReviews: (state, action) => {
             state.reviews = action.payload;
+        },
+        setUserReview: (state, action) => {
+            state.userReviews = action.payload;
         }
     }
 })
 
-export const { setReviews } = reviewSlice.actions
+export const { setReviews, setUserReview } = reviewSlice.actions
 export default reviewSlice.reducer

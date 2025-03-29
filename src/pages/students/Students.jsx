@@ -47,7 +47,7 @@ const Students = () => {
             onChange={handleOnSearch}
           />
         </div>
-        <p>{displayStudents?.length} student(s) Found !</p>
+
         <StudentsTable students={displayStudents} />
       </div>
     </UserLayout>
