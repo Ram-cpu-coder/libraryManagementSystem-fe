@@ -76,7 +76,7 @@ const UserLayout = ({ children, pageTitle }) => {
     <AuthRoute>
       <div>
         <Header />
-        <div className="min-vh-100 d-flex w-100">
+        <div className="min-vh-100 d-flex flex-md-row w-100 flex-column">
           <SideBar menubar={menubar} />
 
           <div className="d-flex flex-column w-100 px-4">

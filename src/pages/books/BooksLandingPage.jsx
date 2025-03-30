@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
 import { getAllBookAction } from "../../features/books/bookAction";
-import { Button, Nav } from "react-bootstrap";
+import { Button, Tab, Table, Tabs } from "react-bootstrap";
 import { createBorrowAction } from "../../features/borrows/borrowAction";
 import { userDataAction } from "../../features/users/userAction";
 import { fetchAdminReviewsAction } from "../../features/reviews/reviewsAction";
+import Stars from "../../components/stars/Stars";
 
 const BooksLandingPage = () => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
@@ -18,9 +19,11 @@ const BooksLandingPage = () => {
   const { _id } = useParams();
 
   const selectedBook = bookStore.books.find((item) => item._id == _id);
+
   // console.log(selectedBook);
 
   const selectedReviewList = reviews.filter((item) => item.bookId === _id);
+  console.log(selectedReviewList);
 
   const totalRatings = selectedReviewList.reduce(
     (acc, item) => acc + item.ratings,
@@ -58,10 +61,7 @@ const BooksLandingPage = () => {
       <p>NotFound</p>
     </div>
   ) : (
-    <div
-      className="d-flex flex-column justify-content-center w-100 align-items-center"
-      style={{ height: "90vh" }}
-    >
+    <div className="d-flex flex-column justify-content-center w-100 align-items-center mt-5">
       <div className="d-flex flex-column w-75 my-3 align-items-center">
         <div className="d-flex gap-3">
           <img
@@ -113,16 +113,58 @@ const BooksLandingPage = () => {
           </div>
         </div>
       </div>
-      {/* description and reviews */}
-      <Nav justify variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link href="/">Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/">Active</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <div></div>
+      <div className="w-100 mt-5 px-4">
+        {/* description and reviews */}
+        <Tabs
+          defaultActiveKey="profile"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="description" title="Description" className="px-2">
+            {selectedBook.description}
+          </Tab>
+          <Tab eventKey="reviews" title="Reviews">
+            {selectedReviewList.map((item, index) => {
+              return (
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Thumbnail</th>
+                      <th>User</th>
+                      <th>Review</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ height: "120px" }}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <img
+                          src={`${rootUrl}${item.thumbnail}`}
+                          alt=""
+                          style={{ height: "100px" }}
+                        />
+                      </td>
+                      <td>{item.userName}</td>
+                      <td
+                        className="d-flex flex-column"
+                        style={{ height: "120px" }}
+                      >
+                        {item.heading}
+                        <Stars
+                          stars={item.ratings}
+                          totalReviews={selectedReviewList.length}
+                        />
+                        {item.message}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              );
+            })}
+          </Tab>
+        </Tabs>
+      </div>
     </div>
   );
 };

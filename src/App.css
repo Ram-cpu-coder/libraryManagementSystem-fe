@@ -90,3 +90,11 @@ background-attachment: fixed;
     max-width: 400px; /* Limit row size for small screens */
   }
   
+
+  /* sidebar responsiveness */
+
+  @media (max-width: 767px){
+    .custom-height-width{
+        width: 100%;
+    }
+  }

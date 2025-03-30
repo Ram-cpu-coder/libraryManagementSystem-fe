@@ -12,8 +12,8 @@ const SideBar = ({ menubar }) => {
       : menubar.filter((item) => !item.isAdminOnly);
   return (
     <div
-      className="d-flex flex-column justify-content-start p-4 bg-dark text-white min-vh-100"
-      style={{ width: "300px" }}
+      className="d-flex flex-column justify-content-start p-4 bg-dark text-white custom-height-width min-sm-vh-100"
+      style={{ minHeight: "5vh" }}
     >
       <div>
         <p className="d-flex align-items-center gap-2">
@@ -25,7 +25,7 @@ const SideBar = ({ menubar }) => {
       </div>
       <hr className="my-3" />
       <div className="d-flex flex-column my-2 min-w-25">
-        <Stack gap={1}>
+        <Stack gap={1} className="d-flex flex-row flex-md-column flex-wrap">
           {list.map((item, index) => {
             return (
               <Link
