@@ -1,17 +1,13 @@
 import React from "react";
 import UserLayout from "../../components/layout/UserLayout";
 import { useSelector } from "react-redux";
-import { Button, Col, Form, Image } from "react-bootstrap";
-import useForm from "../../hooks/useForm";
-import { CiCamera } from "react-icons/ci";
+import { Col, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.users);
-  const { form, handleOnChange } = useForm();
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-  };
+  const profileEP = import.meta.env.VITE_APP_ASSET_URL;
   return (
     <UserLayout pageTitle="Profile">
       <div className="w-50 border shadow rounded p-2 d-flex justify-content-center flex-column">
@@ -19,44 +15,19 @@ const Profile = () => {
           <div className="d-flex justify-content-center w-100">
             <Col xs={6} md={4} className="w-50 position-relative">
               <Image
-                src={user.profilePic}
+                src={`${profileEP}${user.profilePic}`}
                 roundedCircle
                 className=""
                 style={{ height: "200px", width: "200px" }}
               />
-              <Button
-                variant="light"
-                onClick={() =>
-                  document.getElementById("profilePicUpload").click()
-                }
-                className="position-absolute z-3"
-                style={{
-                  bottom: "0",
-                  transform: "translate(0%, 0%)",
-                }}
-              >
-                <CiCamera className="text-dark" />
-              </Button>
             </Col>
-
-            <Form onSubmit={handleOnSubmit} className="visually-hidden">
-              <Form.Group className="mb-3 w-100" controlId="profilePic">
-                <Form.Control
-                  type="file"
-                  accept="image"
-                  id="profilePicUpload"
-                  name="profilePic"
-                  onChange={handleOnChange}
-                />
-              </Form.Group>
-            </Form>
           </div>
           <div className="mt-4">
             {user.fName} {user.lName}
           </div>
         </div>
         <hr />
-        <div className="d-flex justify-content-center w-100">
+        <div className="d-flex flex-column justify-content-center w-100">
           <div className="w-100 mt-2 d-flex flex-column justify-content-center align-items-between px-5">
             <p className="d-flex justify-content-between">
               Phone <span>{user.phone}</span>
@@ -65,6 +36,9 @@ const Profile = () => {
               Email <span>{user.email}</span>
             </p>
           </div>
+          <Link to="/editProfile" className="px-5">
+            Edit Profile
+          </Link>
         </div>
       </div>
     </UserLayout>

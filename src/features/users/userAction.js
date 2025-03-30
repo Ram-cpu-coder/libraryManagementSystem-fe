@@ -74,8 +74,10 @@ export const updateUserProfileAction = (form) => async (dispatch) => {
     toast.promise(pending, {
         pending: "Uploading !"
     })
-    const data = await pending;
-
+    const { data, message, status } = await pending;
+    dispatch(setUser(data))
+    toast[status](message);
+    dispatch(fetchUserDataApi())
 }
 // delete the user action
 export const deleteUserAction = (_id) => async (dispatch) => {

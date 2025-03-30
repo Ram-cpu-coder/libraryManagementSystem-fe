@@ -41,6 +41,7 @@ export const updateUserProfileApi = (form) => {
         method: "put",
         url: authEP + "/edit-profile",
         isPrivate: true,
+        contentType: "multipart/form-data",
         data: form
     })
 }

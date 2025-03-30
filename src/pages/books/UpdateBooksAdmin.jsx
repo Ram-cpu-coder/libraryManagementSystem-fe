@@ -21,7 +21,6 @@ const UpdateBooksAdmin = () => {
   const selectedBook = books.find((item) => {
     return item._id === _id;
   });
-
   const { form, handleOnChange } = useForm(selectedBook || {});
 
   const handleOnSubmit = async (e) => {
@@ -54,8 +53,15 @@ const UpdateBooksAdmin = () => {
         <div className="d-flex justify-content-center align-items-center flex-column shadow py-3 rounded w-50">
           <Form
             onSubmit={handleOnSubmit}
-            className="d-flex align-items-center flex-column w-75"
+            className="d-flex align-items-start flex-column w-75"
           >
+            <Button
+              variant="light"
+              className="my-3"
+              onClick={() => navigate("/admin")}
+            >
+              &lt; Back
+            </Button>
             <Form.Check
               name="status"
               onChange={handleOnChange}
