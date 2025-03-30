@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    allUsers: [],
     user: {},
     students: [],
     isLoggedIn: false,
@@ -20,6 +21,9 @@ const userSlice = createSlice({
         setStudents: (state, action) => {
             state.students = action.payload
         },
+        setAllUsers: (state, { payload }) => {
+            state.allUsers = payload
+        },
         setMenu: (state, action) => {
             state.menu = action.payload
         }
@@ -38,6 +42,6 @@ const userSlice = createSlice({
     }
 })
 
-export const { setUser, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic, setStudents, setMenu } = userSlice.actions
+export const { setUser, setAllUsers, resetUser, setIsLogged, setIsLoggedOut, setIsPrivate, setIsPublic, setStudents, setMenu } = userSlice.actions
 
 export default userSlice.reducer

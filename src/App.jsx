@@ -17,6 +17,7 @@ import AddBook from "./pages/books/AddBook";
 import HeroPage from "./pages/dashboard/HeroPage";
 import {
   autoLogin,
+  getAllUsers,
   getStudentsAction,
   userDataAction,
 } from "./features/users/userAction";
@@ -28,6 +29,7 @@ import Profile from "./pages/profile/Profile";
 import EditProfile from "./pages/profile/EditProfile";
 import Borrows from "./pages/borrows/Borrows";
 import UserReview from "./pages/reviews/UserReview";
+import { fetchPublicReviewsAction } from "./features/reviews/reviewsAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ function App() {
     dispatch(getAllBookAction());
     dispatch(getStudentsAction());
     dispatch(autoLogin());
+    dispatch(getAllUsers());
+    dispatch(fetchPublicReviewsAction());
   }, []);
 
   return (

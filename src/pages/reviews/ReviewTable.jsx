@@ -7,12 +7,21 @@ import {
   fetchAdminReviewsAction,
   updateReviewAction,
 } from "../../features/reviews/reviewsAction";
+import { getAllUsers } from "../../features/users/userAction";
 
 const ReviewTable = () => {
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
   const dispatch = useDispatch();
+  const { allUsers } = useSelector((state) => state.users);
+  console.log(allUsers);
   const { reviews } = useSelector((state) => state.reviews);
   const [deleteBox, setDeleteBox] = useState([false, null]);
+
+  const handleTheProfile = (id) => {
+    const selectedUser = allUsers.find((item) => item._id === id);
+    console.log("triggered", selectedUser);
+    return selectedUser.profilePic;
+  };
 
   const handleOnSwitchChange = (e) => {
     e.preventDefault();
@@ -60,6 +69,7 @@ const ReviewTable = () => {
       </div>
     );
   }
+
   return (
     <div>
       <p>{reviews.length} review(s) found !</p>
@@ -100,7 +110,18 @@ const ReviewTable = () => {
                     style={{ height: "70px", width: "50px" }}
                   />
                 </td>
-                <td>{item.userName}</td>
+                <td className="">
+                  <img
+                    src={`${thumbnailEP}${handleTheProfile(item.userId)}`}
+                    alt=""
+                    style={{
+                      height: "80px",
+                      width: "80px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  &nbsp; &nbsp;{item.userName}
+                </td>
                 <td className="d-flex flex-column justify-content-center">
                   <h2>{item.heading}</h2>{" "}
                   <div>

@@ -36,6 +36,13 @@ export const getStudentsApi = () => {
         isRefreshToken: true
     })
 }
+export const getAllUsersAPi = () => {
+    return apiProcessor({
+        method: "get",
+        url: authEP + "/users",
+        isPrivate: true
+    })
+}
 export const updateUserProfileApi = (form) => {
     return apiProcessor({
         method: "put",

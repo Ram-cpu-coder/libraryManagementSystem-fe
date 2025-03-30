@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { renewAccessJWT } from "../../helpers/axiosHelper";
-import { createNewUserApi, deleteUserApi, fetchUserDataApi, getStudentsApi, loginApi, updateUserProfileApi } from "./userAxios";
-import { resetUser, setStudents, setUser } from "./userSlice";
+import { createNewUserApi, deleteUserApi, fetchUserDataApi, getAllUsersAPi, getStudentsApi, loginApi, updateUserProfileApi } from "./userAxios";
+import { resetUser, setAllUsers, setStudents, setUser } from "./userSlice";
 
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
@@ -68,6 +68,12 @@ export const getStudentsAction = () => async (dispatch) => {
     const data = await getStudentsApi();
     // console.log(2000, data.users)
     dispatch(setStudents(data.users))
+}
+
+// get all users
+export const getAllUsers = () => async (dispatch) => {
+    const { data, status, message } = await getAllUsersAPi()
+    dispatch(setAllUsers(data));
 }
 export const updateUserProfileAction = (form) => async (dispatch) => {
     const pending = updateUserProfileApi(form);

@@ -15,6 +15,13 @@ export const fetchAdminReviewsApi = () => {
         isPrivate: true,
     })
 }
+export const fetchPublicReviews = () => {
+    return apiProcessor({
+        method: "get",
+        url: reviewEP,
+        isPrivate: true
+    })
+}
 
 export const postReviewApi = (form) => {
     return apiProcessor({
