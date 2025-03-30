@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createBorrowApi, getBorrowApi, getUserBorrowApi, returnBorrowApi } from "./borrowAxios.js";
+import { createBorrowApi, deleteBorrowApi, getBorrowApi, getUserBorrowApi, returnBorrowApi } from "./borrowAxios.js";
 import { setBorrows, setUserBorrows } from "./borrowSlice.js";
 import { getAllBookAction } from "../books/bookAction.js";
 
@@ -32,4 +32,18 @@ export const returnBorrowAction = (id, status) => async (dispatch) => {
     dispatch(setBorrows(response.data))
     dispatch(getUserBorrows())
     response && toast[response.status](response.message)
-} 
+}
+
+// delete borrow action 
+export const deleteBorrowAction = (_id) => async (dispatch) => {
+    const pending = deleteBorrowApi(_id);
+
+    toast.promise(pending, {
+        pending: "Deleting!!!"
+    })
+
+    const { data, status, message } = await pending;
+    toast[status](message);
+    console.log(data, "deletedBorrow")
+    dispatch(getBorrowAction())
+}

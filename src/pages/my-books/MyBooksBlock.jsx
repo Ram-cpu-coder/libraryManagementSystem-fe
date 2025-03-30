@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import AddReview from "../reviews/AddReview";
 import { returnBorrowAction } from "../../features/borrows/borrowAction";
 
 const MyBooksBlock = ({ borrows, user, setBorrow }) => {
@@ -13,8 +12,13 @@ const MyBooksBlock = ({ borrows, user, setBorrow }) => {
     dispatch(returnBorrowAction(id, status));
   };
 
+  console.log(borrows);
+
   const handleOnReview = (borrowObj) => {
-    setBorrow({ ...borrowObj, userName: user.fName });
+    setBorrow({
+      ...borrowObj,
+      userName: user.fName,
+    });
   };
 
   return (
@@ -42,7 +46,10 @@ const MyBooksBlock = ({ borrows, user, setBorrow }) => {
             </td>
             <td>{item.title}</td>
             <td>{item.dueDate.slice(0, 10)}</td>
-            <td>{}</td>
+            <td>
+              {item.returnedDate?.slice(0, item.returnedDate.indexOf("T")) ||
+                "YYYY/MM/DD"}
+            </td>
             <td>
               {item.status === "borrowed" ? (
                 <Button onClick={() => handleOnReturn(item._id, item.status)}>

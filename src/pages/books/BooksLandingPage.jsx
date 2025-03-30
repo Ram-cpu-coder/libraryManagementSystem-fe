@@ -124,44 +124,48 @@ const BooksLandingPage = () => {
             {selectedBook.description}
           </Tab>
           <Tab eventKey="reviews" title="Reviews">
-            {selectedReviewList.map((item, index) => {
-              return (
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Thumbnail</th>
-                      <th>User</th>
-                      <th>Review</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ height: "120px" }}>
-                      <td>{index + 1}</td>
-                      <td>
-                        <img
-                          src={`${rootUrl}${item.thumbnail}`}
-                          alt=""
-                          style={{ height: "100px" }}
-                        />
-                      </td>
-                      <td>{item.userName}</td>
-                      <td
-                        className="d-flex flex-column"
-                        style={{ height: "120px" }}
-                      >
-                        {item.heading}
-                        <Stars
-                          stars={item.ratings}
-                          totalReviews={selectedReviewList.length}
-                        />
-                        {item.message}
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              );
-            })}
+            {selectedReviewList.length > 0 ? (
+              selectedReviewList.map((item, index) => {
+                return (
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Thumbnail</th>
+                        <th>User</th>
+                        <th>Review</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ height: "120px" }}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <img
+                            src={`${rootUrl}${item.thumbnail}`}
+                            alt=""
+                            style={{ height: "100px" }}
+                          />
+                        </td>
+                        <td>{item.userName}</td>
+                        <td
+                          className="d-flex flex-column"
+                          style={{ height: "120px" }}
+                        >
+                          {item.heading}
+                          <Stars
+                            stars={item.ratings}
+                            totalReviews={selectedReviewList.length}
+                          />
+                          {item.message}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                );
+              })
+            ) : (
+              <div>No Reviews Found !</div>
+            )}
           </Tab>
         </Tabs>
       </div>

@@ -40,3 +40,13 @@ export const returnBorrowApi = (id) => {
         isRefreshToken: true,
     })
 }
+
+// delete the borrow api
+export const deleteBorrowApi = (_id) => {
+    return apiProcessor({
+        method: "delete",
+        url: borrowEp,
+        isPrivate: true,
+        data: { _id }
+    })
+}

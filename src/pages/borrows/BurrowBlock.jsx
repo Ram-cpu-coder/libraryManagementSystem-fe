@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { returnBorrowAction } from "../../features/borrows/borrowAction";
-
+import { useDispatch } from "react-redux";
+import { deleteBorrowAction } from "../../features/borrows/borrowAction";
 const BurrowBlock = ({ borrows, students }) => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  // console.log("Students", students);
-  // return function
-  const handleOnReturn = (id) => {
-    dispatch(returnBorrowAction(id));
-  };
+  const [deleteBox, setDeleteBox] = useState([false, null]);
+
   const borrowingUser = (id) => {
     const userBorrowing = students.find((item) => item._id == id);
     return userBorrowing;
   };
 
-  // review funciton
-  const handleOnReview = (id) => navigate("/reviews/" + id);
+  const handleOnDelete = (_id) => {
+    dispatch(deleteBorrowAction(_id));
+    setDeleteBox([false, null]);
+  };
+
+  if (deleteBox[0]) {
+    return (
+      <div className="d-flex flex-column justify-content-center align-items-center w-100">
+        <p>Are you sure you want to delete?</p>
+        <div className="row-custom gap-1 text-center">
+          <Button
+            variant="secondary"
+            className="col-5 custom-btn"
+            onClick={() => setDeleteBox([false, null])}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            className="col-5 custom-btn"
+            onClick={() => handleOnDelete(deleteBox[1])}
+          >
+            Delete
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Table bordered hover>
       <thead>
@@ -49,9 +70,16 @@ const BurrowBlock = ({ borrows, students }) => {
             <td>{item.title}</td>
             <td>{borrowingUser(item.userId)?.fName || "John"}</td>
             <td>{item.dueDate.slice(0, 10)}</td>
-            <td>{}</td>
             <td>
-              <Button>Any Action</Button>
+              {item.returnedDate.slice(0, item.returnedDate.indexOf("T"))}
+            </td>
+            <td>
+              <Button
+                variant="danger"
+                onClick={() => setDeleteBox([true, item._id])}
+              >
+                Delete
+              </Button>
             </td>
           </tr>
         ))}
