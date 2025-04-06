@@ -79,6 +79,9 @@ const UserSignInForm = () => {
           <span className="mt-2">
             Don't have an account ? <Link to="/signup">Sign up here</Link>
           </span>
+          <span>
+            <Link to="/forgotPassword">Forgot Password</Link>
+          </span>
         </Form>
       </div>
     </Container>

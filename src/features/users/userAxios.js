@@ -1,4 +1,6 @@
 import { apiProcessor } from "../../helpers/axiosHelper.js";
+
+const rootEP = import.meta.env.VITE_APP_ASSET_URL;
 const authEP = import.meta.env.VITE_API_BASE_URL + "/auth"
 
 export const loginApi = (loginObj) => {
@@ -10,7 +12,6 @@ export const loginApi = (loginObj) => {
         isRefreshToken: false,
     })
 }
-
 export const fetchUserDataApi = () => {
     return apiProcessor({
         method: "get",
@@ -19,7 +20,6 @@ export const fetchUserDataApi = () => {
         isRefreshToken: false,
     })
 }
-
 export const createNewUserApi = ({ ...form }) => {
     return apiProcessor({
         method: "post",
@@ -52,12 +52,17 @@ export const updateUserProfileApi = (form) => {
         data: form
     })
 }
-
 export const deleteUserApi = (_id) => {
     return apiProcessor({
         method: "delete",
         url: authEP + "/delete-user",
         isPrivate: true,
         data: { _id }
+    })
+}
+export const verifyUserApi = ({ sessionId, token }) => {
+    return apiProcessor({
+        method: "get",
+        url: rootEP + `/verify-user?sessionId=${sessionId}&t=${token}`
     })
 }

@@ -30,6 +30,8 @@ import EditProfile from "./pages/profile/EditProfile";
 import Borrows from "./pages/borrows/Borrows";
 import UserReview from "./pages/reviews/UserReview";
 import { fetchPublicReviewsAction } from "./features/reviews/reviewsAction";
+import VerificationPage from "./pages/verificationPage/verificationPage";
+import ForgotPasswordPage from "./pages/verificationPage/ForgotPasswordPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +66,8 @@ function App() {
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="verify-user" element={<VerificationPage />} />
+          <Route path="forgotPassword" element={<ForgotPasswordPage />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="books" element={<PublicBooks />} />
           <Route

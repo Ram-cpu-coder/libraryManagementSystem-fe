@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 const BooksCard = ({ item }) => {
   const rootUrl = import.meta.env.VITE_APP_ASSET_URL;
   return (
-    <Link className="nav-link" to={"/books-landing-page/" + item._id}>
+    <Link
+      to={"/books-landing-page/" + item._id}
+      className="nav-link col-md-6 col-sm-12 col-lg-4 my-2 d-flex justify-content-center"
+    >
       <div
         className="border d-flex flex-column align-items-center m-1 py-2"
         style={{

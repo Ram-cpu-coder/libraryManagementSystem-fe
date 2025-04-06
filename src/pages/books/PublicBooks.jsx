@@ -74,15 +74,15 @@ const PublicBooks = () => {
               />
             </div>
           ) : !displayBooks.length < 1 ? (
-            <Container className="w-100 row">
+            <Container className="w-75 row">
               {displayBooks.map((item, index) => {
                 return (
-                  <div
-                    className="col-md-6 col-sm-12 col-lg-4 my-2 d-flex justify-content-center"
-                    key={index}
-                  >
-                    <BooksCard item={{ ...item }} key={index} />
-                  </div>
+                  // <div
+                  //   className="col-md-6 col-sm-12 col-lg-4 my-2 d-flex justify-content-center"
+                  //   key={index}
+                  // >
+                  <BooksCard item={{ ...item }} key={index} />
+                  // </div>
                 );
               })}
             </Container>

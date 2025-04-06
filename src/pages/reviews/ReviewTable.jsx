@@ -7,7 +7,6 @@ import {
   fetchAdminReviewsAction,
   updateReviewAction,
 } from "../../features/reviews/reviewsAction";
-import { getAllUsers } from "../../features/users/userAction";
 
 const ReviewTable = () => {
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
@@ -115,8 +114,8 @@ const ReviewTable = () => {
                     src={`${thumbnailEP}${handleTheProfile(item.userId)}`}
                     alt=""
                     style={{
-                      height: "80px",
-                      width: "80px",
+                      height: "50px",
+                      width: "50px",
                       borderRadius: "50%",
                     }}
                   />

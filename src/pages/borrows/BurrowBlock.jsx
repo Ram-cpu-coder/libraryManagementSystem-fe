@@ -68,10 +68,20 @@ const BurrowBlock = ({ borrows, students }) => {
               />
             </td>
             <td>{item.title}</td>
-            <td>{borrowingUser(item.userId)?.fName || "John"}</td>
+            <td>
+              <img
+                src={`${rootUrl}${borrowingUser(item.userId)?.profilePic}`}
+                alt=""
+                style={{ height: "50px", width: "50px", borderRadius: "50%" }}
+              />
+              &nbsp;{borrowingUser(item.userId)?.fName}
+            </td>
             <td>{item.dueDate.slice(0, 10)}</td>
             <td>
-              {item.returnedDate.slice(0, item.returnedDate.indexOf("T"))}
+              {item?.returnedDate?.slice(
+                0,
+                item?.returnedDate?.indexOf("T")
+              ) || <p className="text-warning">Not Returned</p>}
             </td>
             <td>
               <Button

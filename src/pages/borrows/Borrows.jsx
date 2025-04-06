@@ -3,12 +3,12 @@ import UserLayout from "../../components/layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
 import BurrowBlock from "./BurrowBlock.jsx";
 import { getBorrowAction } from "../../features/borrows/borrowAction.js";
-import { getStudentsAction } from "../../features/users/userAction.js";
+import { getAllUsers } from "../../features/users/userAction.js";
 
 const Borrows = () => {
   const dispatch = useDispatch();
   const { borrows } = useSelector((state) => state.borrows);
-  const { students } = useSelector((state) => state.users);
+  const { allUsers } = useSelector((state) => state.users);
   const [searchedData, setSearchedData] = useState([]);
   const [displayBorrows, setDisplayBorrows] = useState([]);
 
@@ -25,11 +25,9 @@ const Borrows = () => {
     setDisplayBorrows(filteredData);
   };
 
-  // console.log(borrows, "Borrows");
-
   useEffect(() => {
     const fetchStudents = async () => {
-      (await dispatch(getStudentsAction())) || [];
+      (await dispatch(getAllUsers())) || [];
     };
     fetchStudents();
   }, [displayBorrows]);
@@ -59,7 +57,7 @@ const Borrows = () => {
         {displayBorrows.length} burrowed history found!
         <hr />
         {displayBorrows.length ? (
-          <BurrowBlock borrows={displayBorrows} students={students} />
+          <BurrowBlock borrows={displayBorrows} students={allUsers} />
         ) : (
           <div className="text-center">No Borrows Found!</div>
         )}

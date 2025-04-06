@@ -22,8 +22,10 @@ const Profile = () => {
               />
             </Col>
           </div>
-          <div className="mt-4">
-            {user.fName} {user.lName}
+          <div className="mt-4 ">
+            <h1>
+              {user.fName} {user.lName}
+            </h1>
           </div>
         </div>
         <hr />

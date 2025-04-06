@@ -47,8 +47,10 @@ const MyBooksBlock = ({ borrows, user, setBorrow }) => {
             <td>{item.title}</td>
             <td>{item.dueDate.slice(0, 10)}</td>
             <td>
-              {item.returnedDate?.slice(0, item.returnedDate.indexOf("T")) ||
-                "YYYY/MM/DD"}
+              {item?.returnedDate?.slice(
+                0,
+                item?.returnedDate?.indexOf("T")
+              ) || <p className="text-warning">Not Returned</p>}
             </td>
             <td>
               {item.status === "borrowed" ? (
