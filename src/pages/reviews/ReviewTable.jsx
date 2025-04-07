@@ -9,7 +9,10 @@ import {
 } from "../../features/reviews/reviewsAction";
 
 const ReviewTable = () => {
+  // profilePic rendering with in the review section
   const thumbnailEP = import.meta.env.VITE_APP_ASSET_URL;
+  const defaultProfile = "/profile.png";
+
   const dispatch = useDispatch();
   const { allUsers } = useSelector((state) => state.users);
   console.log(allUsers);
@@ -19,7 +22,7 @@ const ReviewTable = () => {
   const handleTheProfile = (id) => {
     const selectedUser = allUsers.find((item) => item._id === id);
     console.log("triggered", selectedUser);
-    return selectedUser.profilePic;
+    return selectedUser?.profilePic;
   };
 
   const handleOnSwitchChange = (e) => {
@@ -111,7 +114,11 @@ const ReviewTable = () => {
                 </td>
                 <td className="">
                   <img
-                    src={`${thumbnailEP}${handleTheProfile(item.userId)}`}
+                    src={
+                      handleTheProfile(item.userId)
+                        ? `${thumbnailEP}${handleTheProfile(item.userId)}`
+                        : defaultProfile
+                    }
                     alt=""
                     style={{
                       height: "50px",
