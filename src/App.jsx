@@ -30,7 +30,7 @@ import EditProfile from "./pages/profile/EditProfile";
 import Borrows from "./pages/borrows/Borrows";
 import UserReview from "./pages/reviews/UserReview";
 import { fetchPublicReviewsAction } from "./features/reviews/reviewsAction";
-import VerificationPage from "./pages/verificationPage/verificationPage";
+import VerificationPage from "./pages/verificationPage/VerificationPage";
 import ForgotPasswordPage from "./pages/verificationPage/ForgotPasswordPage";
 
 function App() {
