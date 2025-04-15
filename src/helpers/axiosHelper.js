@@ -44,7 +44,7 @@ export const apiProcessor = async ({ method, url, data, isPrivate, isRefreshToke
             })
             if (refreshData && refreshData?.status == "success") {
                 // update sessionStorage
-                sessionStorage.setItem("accessJWT", refreshData.accessToken)
+                sessionStorage.setItem("accessJWT", refreshData.accessJWT)
                 // return the original call
                 return apiProcessor({
                     method,
