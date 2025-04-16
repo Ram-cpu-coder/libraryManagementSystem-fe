@@ -10,13 +10,13 @@ const getRefreshJWT = () => {
     return localStorage.getItem("refreshJWT")
 }
 
-export const apiProcessor = async ({ method, url, data, isPrivate, isRefreshToken, contentType = 'application/json' }) => {
+export const apiProcessor = async ({ method, url, data, isPrivate, isRefreshToken = false, contentType = 'application/json' }) => {
 
     const headers = {
         Authorization: isPrivate
             ? getAccessJWT()
             : isRefreshToken
-                ? getRefreshJWT() = false
+                ? getRefreshJWT()
                 : null,
 
         "Content-type": contentType
