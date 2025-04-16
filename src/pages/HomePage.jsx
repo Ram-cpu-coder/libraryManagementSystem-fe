@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <div className="min-vh-100 relative">
       {/* Hero Section */}
-      <div className="bg-primary text-white text-center py-5  img-bg">
+      <div className="bg-primary text-white text-center py-5 img-bg">
         <Container className="glassmophormism">
           <h1 className="display-4">
             Welcome to the Library Management System

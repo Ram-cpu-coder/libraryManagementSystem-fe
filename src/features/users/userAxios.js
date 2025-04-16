@@ -2,7 +2,7 @@ import { apiProcessor } from "../../helpers/axiosHelper.js";
 
 const rootEP = import.meta.env.VITE_APP_ASSET_URL;
 const authEP = import.meta.env.VITE_API_BASE_URL + "/auth"
-
+console.log(authEP, rootEP)
 export const loginApi = (loginObj) => {
     return apiProcessor({
         method: "post",

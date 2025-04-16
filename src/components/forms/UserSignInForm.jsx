@@ -49,7 +49,7 @@ const UserSignInForm = () => {
       <h3 className="d-flex justify-content-between align-items-center w-50">
         <Button
           variant="light"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/")}
           className="fs-2 d-flex align-items-center bg-white"
         >
           <IoArrowBackCircleOutline />

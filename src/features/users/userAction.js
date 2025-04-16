@@ -32,9 +32,9 @@ export const createNewUser = (form, navigate) => async (dispatch) => {
     toast.promise(pending, {
         pending: "Registering ... "
     })
-    data.status === "success" ? navigate("/") : ""
     // console.log(data)
     toast[data.status](data.message)
+    data.status === "success" ? navigate("/") : ""
 }
 // individual user detail
 export const userDataAction = () => async (dispatch) => {

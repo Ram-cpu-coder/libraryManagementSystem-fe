@@ -19,7 +19,7 @@ border-radius: 2px;
 }
 
 .img-bg{
-background: url("./Library.jpg");
+background: url("/Library.jpg");
 background-position: center center;
 background-attachment: fixed;
 }
