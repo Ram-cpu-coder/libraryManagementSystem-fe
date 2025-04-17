@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import useForm from "../../hooks/useForm";
+import VerifyEmailAndSendOtp from "./VerifyEmailAndSendOtp";
+import OTPform from "./OTPform";
 
 const ForgotPasswordPage = () => {
+  const [heading, setHeading] = useState("Generate OTP");
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const [isOTPVerified, setIsOTPVerified] = useState(false);
+  const [isOTPui, setIsOTPui] = useState(false);
+  const initialState = {
+    email: "",
+    Otp: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const { form, setForm, handleOnChange } = useForm(initialState);
   const handleGenerateOTP = () => {
     console.log("clicked");
 
@@ -25,26 +36,19 @@ const ForgotPasswordPage = () => {
   return (
     <div
       className="text-center mt-2 d-flex flex-column justify-content-center align-items-center"
-      style={{ height: "50vh" }}
+      style={{ minHeight: "50vh" }}
     >
-      <h1 className="mb-5">Generate OTP</h1>
-      <div className="d-flex gap-5">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          onChange={(e) => e.target.value}
-          required
-          placeholder="Enter your Email..."
-          className="rounded px-3 py-2"
+      <h1 className="mb-5 col-4">{heading}</h1>
+      <Form className="d-flex gap-3 col-4">
+        <VerifyEmailAndSendOtp
+          handleOnChange={handleOnChange}
+          form={form}
+          setIsOTPui={setIsOTPui}
+          isOTPui={isOTPui}
+          setHeading={setHeading}
         />
-        <Button variant="primary" onClick={handleGenerateOTP}>
-          Send OTP
-        </Button>
-      </div>
-      {/* <h1>Verify OTP</h1>
-      <p>Please enter OTP sent to your mail</p>
-      <input type="text" name="otp" id="otp" className="rounded px-3 py-2" /> */}
+      </Form>
+      {isOTPui && <OTPform />}
     </div>
   );
 };

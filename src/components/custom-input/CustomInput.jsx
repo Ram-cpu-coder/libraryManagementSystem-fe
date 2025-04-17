@@ -9,8 +9,8 @@ const CustomInput = ({ label, type, ...rest }) => {
     setShowPassword((prev) => !prev);
   };
   return (
-    <div className="w-100 position-relative my-2">
-      <Form.Group className="">
+    <div className="w-100 my-2">
+      <Form.Group className="position-relative">
         <Form.Label className="">{label}</Form.Label>
         <Form.Control
           {...rest}
@@ -21,8 +21,8 @@ const CustomInput = ({ label, type, ...rest }) => {
         {type === "password" && (
           <span
             onClick={handleShowPassword}
-            style={{ cursor: "pointer", right: "10px" }}
-            className="position-absolute top-50"
+            style={{ cursor: "pointer", right: "10px", top: "35px" }}
+            className="position-absolute"
           >
             {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
           </span>

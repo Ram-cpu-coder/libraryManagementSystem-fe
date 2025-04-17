@@ -46,7 +46,7 @@ const UserSignInForm = () => {
   }
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
-      <h3 className="d-flex justify-content-between align-items-center w-50">
+      <h3 className="d-flex justify-content-between align-items-center col-12 col-md-6">
         <Button
           variant="light"
           onClick={() => navigate("/")}
@@ -57,11 +57,11 @@ const UserSignInForm = () => {
         <span>Sign In</span>
         <span></span>
       </h3>
-      <hr className="w-50" />
-      <div className="d-flex w-50 align-items-center justify-content-center gap-5 signinForm container shadow p-3 rounded">
+      <hr className="col-12 col-md-6" />
+      <div className="d-flex col-12 col-md-6 align-items-center justify-content-center gap-5 shadow p-3 rounded border">
         <Form
           onSubmit={handleOnSubmit}
-          className="d-flex align-items-center flex-column w-50"
+          className="d-flex align-items-center flex-column w-100"
         >
           {userSignInInputFields.map((item, index) => {
             return (

@@ -66,3 +66,25 @@ export const verifyUserApi = ({ sessionId, token }) => {
         url: rootEP + `/verify-user?sessionId=${sessionId}&t=${token}`
     })
 }
+export const verifyEmailAndSendOtpApi = (email) => {
+    return apiProcessor({
+        method: "post",
+        url: rootEP + "/verify-user/verifyEmail",
+        data: { email }
+    })
+}
+export const verifyOtpApi = (email, Otp) => {
+    return apiProcessor({
+        method: "post",
+        url: rootEP + "/verify-user/verifyOtp",
+        data: { email, Otp }
+    })
+}
+
+export const verifyOtpAndUpdatePasswordApi = (email, Otp, password, confirmPassword) => {
+    return apiProcessor({
+        method: "post",
+        url: rootEP + "/verify-user/updatePassword",
+        data: { email, Otp, password, confirmPassword }
+    })
+}

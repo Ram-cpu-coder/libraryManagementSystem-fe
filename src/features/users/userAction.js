@@ -1,16 +1,16 @@
 import { toast } from "react-toastify";
 import { renewAccessJWT } from "../../helpers/axiosHelper";
-import { createNewUserApi, deleteUserApi, fetchUserDataApi, getAllUsersAPi, getStudentsApi, loginApi, updateUserProfileApi, verifyUserApi } from "./userAxios";
+import { createNewUserApi, deleteUserApi, fetchUserDataApi, getAllUsersAPi, getStudentsApi, loginApi, updateUserProfileApi, verifyEmailAndSendOtpApi, verifyOtpAndUpdatePasswordApi, verifyOtpApi, verifyUserApi } from "./userAxios";
 import { resetUser, setAllUsers, setStudents, setUser } from "./userSlice";
 // login the user
 export const loginAction = (form, navigate) => async (dispatch) => {
     // call the log in api
     const pending = loginApi({ ...form });
-    const data = await pending;
 
     toast.promise(pending, {
         pending: "Logging ... "
     })
+    const data = await pending;
 
     // update the user store
 
@@ -106,5 +106,35 @@ export const verifyingUserAction = ({ sessionId, token }) => async (dispatch) =>
         pending: "Verifying ..."
     })
     const { message, status, verifiedUpdateUser } = await pending
+    toast[status](message)
+}
+
+// forgot password feature action 
+export const verifyEmailAndSendOTPAction = (email) => async (dispatch) => {
+    const pending = verifyEmailAndSendOtpApi(email);
+    toast.promise(pending, {
+        pending: "Verifying ..."
+    })
+    const { status, message } = await pending;
+    toast[status](message)
+    if (status === "success") {
+        return true;
+    }
+}
+
+export const verifyOtpAction = (email, Otp) => async (dispatch) => {
+    const pending = verifyOtpApi(email, Otp);
+    toast.promise(pending, {
+        pending: "Verifying ..."
+    })
+    const { status, message } = await pending;
+    toast[status](message)
+}
+export const verifyOtpAndUpdatePasswordAction = (email, Otp, password, confirmPassword) => async (dispatch) => {
+    const pending = verifyOtpAndUpdatePasswordApi(email, Otp, password, confirmPassword);
+    toast.promise(pending, {
+        pending: "Verifying ..."
+    })
+    const { status, message } = await pending;
     toast[status](message)
 }
