@@ -133,7 +133,11 @@ const BooksLandingPage = () => {
             <Tab eventKey="description" title="Description" className="px-2">
               {selectedBook.description}
             </Tab>
-            <Tab eventKey="reviews" title="Reviews">
+            <Tab
+              eventKey="reviews"
+              title="Reviews"
+              className="table-responsive"
+            >
               {selectedReviewList.length > 0 ? (
                 <Table>
                   <thead>
