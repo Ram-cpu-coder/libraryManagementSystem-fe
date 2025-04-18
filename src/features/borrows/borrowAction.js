@@ -28,7 +28,11 @@ export const getUserBorrows = () => async (dispatch) => {
 }
 // return borrow action 
 export const returnBorrowAction = (id, status) => async (dispatch) => {
-    const response = await returnBorrowApi(id, status)
+    const pending = returnBorrowApi(id, status)
+    toast.promise(pending, {
+        pending: "Updating ..."
+    })
+    const response = await pending
     dispatch(setBorrows(response.data))
     dispatch(getUserBorrows())
     response && toast[response.status](response.message)

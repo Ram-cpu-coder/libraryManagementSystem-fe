@@ -8,7 +8,7 @@ const AdminBooks = ({ books }) => {
   const { user } = useSelector((state) => state.users);
 
   return (
-    <div>
+    <div className="table-responsive" style={{ minHeight: "800px" }}>
       <Table hover size="sm">
         <thead>
           <tr>

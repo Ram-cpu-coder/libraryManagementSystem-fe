@@ -6,9 +6,9 @@ import { verifyEmailAndSendOTPAction } from "../../features/users/userAction";
 const VerifyEmailAndSendOtp = ({
   handleOnChange,
   form,
+  setHeading,
   setIsOTPui,
   isOTPui,
-  setHeading,
 }) => {
   const dispatch = useDispatch();
   const handleGenerateOTP = async (e) => {
@@ -21,7 +21,7 @@ const VerifyEmailAndSendOtp = ({
   };
   console.log(form, 999);
   return (
-    <>
+    <div className="d-flex gap-3 justify-content-center">
       <input
         type="email"
         name="email"
@@ -31,17 +31,18 @@ const VerifyEmailAndSendOtp = ({
         required
         disabled={isOTPui ? true : false}
         placeholder="Enter your Email..."
-        className="rounded px-3 col-9"
+        className="rounded px-3"
+        style={{ minWidth: "350px" }}
       />
       <Button
         variant="primary"
         disabled={isOTPui ? true : false}
         onClick={handleGenerateOTP}
-        className="col-3"
+        style={{ height: "35.75px", width: "100px" }}
       >
         Send OTP
       </Button>
-    </>
+    </div>
   );
 };
 

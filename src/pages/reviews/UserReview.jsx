@@ -15,7 +15,7 @@ const UserReview = () => {
   }, []);
   return (
     <UserLayout pageTitle="My Reviews">
-      <div className="d-flex flex-column w-100">
+      <div className="d-flex flex-column w-100 table-responsive">
         <p>{userReviews.length} review(s) found!</p>
         {userReviews.length > 0 ? (
           <Table bordered hover relative>

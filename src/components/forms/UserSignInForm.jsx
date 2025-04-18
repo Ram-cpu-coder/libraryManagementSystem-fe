@@ -45,7 +45,10 @@ const UserSignInForm = () => {
     );
   }
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-column min-vh-100">
+    <Container
+      className="d-flex align-items-center justify-content-center flex-column"
+      style={{ height: "800px" }}
+    >
       <h3 className="d-flex justify-content-between align-items-center col-12 col-md-6">
         <Button
           variant="light"
@@ -55,7 +58,15 @@ const UserSignInForm = () => {
           <IoArrowBackCircleOutline />
         </Button>
         <span>Sign In</span>
-        <span></span>
+        {/* this one isfor just taking space */}
+        <Button
+          variant="light"
+          onClick={() => navigate("/")}
+          className="fs-2 d-flex align-items-center bg-white"
+          style={{ visibility: "hidden" }}
+        >
+          <IoArrowBackCircleOutline />
+        </Button>
       </h3>
       <hr className="col-12 col-md-6" />
       <div className="d-flex col-12 col-md-6 align-items-center justify-content-center gap-5 shadow p-3 rounded border">

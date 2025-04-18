@@ -33,7 +33,7 @@ const AddReview = ({ borrow, setBorrow }) => {
   };
 
   return (
-    <div className="w-100 d-flex align-items-center flex-column">
+    <div className="col-12 col-md-9 d-flex align-items-center flex-column">
       <Form className="w-100" onSubmit={handlePostReview}>
         <CustomInput
           label="Title"

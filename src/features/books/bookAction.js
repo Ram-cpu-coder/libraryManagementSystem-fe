@@ -11,19 +11,29 @@ export const getAllBookAction = (isPrivate) => async (dispatch) => {
 }
 
 export const addBookAction = (form) => async (dispatch) => {
-    const data = await addBookApi(form);
+    const pending = addBookApi(form);
+    toast.promise(pending, {
+        pending: "Adding Book..."
+    })
+    const data = await pending;
     dispatch(getAllBookAction(true));
     toast[data.status](data.message)
 }
 
 export const deleteBookAction = (_id) => async (dispatch) => {
-    const data = await deleteBookApi(_id)
+    const pending = deleteBookApi(_id);
+    toast.promise(pending, {
+        pending: "Deleting Book..."
+    })
+    const data = await pending
     dispatch(getAllBookAction(true))
     // toast.error(data.book + "deleted successfully!")
     toast[data.status](data.message)
 }
 export const updateBookAction = (formObj, navigate) => async (dispatch) => {
-    const data = await updateBookApi(formObj)
+    const pending = updateBookApi(formObj)
+    toast.promise(pending, { pending: "Updating Book..." })
+    const data = await pending
     dispatch(getAllBookAction(true))
     // console.log("Updated:", data)
     toast[data.status](data.message)

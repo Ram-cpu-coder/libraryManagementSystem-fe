@@ -3,11 +3,12 @@ import { Button, Form } from "react-bootstrap";
 import useForm from "../../hooks/useForm";
 import VerifyEmailAndSendOtp from "./VerifyEmailAndSendOtp";
 import OTPform from "./OTPform";
+import UpdatePassword from "./UpdatePassword";
 
 const ForgotPasswordPage = () => {
   const [heading, setHeading] = useState("Generate OTP");
-  const [isEmailSent, setIsEmailSent] = useState(false);
   const [isOTPui, setIsOTPui] = useState(false);
+  const [isUpdatePassword, setIsUpdatePassword] = useState(false);
   const initialState = {
     email: "",
     Otp: "",
@@ -38,17 +39,35 @@ const ForgotPasswordPage = () => {
       className="text-center mt-2 d-flex flex-column justify-content-center align-items-center"
       style={{ minHeight: "50vh" }}
     >
-      <h1 className="mb-5 col-4">{heading}</h1>
-      <Form className="d-flex gap-3 col-4">
-        <VerifyEmailAndSendOtp
-          handleOnChange={handleOnChange}
-          form={form}
-          setIsOTPui={setIsOTPui}
-          isOTPui={isOTPui}
-          setHeading={setHeading}
-        />
-      </Form>
-      {isOTPui && <OTPform />}
+      <h1 className="mb-3 col-4">{heading}</h1>
+      <div className="w-75 d-flex justify-content-center">
+        <Form className="d-flex flex-column gap-3 col-md-6 col-12 px-5">
+          <VerifyEmailAndSendOtp
+            handleOnChange={handleOnChange}
+            form={form}
+            setHeading={setHeading}
+            setIsOTPui={setIsOTPui}
+            isOTPui={isOTPui}
+          />
+          {isOTPui && (
+            <OTPform
+              setForm={setForm}
+              form={form}
+              setHeading={setHeading}
+              isOTPui={isOTPui}
+              setIsUpdatePassword={setIsUpdatePassword}
+              isUpdatePassword={isUpdatePassword}
+            />
+          )}
+          {isUpdatePassword && (
+            <UpdatePassword
+              form={form}
+              handleOnChange={handleOnChange}
+              isUpdatePassword={isUpdatePassword}
+            />
+          )}
+        </Form>
+      </div>
     </div>
   );
 };

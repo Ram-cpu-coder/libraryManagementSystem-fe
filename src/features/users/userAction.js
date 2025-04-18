@@ -122,19 +122,25 @@ export const verifyEmailAndSendOTPAction = (email) => async (dispatch) => {
     }
 }
 
-export const verifyOtpAction = (email, Otp) => async (dispatch) => {
-    const pending = verifyOtpApi(email, Otp);
+export const verifyOtpAction = ({ email, Otp }) => async (dispatch) => {
+    const pending = verifyOtpApi({ email, Otp });
     toast.promise(pending, {
         pending: "Verifying ..."
     })
     const { status, message } = await pending;
     toast[status](message)
+    if (status === "success") {
+        return true;
+    }
 }
-export const verifyOtpAndUpdatePasswordAction = (email, Otp, password, confirmPassword) => async (dispatch) => {
-    const pending = verifyOtpAndUpdatePasswordApi(email, Otp, password, confirmPassword);
+export const verifyOtpAndUpdatePasswordAction = ({ email, Otp, password, confirmPassword }) => async (dispatch) => {
+    const pending = verifyOtpAndUpdatePasswordApi({ email, Otp, password, confirmPassword });
     toast.promise(pending, {
         pending: "Verifying ..."
     })
     const { status, message } = await pending;
     toast[status](message)
+    if (status === "success") {
+        return true;
+    }
 }

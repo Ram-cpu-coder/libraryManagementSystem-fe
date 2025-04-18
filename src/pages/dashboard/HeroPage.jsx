@@ -56,7 +56,10 @@ const HeroPage = () => {
           </Link>
         </div>
 
-        <div className="d-flex justify-content-between align-items-center">
+        <div
+          className="d-flex justify-content-between align-items-center"
+          style={{ height: "50px" }}
+        >
           <p>{books?.length || 0} Books Found!</p>
           <input
             type="search"

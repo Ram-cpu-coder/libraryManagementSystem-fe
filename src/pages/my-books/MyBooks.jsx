@@ -41,7 +41,7 @@ const MyBooks = () => {
     </UserLayout>
   ) : (
     <UserLayout pageTitle="My Books">
-      <div className="w-100">
+      <div className="w-100 table-responsive">
         <div className="d-flex justify-content-end">
           <input
             type="search"

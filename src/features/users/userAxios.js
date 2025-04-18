@@ -73,7 +73,7 @@ export const verifyEmailAndSendOtpApi = (email) => {
         data: { email }
     })
 }
-export const verifyOtpApi = (email, Otp) => {
+export const verifyOtpApi = ({ email, Otp }) => {
     return apiProcessor({
         method: "post",
         url: rootEP + "/verify-user/verifyOtp",
@@ -81,7 +81,7 @@ export const verifyOtpApi = (email, Otp) => {
     })
 }
 
-export const verifyOtpAndUpdatePasswordApi = (email, Otp, password, confirmPassword) => {
+export const verifyOtpAndUpdatePasswordApi = ({ email, Otp, password, confirmPassword }) => {
     return apiProcessor({
         method: "post",
         url: rootEP + "/verify-user/updatePassword",

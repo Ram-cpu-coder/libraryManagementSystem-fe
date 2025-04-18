@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Reviews = () => {
   return (
     <UserLayout pageTitle="All Reviews">
-      <div className="d-flex flex-column w-100">
+      <div className="d-flex flex-column w-100 table-responsive">
         <ReviewTable />
       </div>
     </UserLayout>

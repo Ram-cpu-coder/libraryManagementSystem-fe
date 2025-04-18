@@ -37,10 +37,11 @@ export const postReviewAction = (form) => async (dispatch) => {
 }
 
 export const updateReviewAction = ({ _id, status }) => async (dispatch) => {
-    const response = await updateReviewApi({ _id, status });
-    // console.log(response, "updateReview")
-    dispatch(setReviews(response.response))
+    const pending = updateReviewApi({ _id, status });
+    toast.promise(pending, { pending: "Updating Review..." })
+    const response = await pending
     if (response.status === "success") {
+        dispatch(setReviews(response.response))
         dispatch(fetchAdminReviewsAction())
     }
 }

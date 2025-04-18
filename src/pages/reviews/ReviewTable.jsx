@@ -50,23 +50,28 @@ const ReviewTable = () => {
   const safeReviews = Array.isArray(reviews) ? reviews : [];
   if (deleteBox[0]) {
     return (
-      <div className="d-flex flex-column justify-content-center align-items-center w-100">
-        <p>Are you sure you want to delete?</p>
-        <div className="row-custom gap-1 text-center">
-          <Button
-            variant="secondary"
-            className="col-5 custom-btn"
-            onClick={() => setDeleteBox([false, null])}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            className="col-5 custom-btn"
-            onClick={() => handleOnDelete(deleteBox[1])}
-          >
-            Delete
-          </Button>
+      <div className="d-flex justify-content-center">
+        <div
+          className="d-flex flex-column justify-content-center align-items-center py-3 col-12 col-md-9"
+          style={{ height: "auto" }}
+        >
+          <p>Are you sure you want to delete?</p>
+          <div className="d-flex justify-content-between text-center w-50">
+            <Button
+              variant="secondary"
+              className="col-5 custom-btn"
+              onClick={() => setDeleteBox([false, null])}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="danger"
+              className="col-5 custom-btn"
+              onClick={() => handleOnDelete(deleteBox[1])}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       </div>
     );

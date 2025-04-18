@@ -32,8 +32,8 @@ const AddBook = () => {
   return (
     <UserLayout pageTitle="Create Book">
       <div className="w-100 d-flex flex-column justify-content-center align-items-center">
-        <div className="w-75 d-flex flex-column justify-content-center align-items-center">
-          <div className="w-75 d-flex flex-column align-items-center p-4">
+        <div className="col-12 col-md-9 d-flex flex-column justify-content-center align-items-center">
+          <div className="col-12 col-md-9 d-flex flex-column align-items-center">
             <Form className="w-100 px-2" onSubmit={handleOnAdd}>
               {bookAddInputFields.map((item, index) => {
                 return (

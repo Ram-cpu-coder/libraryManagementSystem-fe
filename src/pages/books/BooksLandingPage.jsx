@@ -65,22 +65,25 @@ const BooksLandingPage = () => {
     </div>
   ) : (
     <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ height: "80vh" }}
+      className="d-flex justify-content-center align-items-center mb-5"
+      style={{ minHeight: "80vh" }}
     >
-      <div className="d-flex flex-column justify-content-center align-items-center shadow-lg border mt-5 w-50 px-2 py-4 rounded">
+      <div className="d-flex flex-column justify-content-center align-items-center shadow-lg border mt-5 w-75 px-2 py-4 rounded">
         <div className="d-flex flex-column w-75 my-3 align-items-center">
-          <div className="d-flex gap-3">
+          <div className="d-flex flex-md-row flex-column gap-3">
             <img
               src={`${rootUrl}${selectedBook.thumbnail}`}
               alt=""
-              style={{ height: "200px", width: "200px" }}
+              style={{ maxHeight: "200px", maxWidth: "250px" }}
             />
             <div className="d-flex flex-column px-2">
+              {/* title */}
               <h1 className="m-0">{selectedBook.title}</h1>
+              {/* books name and author */}
               <p className="fs-4 m-0">
                 {selectedBook.author} - {selectedBook.publishedYear}
               </p>
+              {/* ratings */}
               <div>
                 {stars.map((item, index) => {
                   return (

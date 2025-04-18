@@ -16,7 +16,10 @@ const DeleteBook = () => {
 
   return (
     <UserLayout pageTitle="Delete Book">
-      <div className="d-flex flex-column shadow-lg px-4 py-2 rounded">
+      <div
+        className="d-flex flex-column shadow-lg px-4 py-2 rounded"
+        style={{ height: "auto" }}
+      >
         Are you sure to delete the book?
         <div className="row gap-3 m-3">
           <Button variant="danger" onClick={handleOnDelete} className="col">

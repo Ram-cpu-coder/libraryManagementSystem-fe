@@ -16,7 +16,10 @@ const StudentsTable = ({ students }) => {
 
   if (deleteBox[0] === true) {
     return (
-      <div className="w-100 d-flex flex-column align-items-center">
+      <div
+        className="w-100 d-flex flex-column align-items-center"
+        style={{ minHeight: "300px" }}
+      >
         <p>Are you sure to Delete?</p>
         <div className="row  d-flex justify-content-between w-50">
           <Button
@@ -38,7 +41,7 @@ const StudentsTable = ({ students }) => {
     );
   }
   return (
-    <div>
+    <div style={{ minHeight: "300px" }} className="table-responsive">
       <p>{students?.length} student(s) Found !</p>
       {students?.length > 0 ? (
         <Table bordered hover>

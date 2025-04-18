@@ -10,6 +10,7 @@ import {
   getAllBookAction,
   updateBookAction,
 } from "../../features/books/bookAction.js";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 const UpdateBooksAdmin = () => {
   const dispatch = useDispatch();
@@ -50,18 +51,24 @@ const UpdateBooksAdmin = () => {
   return (
     <UserLayout pageTitle="Update Books">
       <div className="w-100 d-flex flex-column min-vh-100 align-items-center justify-content-center">
-        <div className="d-flex justify-content-center align-items-center flex-column shadow py-3 rounded w-50">
+        <div className="d-flex justify-content-center align-items-center flex-column shadow py-3 rounded col-12 col-md-9">
           <Form
             onSubmit={handleOnSubmit}
             className="d-flex align-items-start flex-column w-75"
           >
-            <Button
-              variant="light"
-              className="my-3"
+            <button
+              className="my-3 fs-4"
               onClick={() => navigate("/admin")}
+              style={{
+                width: "20px",
+                outline: "none",
+                border: "none",
+                background: "white",
+                cursor: "pointer",
+              }}
             >
-              &lt; Back
-            </Button>
+              <IoArrowBackCircleOutline />
+            </button>
             <Form.Check
               name="status"
               onChange={handleOnChange}
