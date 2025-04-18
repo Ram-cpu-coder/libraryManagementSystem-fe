@@ -68,9 +68,9 @@ const BooksLandingPage = () => {
       className="d-flex justify-content-center align-items-center mb-5"
       style={{ minHeight: "80vh" }}
     >
-      <div className="d-flex flex-column justify-content-center align-items-center shadow-lg border mt-5 w-75 px-2 py-4 rounded">
+      <div className="d-flex flex-column justify-content-center align-items-center shadow-lg border mt-5 col-11 col-md-8 px-2 py-4 rounded">
         <div className="d-flex flex-column w-75 my-3 align-items-center">
-          <div className="d-flex flex-md-row flex-column gap-3">
+          <div className="d-flex flex-md-row flex-column gap-3 col-10 col-md-8">
             <img
               src={`${rootUrl}${selectedBook.thumbnail}`}
               alt=""
