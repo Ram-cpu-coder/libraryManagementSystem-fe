@@ -13,7 +13,7 @@ const LoggedInHeader = () => {
   return (
     <Navbar expand="lg" className="shadow text-dark">
       <Container>
-        <Navbar.Brand href="/dashboard" className="text-dark">
+        <Navbar.Brand href="/" className="text-dark">
           LMS
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

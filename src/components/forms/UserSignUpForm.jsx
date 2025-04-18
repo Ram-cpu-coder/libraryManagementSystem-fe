@@ -25,8 +25,6 @@ const UserSignUpForm = () => {
     e.preventDefault();
 
     dispatch(createNewUser(form, navigate));
-    // console.log("registered");
-    // setForm({ ...initialState });
   };
 
   return (

@@ -15,7 +15,7 @@ const Profile = () => {
           <div className="d-flex justify-content-center w-100">
             <Col xs={6} md={4} className="w-50 position-relative">
               <Image
-                src={`${profileEP}${user.profilePic}`}
+                src={`${profileEP}${user.profilePic}` || "/profile.png"}
                 roundedCircle
                 className=""
                 style={{ height: "200px", width: "200px" }}
